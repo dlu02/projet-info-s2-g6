@@ -36,6 +36,8 @@ void carte_ajouter(carte carte, plateau plateau);
  \return: un entier, le nombre de point PE du joueur
  */
 
+int carte_pointPE (plateau plateau);
+
 /**
  \brief: réalise l'action décrite par une carte personnel
  \param: une carte personnel
@@ -43,8 +45,6 @@ void carte_ajouter(carte carte, plateau plateau);
  */
 
 void carte_personnel( carte carte);
-
-int carte_pointPE (plateau plateau);
 
 /**
  \Brief: une fonction pour permettre à une ENSIIE de jouer une carte de sa main
@@ -59,6 +59,7 @@ int carte_jouer (/*cf later*/ pile);
  \param: un plateau
  \return: les points DD gagné par un joueur
  */
+ 
 int carte_fin(plateau plateau);
 
 /**
