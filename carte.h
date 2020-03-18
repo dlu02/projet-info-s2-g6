@@ -52,7 +52,7 @@ void carte_personnel( carte carte);
  \return: la carte sélectinné par le joueur
  */
 
-int carte_jouer (/*cf later*/ pile);
+carte carte_jouer (/*cf later*/ carte_pile pile);
 
 /**
  \Brief: signifier au plateau que le tour est terminé. Elle permettra, entre autres, de faire le calcul des DD gagnés par chaque ENSIIE à la fin du tour.
