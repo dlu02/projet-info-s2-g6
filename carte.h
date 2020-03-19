@@ -5,15 +5,22 @@
 //  Created by Loirs Romain on 06/03/2020.
 //
 
-#ifndef carte_h
-#define carte_h
+#ifndef CARTE_H
+#define CARTE_H
 
-#include <stdio.h>
 #include "plateau.h"
 
-typedef struct carte * carte;
+typedef struct plateau p;
 
-typedef struct carte_pile * carte_pile;
+typedef struct {
+	int numero;
+	char *nom;
+	int cout;
+	char *effet; 
+} carte;
+
+
+typedef carte *carte_pile;
 
 /**
  \brief: calculer combien de cartes Elève une ENSIIE recevra au début de sa phase. (utile pour la carte personnels avec effet DR)
@@ -21,23 +28,23 @@ typedef struct carte_pile * carte_pile;
  \return: le nombre de carte à piocher par la personne.
  */
 
-int carte_piocher(carte_pile carte_pile);
+int pioche_eleve(carte_pile);
 
 /**
  \brief: ajouter une carte Élève de type FISE ou FISA au plateau de jeu d’une ENSIIE.
- \param: une carte de type FISE ou FISA UNIQUEMENT et un plateau de jeu
+ \param: une carte de type FISE ou FISA UNIQUEMENT et un plateau de jeu p
  \return: nothing
 */
 
-void carte_ajouter(carte carte, plateau plateau);
+void carte_ajouter(carte,p);
 
 /**
- \Brief: calculer le nombre de PE disponibles par une ENSIIE après avoir posé sa ou ses nouvelles cartes Élèves.
- \param: plateau
+ \Brief: calculer le nombre de PE disponibles par ENSIIE après avoir posé sa ou ses nouvelles cartes Élèves.
+ \param: le plateau 
  \return: un entier, le nombre de point PE du joueur
  */
 
-int carte_pointPE (plateau plateau);
+int carte_pointPE(p);
 
 /**
  \brief: réalise l'action décrite par une carte personnel
@@ -45,23 +52,23 @@ int carte_pointPE (plateau plateau);
  \return: nothing
  */
 
-void carte_personnel( carte carte);
+void carte_personnel(carte);
 
 /**
  \Brief: une fonction pour permettre à une ENSIIE de jouer une carte de sa main
  \param: un jeu de carte (structure à préciser par la suite)
- \return: la carte sélectinné par le joueur
+ \return: nothing
  */
 
-carte carte_jouer (/*cf later*/ carte_pile pile);
+void carte_jouer(p);
 
 /**
  \Brief: signifier au plateau que le tour est terminé. Elle permettra, entre autres, de faire le calcul des DD gagnés par chaque ENSIIE à la fin du tour.
- \param: un plateau
- \return: les points DD gagné par un joueur
+ \param: un plateau p
+ \return: nothing
  */
  
-int carte_fin(plateau plateau);
+void carte_fin(p);
 
 /**
  \Brief: afficher une carte en fonction de son type
@@ -69,7 +76,7 @@ int carte_fin(plateau plateau);
  \return: nothing
  */
 
-void carte_print_carte(carte carte);
+void carte_print_carte(carte);
 
 /**
  \Brief: afficher une pile de carte
@@ -77,7 +84,7 @@ void carte_print_carte(carte carte);
  \return: nothing
  */
 
-void carte_print_pile(carte_pile carte_pile);
+void carte_print_pile(carte_pile);
 
 
-#endif /* carte_h */
+#endif 

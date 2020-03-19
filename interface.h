@@ -1,42 +1,48 @@
+//
+//  plateau.h
+//  
+//
+//  Created by Lu Damien on 14/03/2020.
+//
+
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
 #include "plateau.h"
-#include "carte.h"
 
 /**
  \brief: afficher un message de début de nouveau tour
  \param: 
  \return: message de début de nouveau tour
 */
-void print_new_tour()
+void print_new_tour();
 
 /**
- \brief: afficher un message de début de nouveau tour
+ \brief: afficher un message de début de nouvelle phase en fonction du nom de l'ENSIIE
  \param: 
  \return: message de début de nouveau tour
 */
-void new_phase()
+void print_new_phase(char);
 
 /**
  \brief: afficher le plateau p
- \param: un plateau p
+ \param: un plateau 
  \return: affiche le plateau p
 */
-void print_plateau(plateau p);
+void print_plateau(plateau);
 
 /**
- \brief: demande au joueur de choisir entre chosiir une carte de sa main et finir la phase
- \param: un plateau p
+ \brief: demande au joueur de choisir entre une carte de sa main ou finir la phase en cours
+ \param: un plateau 
  \return: son choix (en chaine de caractères)
 */
-char *ask_carte_ou_fin(plateau p)
+char *ask_carte_ou_fin(plateau);
 
 /**
  \brief: affiche le gagnant du jeu ou l'égalité
- \param: un plateau p
+ \param: un plateau 
  \return: rien
 */
-void win_player(plateau p)
+void print_win_player(plateau);
 
 #endif

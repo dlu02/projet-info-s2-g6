@@ -1,5 +1,5 @@
 //
-//  carte.h
+//  plateau.h
 //  
 //
 //  Created by Lecomte Florian on 14/03/2020.
@@ -8,25 +8,24 @@
 #ifndef PLATEAU_H
 #define PLATEAU_H
 
-#include carte.h
+#include "carte.h"
 
-typedef struct carte 
 typedef struct plateau {
-    carte* mainA;
-    carte* mainB;
-    carte* defausseA;
-    carte* defausseB;
-    carte* deckA;
-    carte* deckB;
-    carte* sideA;
-    carte* sideB;
-    int tour;
+    carte_pile mainA, mainB;
+    carte_pile defausseA, defausseB;
+    carte_pile deckA, deckB;
+    carte_pile pileFiseA, pileFiseB;
+    carte_pile pileFisaA, pileFisaB;
+    int ddA, ddB;	// points de développement durable pour chaque ENSIIE
+    int tour;	// indice de tour
+    char debutEnsiie;	/* lettre 'A' ou 'B' calculée de facon aléatoire qui détermine
+    					  la première ENSIIE à débuter */
 } plateau;
 
 /**
- \brief: créer un nouveau plateau vide
+ \brief: créer un nouveau plateau qui initialise chaque pile de carte
  \param: vide
- \return: un plateau vide
+ \return: un plateau de base
  */
 
 plateau new_plateau();
@@ -53,20 +52,20 @@ void new_tour(plateau);
  \return: le nombre de cartes à piocher pour une ENSIIE (A ou B)
  */
 
-int nb_cartes(plateau, char);
+int nb_cartes(plateau);
 
 /**
  \brief: permet à une ENSIIE de piocher
  \param: le plateau en jeu, un char pour signifier si c'est l'ENSIIE A ou B qui pioche
- \return: vide
+ \return: la carte piochée
  */
 
-void pioche (plateau, char);
+void pioche(plateau);
 
 /**
  \brief: renvoie un booléen (entier) indiquant si la partie est finie ou non, et si oui par laquelle des deux ENSIIE
  \param: le plateau en jeu
- \return: un entier, -1 si non, 0 si égalité, 1 si ENSIIE A gagne, 2 si ENSIIE B gagne
+ \return: un entier, -1 si non, 0 si égalité (i.e 30 tours de passés) , 1 si ENSIIE A gagne, 2 si ENSIIE B gagne
  */
 
 int win(plateau);
