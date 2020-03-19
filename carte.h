@@ -9,6 +9,7 @@
 #define carte_h
 
 #include <stdio.h>
+#include "plateau.h"
 
 typedef struct carte * carte;
 
