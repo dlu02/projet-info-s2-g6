@@ -2,6 +2,7 @@
 //  Created by Decouty Rémi on 15/03/2020.
 
 #include "interface.h"
+#include "plateau.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
