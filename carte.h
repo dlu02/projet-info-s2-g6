@@ -10,6 +10,8 @@
 
 #include "plateau.h"
 
+typedef struct plateau p;
+
 typedef struct {
 	int numero;
 	char *nom;
@@ -18,7 +20,7 @@ typedef struct {
 } carte;
 
 
-typedef carte * carte_pile;
+typedef carte *carte_pile;
 
 /**
  \brief: calculer combien de cartes Elève une ENSIIE recevra au début de sa phase. (utile pour la carte personnels avec effet DR)
@@ -26,7 +28,7 @@ typedef carte * carte_pile;
  \return: le nombre de carte à piocher par la personne.
  */
 
-int pioche_eleve(carte_pile carte_pile);
+int pioche_eleve(carte_pile);
 
 /**
  \brief: ajouter une carte Élève de type FISE ou FISA au plateau de jeu d’une ENSIIE.
@@ -34,7 +36,7 @@ int pioche_eleve(carte_pile carte_pile);
  \return: nothing
 */
 
-void carte_ajouter(carte carte,plateau p);
+void carte_ajouter(carte,p);
 
 /**
  \Brief: calculer le nombre de PE disponibles par ENSIIE après avoir posé sa ou ses nouvelles cartes Élèves.
@@ -42,7 +44,7 @@ void carte_ajouter(carte carte,plateau p);
  \return: un entier, le nombre de point PE du joueur
  */
 
-int carte_pointPE(plateau p);
+int carte_pointPE(p);
 
 /**
  \brief: réalise l'action décrite par une carte personnel
@@ -50,7 +52,7 @@ int carte_pointPE(plateau p);
  \return: nothing
  */
 
-void carte_personnel(carte carte);
+void carte_personnel(carte);
 
 /**
  \Brief: une fonction pour permettre à une ENSIIE de jouer une carte de sa main
@@ -58,7 +60,7 @@ void carte_personnel(carte carte);
  \return: nothing
  */
 
-void carte_jouer(plateau p);
+void carte_jouer(p);
 
 /**
  \Brief: signifier au plateau que le tour est terminé. Elle permettra, entre autres, de faire le calcul des DD gagnés par chaque ENSIIE à la fin du tour.
@@ -66,7 +68,7 @@ void carte_jouer(plateau p);
  \return: nothing
  */
  
-void carte_fin(plateau p);
+void carte_fin(p);
 
 /**
  \Brief: afficher une carte en fonction de son type
@@ -74,7 +76,7 @@ void carte_fin(plateau p);
  \return: nothing
  */
 
-void carte_print_carte(carte carte);
+void carte_print_carte(carte);
 
 /**
  \Brief: afficher une pile de carte
@@ -82,7 +84,7 @@ void carte_print_carte(carte carte);
  \return: nothing
  */
 
-void carte_print_pile(carte_pile carte_pile);
+void carte_print_pile(carte_pile);
 
 
 #endif 
