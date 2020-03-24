@@ -1,0 +1,52 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[utf8]{inputenc}   
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\geometry{hmargin=2cm,vmargin=2.5cm}
+
+\title{Projet Informatique}
+ \author{Romain LOIRS}
+\date{24 mars 2020}
+
+\pagestyle{fancy} 
+\lhead{Loirs Romain}
+\chead{Projet Informatique} 
+\rhead{ENSIIE} 
+\lfoot{} 
+\cfoot{} 
+\rfoot{} 
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt} 
+
+\begin{document}
+
+\maketitle
+\tableofcontents 
+
+\newpage
+
+Ce fichier a \'et\'e \'ecrit sans aucune relecture pr\'ealable
+
+Pour commenc\'e j'ai c\'ee ce fichier latex pour vous expliquer touts les fichiers que j'ai envoy\'e (Comme cela j'aurais une trace pour un rendu plus officiel.) et parce que sur messenger cela aurait fait (un peu) long.
+
+\paragraph{}
+Pour les cartes, la structure est dans le fichier carte.h (j'ai mis toutes les structures dans les fichiers.h pour plus de lisibilit\'e pour vous). j'ai choisis d'utiliser un maximum des types \'enum\'er\'es pour les noms des cartes et les types car manipuler des entiers est plus simples pour les tests qu'une chaine de caract\'res.  Malheureusement, je n'ai pas encore trouv\'e de facon - flemme de trouver le c\'edille- efficace de mettre touts les points et le couts de cartes dans un seul int pour \'economiser de la place m\'emoire -> cherche solution
+Bien sur j'ai juste fait l'essentiel pour le moment (afficher et cr\'eer une carte). j'attend le deck et le plateau pour continiuer.
+
+\paragraph{}
+Pour le deck, j'ai utilis\'e un format de liste chain\'e (\# optimsation de la m\'emoire) ou chaque maillon contient une carte... cf structure.h et structure.c
+J'ai repris les fonctions de Burel  et Y ( merci mes vieux TP et Damien) mais malheureusement les test d'\'egalit\'e entre des entiers et des cartes c'est pas la pareil. toutes les fonctions que je vous ai envoy\'e dans   le fichier fonctionnent. J'ai ajout\'e un \'element, retirer le premier \'element ins\'er\'ee et la sacrosainte fonction dek\_print. Il me reste retirer le dernier \'element ins\'er\'ee dans le deck et plein d'autres focntions (si en lisant les r\'egles vous trouverez des focntions, faites vous plaisir)
+
+\paragraph{}
+
+J'ai fais un makefile (mais pas pour le projet en entier->deception) pour compiler un fichier test (pour voir si mes focntions fonctionnent - la base quoi). Je pense qu'il ne vous sera pas utile mais bon, il vaut mieux tout partager (ahhh le communisme...)
+
+Si vous trouvez des id\'ees d'optimisation ou des fonctionnalit\'s dont vous aurez besoin, dites le moi.
+
+\end{document}
