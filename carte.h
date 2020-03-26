@@ -8,6 +8,8 @@
 #ifndef CARTE_H
 #define CARTE_H
 
+
+
 // Les structures et les types énumérés //
 
 typedef enum Nom Nom;
@@ -27,25 +29,124 @@ typedef struct carte carte;
 struct carte{
     Nom nom;
     Type type;
-    //carte Eleve
-    int pt_dev;
-    int pt_dur;
-    int pt_nrj;
-    // carte personnel et action
-    int cout;
+    long code;
 };
 
 #include "plateau.h"
 
-//les fonctions//
+
+
+
+//les fonctions permettant d'accéder aux différentes informations d'une carte//
 
 /**
- \brief: création d'une nouvelle carte
- \param: un entier qui corre
- \return: le nombre de carte à piocher par la personne.
+ \brief:  obtenir le nom de la carte
+ \param: une carte
+ \return: le nom de la carte
+*/
+
+Nom getNom(carte);
+
+/**
+ \brief:  retourne le type d'une carte
+ \param: une carte
+ \return: le type de la carte
+*/
+
+Type getType(carte);
+
+/**
+ \brief:  obtenir les point developement durable à partir du code d'une carte.
+ \param: une carte de type élève.
+ \return: les points developpement durable d'une carte. -1 en cas de pb
+*/
+
+long pt_DD(carte);
+
+/**
+ \brief:  obtenir les point durabilité  à partir du code d'une carte.
+ \param: une carte de type élève.
+ \return: les points durablilité d'une carte. -1 en cas de pb
+*/
+
+long pt_Dur(carte);
+
+/**
+ \brief:  obtenir les point énergie à partir du code d'une carte.
+ \param: une carte de type élève.
+ \return: les points énergie d'une carte. -1 en cas de pb
+*/
+
+long pt_nrj(carte);
+
+/**
+ \brief:  obtenir le cout à partir du code d'une carte
+ \param: une carte de type personnel ou action
+ \return: les points developpement durable. -1 en cas de pb
+*/
+
+long cout(carte);
+
+
+
+
+
+
+//fonctions permettant de modifier une carte//
+
+/**
+ \brief: modifie(ajouter ou soustraire) en place les points développement durables d'une carte.
+ \param: une carte de type élève et les points à soustraire ou additionner
+ \return: nothing. si le nombre de point Développement durable est négatif, remet à 0.
+*/
+
+void pt_DD_change(carte*,long);
+
+/**
+ \brief: modifie(ajouter ou soustraire) en place les points durabilité d'une carte.
+ \param: une carte de type élève et les points à soustraire ou additionner
+ \return: nothing. si le nombre de point durabilité est négatif, remet à 0.
+*/
+
+void pt_Dur_change(carte*,long);
+
+/**
+ \brief:  modifie(ajouter ou soustraire) en place les énérgie d'une carte.
+ \param: une carte de type élève et les points à soustraire ou additionner
+ \return: nothing. si le nombre de point énérgie est négatif, remet à 0.
+*/
+
+void pt_nrj_change(carte*,long);
+
+
+
+
+
+
+// fonctions utiles en particulier pour deck //
+
+/**
+ \brief:  créer une nouvelle carte
+ \param: le nom de la carte (soit le nom déterminié dans le type énuméré, soit un entier compirs entre 0 et 32 comrpis)
+ \return: la carte désirée
 */
 
 carte carte_new(Nom);
+
+/**
+\Brief: afficher une carte en fonction de son type
+\param: une carte
+\return: nothing
+*/
+
+void carte_print(carte);
+
+
+
+
+
+// fonctions utiles pour coder le jeu//
+
 
 /**
  \brief: calculer combien de cartes Elève une ENSIIE recevra au début de sa phase. (utile pour la carte personnels avec effet DR)
@@ -95,19 +196,6 @@ void carte_jouer(plateau);
  
 void carte_fin(plateau);
 
-/**
- \Brief: afficher une carte en fonction de son type
- \param: une carte
- \return: nothing
- */
-
-void carte_print(carte);
-
-/**
- \Brief: afficher une pile de carte
- \param: une pile de carte
- \return: nothing
- */
 
 
 #endif 
