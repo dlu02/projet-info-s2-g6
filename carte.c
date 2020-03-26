@@ -58,7 +58,7 @@ void pt_Dur_change(carte *c,long pt){
 }
 
 void pt_nrj_change(carte *c,long pt){
-    if (pt_nrj(*c)+pt<0) c->pt_Dur(*c)*1000+pt_DD(*c);
+    if (pt_nrj(*c)+pt<0) c->code=pt_Dur(*c)*1000+pt_DD(*c);
     else c->code=c->code+(pt*1000000);
 }
 
