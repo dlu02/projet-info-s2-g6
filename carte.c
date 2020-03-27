@@ -131,8 +131,8 @@ void aux_NomPrint(carte c){
         case Prevel: printf("Prevel");break;
         case Cours_developpemnt_durable: printf("cours_developpement durable");break;
         case Recrutement: printf("Recrutement");break;
-        case Rentrée_FISE: printf("Rentrée_FISE");break;
-        case Rentrée_FISA: printf("Rentrée_FISA");break;
+        case Rentree_FISE: printf("Rentrée_FISE");break;
+        case Rentree_FISA: printf("Rentrée_FISA");break;
         case Energie_verte: printf("Energie_verte");break;
         case Diplomation: printf("Diplomation");break;
         case Decharge: printf("decharge");break;
