@@ -56,21 +56,38 @@ void deck_add_last(carte,deck*);
 /**
 \brief: utilisation FIFO: retire le premier élément placé dans le deck
 \param: un deck contenant une carte (vérifié si le deck est non vide avant de l'utiliser)
-\return:  nothing
+\return:  la carte retiré"
 */
 carte deck_remove_head(deck*);
 
 /**
 \brief: utilisation FILO: retire le dernier élément placé dans le deck
 \param: un deck contenant une carte (vérifié si le deck est non vide avant de l'utiliser)
-\return:  nothing
+\return:  la carte retiirée
 */
 carte deck_remove_queue(deck*);
+
+/**
+\brief: utilisation lambda: retire le i-eme element du deck (en partant du premier element ajouté a la pile)
+\param: un deck contenant une carte (vérifié si le deck est non vide avant de l'utiliser)
+\return:  la carte supprimé
+*/
+
+carte deck_remove_indice(deck*, int);
+
+/**
+\brief: supprimer une carte précise du deck
+\param: un deck contenant une carte (vérifié si le deck est non vide avant de l'utiliser) et le nom de la carte
+\return:  la carte supprimé
+*/
+
+carte deck_remove_carte(deck*, Nom);
 
 /**
 \brief: imprime à l'écran un deck
 \param: un deck.
 \return:  Si le decke st vide affiche "the deck is empty" sinon affiche de leck
+ 
 */
 void deck_print(deck);
 
