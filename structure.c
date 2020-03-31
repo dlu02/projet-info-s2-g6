@@ -10,6 +10,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
+
+
+/* construction du deck et destrcution*/
+
 deck deck_create(){
   return NULL;
 }
@@ -18,7 +23,6 @@ int deck_isEmpty(deck l){
   return l==NULL;
 }
 
-/* requires : l valide ou NULL / assigns nothing / ensures retourne la liste x::l */
 deck deck_cons(carte x,deck l){
     deck res;
     res= (deck) malloc(sizeof(struct node));
@@ -27,12 +31,25 @@ deck deck_cons(carte x,deck l){
     return res;
 }
 
-/* requires l valide / assigns *l / ensure oin ajoute x en tête de *l */
+void deck_free(deck l){
+    deck tmp;
+    while (l != NULL){
+        tmp=l->next;
+        free(l);
+        l=tmp;
+    }
+}
+
+
+
+
+/*addition d'element*/
+
 void deck_add(carte x,deck *l){
     *l = deck_cons(x,*l);
 }
 
-/* requires *l valide / assigns *l / ensures ajoute x dans *l à la fin */
+
 void deck_add_last(carte x,deck *l){
     deck q;
     if (*l==NULL){
@@ -47,16 +64,12 @@ void deck_add_last(carte x,deck *l){
     }
 }
 
-void deck_free(deck l){
-    deck tmp;
-    while (l != NULL){
-        tmp=l->next;
-        free(l);
-        l=tmp;
-    }
-}
 
-/* requires *l != NULL / assigns *l / ensues retire le maillon en tête de l */
+
+
+
+/*retirer des elements*/
+
 carte deck_remove_head(deck *l){
     carte res= (*l)->carte;
     deck tmp= (*l)->next;
@@ -65,13 +78,33 @@ carte deck_remove_head(deck *l){
     return res;
 }
 
+carte deck_remove_queue(deck *l){
+    carte res;
+    return res;
+}
+
+carte deck_remove_carte(deck *l, Nom nom){
+    
+}
+
+carte deck_remove_indice(deck *l, int indice){
+    
+}
+
+
+
+/*afficher le deck*/
+
 void deck_print(deck l){
     if (deck_isEmpty(l)){
         printf("the deck is empty\n");
     }
     else{
         deck curl=l;
+        int i=0;
         while(!deck_isEmpty(curl)){
+            printf("carte n° %i",i);
+            i=i+1;
             carte_print(curl->carte);
             curl=curl->next;
         }
