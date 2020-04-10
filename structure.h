@@ -11,15 +11,6 @@
 #include <stdio.h>
 #include "carte.h"
 
-//la structure du deck
-//utilisation des liste chainées
-
-typedef struct node *deck;
-struct node{
-  carte carte;
-  deck next;
-};
-
 
 
 
