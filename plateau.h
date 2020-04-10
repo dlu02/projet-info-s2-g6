@@ -10,21 +10,6 @@
 
 #include "structure.h"
 
-typedef struct plateau {
-    deck mainA, mainB;
-    deck sideA, sideB;
-    int nbcarteA, nbcarteB;
-    deck defausseA, defausseB;
-    deck deckA, deckB;
-    deck pileFiseA, pileFiseB;
-    deck pileFisaA, pileFisaB;
-    int maxcarte; //maximum de cartes Personnel que les ENSIIE peuvent jouer
-    int ddA, ddB;	// points de développement durable pour chaque ENSIIE
-    int tour;	// indice de tour
-    char debutEnsiie;	/* lettre 'A' ou 'B' calculée de facon aléatoire qui détermine
-    					  la première ENSIIE à débuter */
-}* plateau;
-
 /**
  \brief: créer un nouveau plateau qui initialise chaque pile de carte
  \param: vide
@@ -47,7 +32,7 @@ void free_plateau(plateau);
  \return: vide
  */
 
-void new_tour(plateau);
+void new_tour(plateau*);
 
 /**
  \brief: calcule le nombre de carte à piocher pour une ENSIIE (A ou B)
@@ -63,7 +48,7 @@ int nb_cartes(plateau, char);
  \return: la carte piochée
  */
 
-void pioche(plateau, char);
+void pioche(plateau*, char);
 
 /**
  \brief: renvoie un booléen (entier) indiquant si la partie est finie ou non, et si oui par laquelle des deux ENSIIE
