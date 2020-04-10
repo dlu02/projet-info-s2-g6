@@ -19,7 +19,7 @@ enum Nom {
     //Nom des cartes Personnels (20)
     Lim, Szafranski, Faye, Mouilleron, Dumbrava, Forest, Brunel, Bourard, Watel, Y, Goilard, Jeannas, Merabet, Ligozat, Dubois, Lejeune, Mathias, Salhab, Sagna, Prevel,
     //Nom des cartes Actions (11)
-    Cours_developpemnt_durable, Recrutement, Rentree_FISE, Rentree_FISA, Energie_verte, Diplomation, Decharge, Recyclage, Zero_papier, Repas_vegetarien, Fermeture_annuelle
+    Cours_developpemnt_durable, Recrutement, Rentrée_FISE, Rentrée_FISA, Energie_verte, Diplomation, Decharge, Recyclage, Zero_papier, Repas_vegetarien, Fermeture_annuelle
 };
 
 typedef enum Type Type;
@@ -32,7 +32,31 @@ struct carte{
     long code;
 };
 
-#include "plateau.h"
+//la structure du deck
+//utilisation des liste chainées
+
+typedef struct node *deck;
+struct node{
+  carte carte;
+  deck next;
+};
+
+//structure du plateau
+
+typedef struct plateau {
+    deck mainA, mainB;
+    deck sideA, sideB;
+    int nbcarteA, nbcarteB;
+    deck defausseA, defausseB;
+    deck deckA, deckB;
+    deck pileFiseA, pileFiseB;
+    deck pileFisaA, pileFisaB;
+    int maxcarte; //maximum de cartes Personnel que les ENSIIE peuvent jouer
+    int ddA, ddB;    // points de développement durable pour chaque ENSIIE
+    int tour;    // indice de tour
+    char debutEnsiie;    /* lettre 'A' ou 'B' calculée de facon aléatoire qui détermine
+                          la première ENSIIE à débuter */
+} plateau;
 
 
 
@@ -86,6 +110,15 @@ long pt_nrj(carte);
 */
 
 long cout(carte);
+
+/**
+ \brief:  test pour reconnaitre une carte
+ \param: une  carte et un nom
+ \return: retrun 1 si c'est la bonne carte et 0 sinon. Si ce sont deux cartes Fise ou Fisa différentes, la fonctions renvoie tout de même 1.
+*/
+
+int carte_equal(carte,Nom);
+    
 
 
 
@@ -147,10 +180,9 @@ void carte_print(carte);
 
 // fonctions utiles pour coder le jeu//
 
-
 /**
  \brief: calculer combien de cartes Elève une ENSIIE recevra au début de sa phase. (utile pour la carte personnels avec effet DR)
- \param: historique des cartes joué au tour précédent. Bonne idée?
+ \param: historique des cartes joué au tour précédent.
  \return: le nombre de carte à piocher par la personne.
  */
 
@@ -158,11 +190,11 @@ int pioche_eleve(plateau);
 
 /**
  \brief: ajouter une carte Élève de type FISE ou FISA au plateau de jeu d’une ENSIIE.
- \param: une carte de type FISE ou FISA UNIQUEMENT et un plateau de jeu p
- \return: nothing
+ \param: une carte de type FISE ou FISA UNIQUEMENT et un plateau de jeu p, un char A  ou B pour identifier l'ENSIIE
+ \return: ajoute la carte
 */
 
-void carte_ajouter(carte,plateau);
+void carte_ajouter(carte,plateau, char);
 
 /**
  \Brief: calculer le nombre de PE disponibles par ENSIIE après avoir posé sa ou ses nouvelles cartes Élèves.
@@ -182,7 +214,7 @@ void carte_personnel(carte);
 
 /**
  \Brief: une fonction pour permettre à une ENSIIE de jouer une carte de sa main
- \param: un jeu de carte (structure à préciser par la suite)
+ \param: un jeu de carte
  \return: nothing
  */
 
@@ -191,7 +223,7 @@ void carte_jouer(plateau);
 /**
  \Brief: signifier au plateau que le tour est terminé. Elle permettra, entre autres, de faire le calcul des DD gagnés par chaque ENSIIE à la fin du tour.
  \param: un plateau p
- \return: nothing
+ \return: les point DD
  */
  
 void carte_fin(plateau);
