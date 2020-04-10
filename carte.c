@@ -171,8 +171,8 @@ long aux_code(Nom nom){
         case Prevel: return 2;break;
         case Cours_developpemnt_durable: return 2;break;
         case Recrutement: return 2;break;
-        case Rentrée_FISE:return 3;break;
-        case Rentrée_FISA:return 3;break;
+        case Rentree_FISE:return 3;break;
+        case Rentree_FISA:return 3;break;
         case Energie_verte: return 4;break;
         case Diplomation: return 5;break;
         case Decharge: return 5;break;
