@@ -12,15 +12,18 @@
 
 typedef struct plateau {
     deck mainA, mainB;
+    deck sideA, sideB;
+    int nbcarteA, nbcarteB;
     deck defausseA, defausseB;
     deck deckA, deckB;
     deck pileFiseA, pileFiseB;
     deck pileFisaA, pileFisaB;
+    int maxcarte; //maximum de cartes Personnel que les ENSIIE peuvent jouer
     int ddA, ddB;	// points de développement durable pour chaque ENSIIE
     int tour;	// indice de tour
     char debutEnsiie;	/* lettre 'A' ou 'B' calculée de facon aléatoire qui détermine
     					  la première ENSIIE à débuter */
-} plateau;
+}* plateau;
 
 /**
  \brief: créer un nouveau plateau qui initialise chaque pile de carte
@@ -39,7 +42,7 @@ plateau new_plateau();
 void free_plateau(plateau);
 
 /**
- \brief: incrémente le compteur de tours, gére les cartes FISA et met à jour les espaces disponibles pour les cartes Personnels
+ \brief: incrémente le compteur de tours, gére les pioches de cartes Personnel et met à jour les espaces disponibles pour les cartes Personnels
  \param: le plateau en jeu
  \return: vide
  */
@@ -52,7 +55,7 @@ void new_tour(plateau);
  \return: le nombre de cartes à piocher pour une ENSIIE (A ou B)
  */
 
-int nb_cartes(plateau);
+int nb_cartes(plateau, char);
 
 /**
  \brief: permet à une ENSIIE de piocher
@@ -60,7 +63,7 @@ int nb_cartes(plateau);
  \return: la carte piochée
  */
 
-void pioche(plateau);
+void pioche(plateau, char);
 
 /**
  \brief: renvoie un booléen (entier) indiquant si la partie est finie ou non, et si oui par laquelle des deux ENSIIE
@@ -70,6 +73,13 @@ void pioche(plateau);
 
 int win(plateau);
 
+/**
+ \brief: remplis un deck VIDE
+ \param: vide
+ \return: un deck de départ mélangé de 31 cartes distinctes
+ */
+
+deck random_deck();
 
 
 #endif
