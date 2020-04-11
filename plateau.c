@@ -6,6 +6,7 @@
 int alea (int a, int b){
     int res;
     srand(time(NULL));
+    sleep(1);
     res= rand()%(b-a)+a;
     return res;
 }
