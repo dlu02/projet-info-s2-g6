@@ -62,45 +62,51 @@ void pt_nrj_change(carte *c,long pt){
     else c->code=c->code+(pt*1000000);
 }
 
+//deux cartes sont égales si elles ont le meme nom, unicité des cartes personnels et actions dans les decks, pour les cartes FISE et FISA, elles n'ont pas d'identité propre. Cas à part
+int carte_equal(carte c1,Nom nom){
+    return c1.nom==nom;
+}
 
 
 
 /* les fonctions annexes. Elles sont utiles pour d'autres focntions (non définis dans le header) */
 
-void AE1(plateau plateau,int x){
+/* ajoute x points de dévellopement à chacune de vos cartes FISE*/
+void AE1(plateau plateau,int x, char id){
+    
 }
 
-void AE2(plateau plateau,int x){
+void AE2(plateau plateau,int x, char id){
 }
 
-void AA1(plateau plateau,int x){
+void AA1(plateau plateau,int x, char id){
 }
 
-void AA2(plateau plateau,int x){
+void AA2(plateau plateau,int x,char id){
 }
 
-void RE1(plateau plateau,int x){
+void RE1(plateau plateau,int x,char id){
 }
 
-void RE2(plateau plateau,int x){
+void RE2(plateau plateau,int x,char id ){
 }
 
-void RA1(plateau plateau,int x){
+void RA1(plateau plateau,int x,char id){
 }
 
-void RA2(plateau plateau,int x){
+void RA2(plateau plateau,int x,char id){
 }
 
-void ADD(plateau plateau,int x){
+void ADD(plateau plateau,int x,char id){
 }
 
-void RDD(plateau plateau,int x){
+void RDD(plateau plateau,int x,char id){
 }
 
-void DR(plateau plateau,int x){
+void DR(plateau plateau,int x,char id){
 }
 
-void E(plateau plateau,int x){
+void E(plateau plateau,int x,char id){
 }
 
 /*permet d'afficher le nom d'une carte
@@ -131,8 +137,8 @@ void aux_NomPrint(carte c){
         case Prevel: printf("Prevel");break;
         case Cours_developpemnt_durable: printf("cours_developpement durable");break;
         case Recrutement: printf("Recrutement");break;
-        case Rentree_FISE: printf("Rentrée_FISE");break;
-        case Rentree_FISA: printf("Rentrée_FISA");break;
+        case Rentrée_FISE: printf("Rentrée_FISE");break;
+        case Rentrée_FISA: printf("Rentrée_FISA");break;
         case Energie_verte: printf("Energie_verte");break;
         case Diplomation: printf("Diplomation");break;
         case Decharge: printf("decharge");break;
@@ -171,8 +177,8 @@ long aux_code(Nom nom){
         case Prevel: return 2;break;
         case Cours_developpemnt_durable: return 2;break;
         case Recrutement: return 2;break;
-        case Rentree_FISE:return 3;break;
-        case Rentree_FISA:return 3;break;
+        case Rentrée_FISE:return 3;break;
+        case Rentrée_FISA:return 3;break;
         case Energie_verte: return 4;break;
         case Diplomation: return 5;break;
         case Decharge: return 5;break;
@@ -219,6 +225,17 @@ void carte_print(carte c){
     }
     printf("\n");
 }
+
+/*void carte_ajouter(carte c,plateau p, char n){
+    if (n=='A'){
+        if (c.nom==Fise){deck_add_last (c, (p)->pileFiseA);}
+        else {deck_add_last(c,(p)->pileFiseA);}
+    }
+    else{
+        if (c.nom==Fise){deck_add_last (c, (p)->pileFiseB);}
+        else {deck_add_last(c,(p)->pileFiseB);}
+    }
+}*/
 
 
 
