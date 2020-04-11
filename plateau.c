@@ -3,10 +3,35 @@
 #include"time.h"
 #include <unistd.h>
 
+int alea (int a, int b){
+    int res;
+    srand(time(NULL));
+    res= rand()%(b-a)+a;
+    return res;
+}
+
+void remplir_alea_deck(deck *res) {
+    carte fise=carte_new(Fise);
+    carte fisa= carte_new(Fisa);
+    for (int i=2;i<33;i++){
+        carte c=carte_new(i);
+        deck_add_last(c,res);
+        deck_add_last(fise,res);
+        deck_add_last(fisa,res);
+    }
+    for (int i=0;i<100;i++){
+        int aux=alea(0,deck_length(*res));
+        carte caux= deck_remove_indice(res,aux);
+        deck_add_last(caux,res);
+    }
+}
+
 plateau new_plateau() {
     plateau new;
-    new.deckA = random_deck();
-    new.deckB = random_deck();
+    new.deckA = deck_create();
+    new.deckB = deck_create();
+    remplir_alea_deck(&(new.deckA));
+    remplir_alea_deck(&(new.deckB));
     new.mainA = deck_create();
     new.mainB =  deck_create();
     new.defausseA = deck_create();
@@ -23,40 +48,17 @@ plateau new_plateau() {
     new.ddA = 0;
     new.ddB = 0;
     new.maxcarte = 1;
-    //pioche(&new,'A');
-    //pioche(&new,'A');
-    //pioche(&new,'B');
-    //pioche(&new,'B');
+    pioche(&new,'A');
+    pioche(&new,'A');
+    pioche(&new,'B');
+    pioche(&new,'B');
     srand(time(NULL));
     if (rand()%2==0) {new.debutEnsiie = 'A';} else {new.debutEnsiie = 'B';};
     return new;
 }
 
-int alea (int a, int b){
-    int res;
-    srand(time(NULL));
-    sleep(1);
-    res= rand()%(b-a)+a;
-    return res;
-}
-deck random_deck() {
-    deck res;
-    carte fise=carte_new(Fise);
-    carte fisa= carte_new(Fisa);
-    for (int i=2;i<33;i++){
-        carte c=carte_new(i);
-        deck_add_last(c,&res);
-        deck_add_last(fise,&res);
-        deck_add_last(fisa,&res);
-    }
-    for (int i=0;i<100;i++){
-        int aux=alea(0,deck_length(res));
-        carte caux= deck_remove_indice(&res,aux);
-        deck_add_last(caux,&res);
-    }
-    return res;
-}
-    
+
+
     
     /*d = deck_create();
     int compteur = (31+32)/2;
