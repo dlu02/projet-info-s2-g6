@@ -9,10 +9,62 @@
 #define carte_file_h
 
 #include <stdio.h>
+
+// Les structures et les types énumérés //
+
+typedef enum Nom Nom;
+enum Nom {
+    //Nom des cartes élèves (2)
+    Fise,Fisa,
+    //Nom des cartes Personnels (20)
+    Lim, Szafranski, Faye, Mouilleron, Dumbrava, Forest, Brunel, Bourard, Watel, Y, Goilard, Jeannas, Merabet, Ligozat, Dubois, Lejeune, Mathias, Salhab, Sagna, Prevel,
+    //Nom des cartes Actions (11)
+    Cours_developpemnt_durable, Recrutement, Rentrée_FISE, Rentrée_FISA, Energie_verte, Diplomation, Decharge, Recyclage, Zero_papier, Repas_vegetarien, Fermeture_annuelle
+};
+
+typedef enum Type Type;
+enum Type {Eleve,Personnel,Action};
+
+typedef struct carte carte;
+struct carte{
+    Nom nom;
+    Type type;
+    long code;
+};
+
+//la structure du deck
+//utilisation des liste chainées
+
+typedef struct node *deck;
+struct node{
+  carte carte;
+  deck next;
+};
+
+//structure du plateau
+
+typedef struct plateau {
+    deck mainA, mainB;
+    deck sideA, sideB;
+    int nbcarteA, nbcarteB;
+    deck defausseA, defausseB;
+    deck deckA, deckB;
+    deck pileFiseA, pileFiseB;
+    deck pileFisaA, pileFisaB;
+    int maxcarte; //maximum de cartes Personnel que les ENSIIE peuvent jouer
+    int ddA, ddB; // points de développement durable pour chaque ENSIIE
+    int nrjA, nrjB;
+    // permet de modéliser les effets;
+    int ADD_effetA, ADD_effetB;
+    int RDD_effetA, RDD_effetB;
+    int piocheA, piocheB;
+    int EA, EB;
+    int tour;    // indice de tour
+    char debutEnsiie;    /* lettre 'A' ou 'B' calculée de facon aléatoire qui détermine
+                          la première ENSIIE à débuter */
+} plateau;
+
 #include "carte.h"
-
-
-
 
 /* construction du deck et destruction*/
 
@@ -68,7 +120,7 @@ int deck_carteIn(deck, Nom);
 \param: un deck
 \return: la longueur du deck
 */
-int deck_length(deck l);
+int deck_length(deck);
 
 /**
 \brief: imprime à l'écran un deck
@@ -109,6 +161,17 @@ carte deck_remove_carte(deck*, Nom);
 */
 carte deck_remove_indice(deck*, int);
 
+
+
+/*modifier des élements*/
+
+/**
+\brief: ajouter ou retirer des points a une carte Fise ou Fisa
+\param: la pile a modifier, le nombre de points à ajouter ou retrancher, un numero  pour identifier les points à modifier (1- point DD, 2-point Dur, 3-point energie)
+\return:  nothing
+*/
+
+void deck_addPt(deck* ,long , int);
 
 
 #endif /* carte_file_h */
