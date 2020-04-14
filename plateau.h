@@ -64,7 +64,9 @@ int win(plateau);
  \return: un deck de départ mélangé de 31 cartes distinctes
  */
 
-void remplir_alea_deck(deck*);
+void remplir_deck(deck*);
+
+void melanger_deck (deck*);
 
 
 #endif
