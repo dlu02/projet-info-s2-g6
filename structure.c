@@ -202,7 +202,31 @@ carte deck_remove_indice(deck *l, int indice){
     return res;
 }
 
-
+void deck_addPt(deck *l,long pt, int id){
+    deck tmp = *l;
+    switch(id){
+        case 1:
+            while (tmp != NULL){
+                pt_DD_change(&(tmp->carte),pt);
+                tmp=tmp->next;
+            }
+            break;
+        case 2:
+            while (tmp != NULL){
+                pt_Dur_change(&(tmp->carte),pt);
+                tmp=tmp->next;
+            }
+            break;
+        case 3:
+            while (tmp != NULL){
+                pt_nrj_change(&(tmp->carte),pt);
+                tmp=tmp->next;
+            }
+            break;
+        default:
+            printf("id non reconnu\n");
+   }
+}
 
 
 
