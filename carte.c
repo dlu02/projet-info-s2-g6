@@ -3,9 +3,9 @@
 //  
 //
 //  Created by Loirs Romain on 06/03/2020.
-//
 
 #include "carte.h"
+#include "structure.h"
 #include <stdio.h>
 
 
@@ -72,41 +72,113 @@ int carte_equal(carte c1,Nom nom){
 /* les fonctions annexes. Elles sont utiles pour d'autres focntions (non définis dans le header) */
 
 /* ajoute x points de dévellopement à chacune de vos cartes FISE*/
-void AE1(plateau plateau,int x, char id){
-    
+void AE1(plateau *p,int x, char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFiseA),x,1);
+    }
+    else{
+        deck_addPt(&(p->pileFiseB),x,1);
+    }
 }
 
-void AE2(plateau plateau,int x, char id){
+void AE2(plateau *p,int x, char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFiseA),x,2);
+    }
+    else{
+        deck_addPt(&(p->pileFiseB),x,2);
+    }
 }
 
-void AA1(plateau plateau,int x, char id){
+void AA1(plateau *p,int x, char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFisaA),x,1);
+    }
+    else{
+        deck_addPt(&(p->pileFisaB),x,1);
+    }
 }
 
-void AA2(plateau plateau,int x,char id){
+void AA2(plateau *p,int x,char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFisaA),x,2);
+    }
+    else{
+        deck_addPt(&(p->pileFisaB),x,2);
+    }
 }
 
-void RE1(plateau plateau,int x,char id){
+/*retirer x*/
+void RE1(plateau *p,int x,char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFiseB),-x,1);
+    }
+    else{
+        deck_addPt(&(p->pileFiseA),-x,1);
+    }
 }
 
-void RE2(plateau plateau,int x,char id ){
+void RE2(plateau *p,int x,char id ){
+    if (id=='A'){
+        deck_addPt(&(p->pileFiseB),-x,2);
+    }
+    else{
+        deck_addPt(&(p->pileFiseA),-x,2);
+    }
 }
 
-void RA1(plateau plateau,int x,char id){
+void RA1(plateau *p,int x,char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFisaB),-x,1);
+    }
+    else{
+        deck_addPt(&(p->pileFisaA),-x,1);
+    }
 }
 
-void RA2(plateau plateau,int x,char id){
+void RA2(plateau *p,int x,char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFisaB),-x,2);
+    }
+    else{
+        deck_addPt(&(p->pileFisaA),-x,2);
+    }
 }
 
-void ADD(plateau plateau,int x,char id){
+void ADD(plateau *p,int x,char id){
+    if (id=='A'){
+       p->ADD_effetA= p->ADD_effetA+x ;
+    }
+    else{
+         p->ADD_effetB= p->ADD_effetB+x;
+    }
 }
 
-void RDD(plateau plateau,int x,char id){
+void RDD(plateau *p,int x,char id){
+    if (id=='A'){
+         p->RDD_effetB= p->RDD_effetB+x ;
+    }
+    else{
+         p->RDD_effetA= p->RDD_effetA+x;
+    }
 }
 
-void DR(plateau plateau,int x,char id){
+void DR(plateau *p,int x,char id){
+    if (id=='A'){
+         p->piocheA= p->piocheA+x ;
+    }
+    else{
+         p->piocheA= p->piocheA+x;
+    }
 }
 
-void E(plateau plateau,int x,char id){
+void E(plateau *p,int x,char id){
+    if (id=='A'){
+         p->EA= p->EA+x ;
+    }
+    else{
+         p->EB= p->EB+x;
+    }
 }
 
 /*permet d'afficher le nom d'une carte
@@ -226,16 +298,142 @@ void carte_print(carte c){
     printf("\n");
 }
 
-/*void carte_ajouter(carte c,plateau p, char n){
-    if (n=='A'){
-        if (c.nom==Fise){deck_add_last (c, (p)->pileFiseA);}
-        else {deck_add_last(c,(p)->pileFiseA);}
+
+
+int pioche_eleve(plateau p, char id){
+    if (id=='A'){
+        return p.piocheA;
+    }
+    else {
+        return p.piocheB;
+    }
+}
+
+void carte_ajouter(Nom nom, plateau* p, char id){
+    if (id=='A'){
+        if (nom==Fise){
+            carte carte=carte_new(Fise);
+        /*parcours des cartes perso pour savoir si des effets sont à appliqués*/
+            deck_add_last(carte,&(p->pileFiseA));
+        }
+        else if (nom==Fisa){
+            carte carte=carte_new(Fisa);
+            
+            deck_add_last(carte,&(p->pileFiseA));
+        
+        }
+        else printf ("ce n'est pas une carte eleve");
     }
     else{
-        if (c.nom==Fise){deck_add_last (c, (p)->pileFiseB);}
-        else {deck_add_last(c,(p)->pileFiseB);}
+        if (nom==Fise){
+            carte carte=carte_new(Fise);
+        /*parcours des cartes perso pour savoir si des effets sont à appliqués*/
+            deck_add_last(carte,&(p->pileFiseB));
+        }
+        else if (nom==Fisa){
+            carte carte=carte_new(Fisa);
+            
+            deck_add_last(carte,&(p->pileFiseB));
+        
+        }
+        else printf ("ce n'est pas une carte eleve");
     }
-}*/
+}
+
+int carte_pointPE(plateau p, char id){
+    if (id=='A'){
+        int res;
+      //parcours tas
+        return res;
+    }
+    else{
+        int res;
+        
+        return res;
+    }
+}
+
+void carte_fin(plateau p){
+    
+}
+
+
+void carte_personnel(carte c,plateau *p,char id){
+        switch(getNom(c)){
+            case Lim: AE1(p,1,id); break;
+            case Szafranski: AE2(p,1,id); break;
+            case Faye: AA1(p,1,id);break;
+            case Mouilleron:AA2(p,1,id);break;
+            case Dumbrava:RE1(p,1,id);break;
+            case Forest:RE2(p,1,id);break;
+            case Brunel:RA1(p,1,id); break;
+            case Bourard:RA2(p,1,id) ;break;
+            case Watel:
+                AE1(p,1,id);
+                AA1(p,1,id);
+                break;
+            case Y:
+                AE2(p,1,id);
+                AA2(p,1,id);
+                break;
+            case Goilard:
+                RE1(p,1,id);
+                RA1(p,1,id);
+                break;
+            case Jeannas:
+                RE2(p,1,id);
+                RA2(p,1,id);
+                break;
+            case Merabet:
+                DR(p,2,id);
+                break;
+            case Ligozat:
+                ADD(p,2,id);
+                DR(p,1,id);
+                E(p,1,id);
+                break;
+            case Dubois:
+                RDD(p,2,id);
+                DR(p,1,id);
+                E(p,1,id);
+                break;
+            case Lejeune:
+                AE1(p,1,id);
+                AE2(p,1,id);
+                RE2(p,1,id);
+                RDD(p,1,id);
+                break;
+            case Mathias:
+                AA1(p,1,id);
+                AA2(p,1,id);
+                RA2(p,1,id);
+                RDD(p,1,id);
+                break;
+            case Salhab:
+                AE1(p,2,id);
+                AE2(p,2,id);
+                E(p,1,id);
+                break;
+            case Sagna:
+                AA1(p,2,id);
+                AA2(p,2,id);
+                E(p,1,id);
+                break;
+            case Prevel:
+                AE1(p,2,id);
+                AE2(p,2,id);
+                AA1(p,2,id);
+                AA2(p,2,id);
+                ADD(p,1,id);
+                RDD(p,1,id);
+                DR(p,1,id);
+                E(p,2,id);
+                break;
+            default:
+                printf("n'est pas une carte personnel");
+        }
+    }
+
 
 
 
