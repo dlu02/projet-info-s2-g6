@@ -5,22 +5,37 @@
 
 int alea (int a, int b){
     int res;
-    srand(time(NULL));
     sleep(1);
+    srand(time(NULL));
     res= rand()%(b-a)+a;
     return res;
 }
 
-void remplir_alea_deck(deck *res) {
-    carte fise=carte_new(Fise);
-    carte fisa= carte_new(Fisa);
-    for (int i=2;i<33;i++){
+void remplir_deck(deck *res) {
+    int i;
+    for (i=0;i<33;i++){
         carte c=carte_new(i);
-        deck_add_last(c,res);
-        deck_add_last(fise,res);
-        deck_add_last(fisa,res);
+        if (i==22 || i==23){
+            deck_add_last(c,res);
+            deck_add_last(c,res);
+            deck_add_last(c,res);
+        }
+        else if (i==24 || i==25 || i==26 || i==27){
+            deck_add_last(c,res);
+            deck_add_last(c,res);
+        }
+        else if (i==28){
+            deck_add_last(c,res);
+            deck_add_last(c,res);
+            deck_add_last(c,res);
+            deck_add_last(c,res);
+        }
+        else deck_add_last(c,res);
     }
-    for (int i=0;i<100;i++){
+}
+
+void melanger_deck (deck *res) {
+    for (int i=0;i<60;i++){
         int aux=alea(0,deck_length(*res));
         carte caux= deck_remove_indice(res,aux);
         deck_add_last(caux,res);
@@ -31,8 +46,10 @@ plateau new_plateau() {
     plateau new;
     new.deckA = deck_create();
     new.deckB = deck_create();
-    remplir_alea_deck(&(new.deckA));
-    remplir_alea_deck(&(new.deckB));
+    remplir_deck(&(new.deckA));
+    melanger_deck(&(new.deckA));
+    remplir_deck(&(new.deckB));
+    melanger_deck(&(new.deckB));
     new.mainA = deck_create();
     new.mainB =  deck_create();
     new.defausseA = deck_create();
@@ -54,6 +71,16 @@ plateau new_plateau() {
     pioche(&new,'B');
     pioche(&new,'B');
     srand(time(NULL));
+    new.nrjA=0;
+    new.nrjB=0;
+    new.ADD_effetA=0;
+    new.ADD_effetB=0;
+    new.RDD_effetA=0;
+    new.RDD_effetB=0;
+    new.piocheA=1;
+    new.piocheB=1;
+    new.EA=0;
+    new.EB=0;
     if (rand()%2==0) {new.debutEnsiie = 'A';} else {new.debutEnsiie = 'B';};
     return new;
 }
