@@ -8,58 +8,7 @@
 #ifndef CARTE_H
 #define CARTE_H
 
-
-
-// Les structures et les types énumérés //
-
-typedef enum Nom Nom;
-enum Nom {
-    //Nom des cartes élèves (2)
-    Fise,Fisa,
-    //Nom des cartes Personnels (20)
-    Lim, Szafranski, Faye, Mouilleron, Dumbrava, Forest, Brunel, Bourard, Watel, Y, Goilard, Jeannas, Merabet, Ligozat, Dubois, Lejeune, Mathias, Salhab, Sagna, Prevel,
-    //Nom des cartes Actions (11)
-    Cours_developpemnt_durable, Recrutement, Rentrée_FISE, Rentrée_FISA, Energie_verte, Diplomation, Decharge, Recyclage, Zero_papier, Repas_vegetarien, Fermeture_annuelle
-};
-
-typedef enum Type Type;
-enum Type {Eleve,Personnel,Action};
-
-typedef struct carte carte;
-struct carte{
-    Nom nom;
-    Type type;
-    long code;
-};
-
-//la structure du deck
-//utilisation des liste chainées
-
-typedef struct node *deck;
-struct node{
-  carte carte;
-  deck next;
-};
-
-//structure du plateau
-
-typedef struct plateau {
-    deck mainA, mainB;
-    deck sideA, sideB;
-    int nbcarteA, nbcarteB;
-    deck defausseA, defausseB;
-    deck deckA, deckB;
-    deck pileFiseA, pileFiseB;
-    deck pileFisaA, pileFisaB;
-    int maxcarte; //maximum de cartes Personnel que les ENSIIE peuvent jouer
-    int ddA, ddB;    // points de développement durable pour chaque ENSIIE
-    int tour;    // indice de tour
-    char debutEnsiie;    /* lettre 'A' ou 'B' calculée de facon aléatoire qui détermine
-                          la première ENSIIE à débuter */
-} plateau;
-
-
-
+#include "structure.h"
 
 //les fonctions permettant d'accéder aux différentes informations d'une carte//
 
@@ -182,11 +131,11 @@ void carte_print(carte);
 
 /**
  \brief: calculer combien de cartes Elève une ENSIIE recevra au début de sa phase. (utile pour la carte personnels avec effet DR)
- \param: historique des cartes joué au tour précédent.
+ \param: le plateau de jeu
  \return: le nombre de carte à piocher par la personne.
  */
 
-int pioche_eleve(plateau);
+int pioche_eleve(plateau, char);
 
 /**
  \brief: ajouter une carte Élève de type FISE ou FISA au plateau de jeu d’une ENSIIE.
@@ -194,7 +143,7 @@ int pioche_eleve(plateau);
  \return: ajoute la carte
 */
 
-void carte_ajouter(carte,plateau, char);
+void carte_ajouter(Nom, plateau*, char);
 
 /**
  \Brief: calculer le nombre de PE disponibles par ENSIIE après avoir posé sa ou ses nouvelles cartes Élèves.
@@ -202,23 +151,23 @@ void carte_ajouter(carte,plateau, char);
  \return: un entier, le nombre de point PE du joueur
  */
 
-int carte_pointPE(plateau);
+int carte_pointPE(plateau, char);
 
 /**
  \brief: réalise l'action décrite par une carte personnel
- \param: une carte personnel
+ \param: une carte personnel, le plateau de jeu, l'id du joueur
  \return: nothing
  */
 
-void carte_personnel(carte);
+void carte_personnel(carte,plateau*,char );
 
 /**
  \Brief: une fonction pour permettre à une ENSIIE de jouer une carte de sa main
- \param: un jeu de carte
+ \param: un plateau et une carte appartenant a la main du joueur
  \return: nothing
  */
 
-void carte_jouer(plateau);
+void carte_jouer(carte, plateau, char);
 
 /**
  \Brief: signifier au plateau que le tour est terminé. Elle permettra, entre autres, de faire le calcul des DD gagnés par chaque ENSIIE à la fin du tour.
