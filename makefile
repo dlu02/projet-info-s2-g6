@@ -3,7 +3,7 @@ OBJ1= test.o structure.o carte.o plateau.o
 
 all: test_romain
 
-carte.o: carte.c 
+carte.o: carte.c structure.h
 
 structure.o: structure.c carte.h
 
