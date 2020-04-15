@@ -69,117 +69,7 @@ int carte_equal(carte c1,Nom nom){
 
 
 
-/* les fonctions annexes. Elles sont utiles pour d'autres focntions (non définis dans le header) */
-
-/* ajoute x points de dévellopement à chacune de vos cartes FISE*/
-void AE1(plateau *p,int x, char id){
-    if (id=='A'){
-        deck_addPt(&(p->pileFiseA),x,1);
-    }
-    else{
-        deck_addPt(&(p->pileFiseB),x,1);
-    }
-}
-
-void AE2(plateau *p,int x, char id){
-    if (id=='A'){
-        deck_addPt(&(p->pileFiseA),x,2);
-    }
-    else{
-        deck_addPt(&(p->pileFiseB),x,2);
-    }
-}
-
-void AA1(plateau *p,int x, char id){
-    if (id=='A'){
-        deck_addPt(&(p->pileFisaA),x,1);
-    }
-    else{
-        deck_addPt(&(p->pileFisaB),x,1);
-    }
-}
-
-void AA2(plateau *p,int x,char id){
-    if (id=='A'){
-        deck_addPt(&(p->pileFisaA),x,2);
-    }
-    else{
-        deck_addPt(&(p->pileFisaB),x,2);
-    }
-}
-
-/*retirer x*/
-void RE1(plateau *p,int x,char id){
-    if (id=='A'){
-        deck_addPt(&(p->pileFiseB),-x,1);
-    }
-    else{
-        deck_addPt(&(p->pileFiseA),-x,1);
-    }
-}
-
-void RE2(plateau *p,int x,char id ){
-    if (id=='A'){
-        deck_addPt(&(p->pileFiseB),-x,2);
-    }
-    else{
-        deck_addPt(&(p->pileFiseA),-x,2);
-    }
-}
-
-void RA1(plateau *p,int x,char id){
-    if (id=='A'){
-        deck_addPt(&(p->pileFisaB),-x,1);
-    }
-    else{
-        deck_addPt(&(p->pileFisaA),-x,1);
-    }
-}
-
-void RA2(plateau *p,int x,char id){
-    if (id=='A'){
-        deck_addPt(&(p->pileFisaB),-x,2);
-    }
-    else{
-        deck_addPt(&(p->pileFisaA),-x,2);
-    }
-}
-
-void ADD(plateau *p,int x,char id){
-    if (id=='A'){
-       p->ADD_effetA= p->ADD_effetA+x ;
-    }
-    else{
-         p->ADD_effetB= p->ADD_effetB+x;
-    }
-}
-
-void RDD(plateau *p,int x,char id){
-    if (id=='A'){
-         p->RDD_effetB= p->RDD_effetB+x ;
-    }
-    else{
-         p->RDD_effetA= p->RDD_effetA+x;
-    }
-}
-
-void DR(plateau *p,int x,char id){
-    if (id=='A'){
-         p->piocheA= p->piocheA+x ;
-    }
-    else{
-         p->piocheA= p->piocheA+x;
-    }
-}
-
-void E(plateau *p,int x,char id){
-    if (id=='A'){
-         p->EA= p->EA+x ;
-    }
-    else{
-         p->EB= p->EB+x;
-    }
-}
+/* les fonctions annexes. Elles sont utiles pour d'autres fonctions (non définis dans le header) */
 
 /*permet d'afficher le nom d'une carte
  utilisé avec carte_print*/
@@ -261,8 +151,282 @@ long aux_code(Nom nom){
     }
 }
 
+/* ajoute x points de dévellopement à chacune de vos cartes FISE*/
+void AE1(plateau *p,int x, char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFiseA),x,1);
+    }
+    else{
+        deck_addPt(&(p->pileFiseB),x,1);
+    }
+}
+
+void AE2(plateau *p,int x, char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFiseA),x,2);
+    }
+    else{
+        deck_addPt(&(p->pileFiseB),x,2);
+    }
+}
+
+void AA1(plateau *p,int x, char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFisaA),x,1);
+    }
+    else{
+        deck_addPt(&(p->pileFisaB),x,1);
+    }
+}
+
+void AA2(plateau *p,int x,char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFisaA),x,2);
+    }
+    else{
+        deck_addPt(&(p->pileFisaB),x,2);
+    }
+}
+
+/*retirer x*/
+void RE1(plateau *p,int x,char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFiseB),-x,1);
+    }
+    else{
+        deck_addPt(&(p->pileFiseA),-x,1);
+    }
+}
+
+void RE2(plateau *p,int x,char id ){
+    if (id=='A'){
+        deck_addPt(&(p->pileFiseB),-x,2);
+    }
+    else{
+        deck_addPt(&(p->pileFiseA),-x,2);
+    }
+}
+
+void RA1(plateau *p,int x,char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFisaB),-x,1);
+    }
+    else{
+        deck_addPt(&(p->pileFisaA),-x,1);
+    }
+}
+
+void RA2(plateau *p,int x,char id){
+    if (id=='A'){
+        deck_addPt(&(p->pileFisaB),-x,2);
+    }
+    else{
+        deck_addPt(&(p->pileFisaA),-x,2);
+    }
+}
+
+void ADD(plateau *p,int x,char id){
+    if (id=='A'){
+       p->ADD_effetA= p->ADD_effetA+x ;
+    }
+    else{
+        p->ADD_effetB= p->ADD_effetB+x;
+    }
+}
+
+void RDD(plateau *p,int x,char id){
+    if (id=='A'){
+         p->RDD_effetB= p->RDD_effetB+x ;
+    }
+    else{
+         p->RDD_effetA= p->RDD_effetA+x;
+    }
+}
+
+void DR(plateau *p,int x,char id){
+    if (id=='A'){
+         p->piocheA= p->piocheA+x ;
+    }
+    else{
+         p->piocheA= p->piocheA+x;
+    }
+}
+
+void E(plateau *p,int x,char id){
+    if (id=='A'){
+         p->EA= p->EA+x ;
+    }
+    else{
+         p->EB= p->EB+x;
+    }
+}
+
+//prend en paramétre une carte FISA, ajoute un effet qi la carte personnel est deja present sur le plateau
+void ajout_effet_FISA(carte *c,plateau p,char id){
+     if (id=='A'){
+           while (p.sideA != NULL){
+               switch (getNom(p.sideA->carte)){
+                   case Faye: pt_DD_change(c,1);break;
+                   case Mouilleron: pt_Dur_change(c,1);break;
+                   case Watel:pt_DD_change(c,1);break;
+                   case Y:pt_Dur_change(c,1);break;
+                   case Mathias:
+                       pt_DD_change(c,1);
+                       pt_Dur_change(c,1);
+                       break;
+                   case Sagna:
+                       pt_DD_change(c,2);
+                       pt_Dur_change(c,2);
+                       break;
+                   case Prevel:
+                       pt_DD_change(c,2);
+                       pt_Dur_change(c,2);
+                       break;
+                default: break;
+               }
+            p.sideA=p.sideA->next;
+        }
+         while(p.sideB != NULL){
+                 switch (getNom(p.sideB->carte)){
+                     case Brunel:pt_DD_change(c,-1);break;
+                     case Bourard:pt_Dur_change(c,-1);break;
+                     case Goilard:pt_DD_change(c,-1);break;
+                     case Jeannas:pt_Dur_change(c,-1);break;
+                     case Mathias:pt_Dur_change(c,-1); break;
+                     default: break;
+                 }
+                 p.sideB=p.sideB->next;
+             }
+         }
+     else {
+         while (p.sideB != NULL){
+           switch (getNom(p.sideB->carte)){
+               case Faye: pt_DD_change(c,1);break;
+               case Mouilleron: pt_Dur_change(c,1);break;
+               case Watel:pt_DD_change(c,1);break;
+               case Y:pt_Dur_change(c,1);break;
+               case Mathias:
+                   pt_DD_change(c,1);
+                   pt_Dur_change(c,1);
+                   break;
+               case Sagna:
+                   pt_DD_change(c,2);
+                   pt_Dur_change(c,2);
+                   break;
+               case Prevel:
+                   pt_DD_change(c,2);
+                   pt_Dur_change(c,2);
+                   break;
+            default: break;
+           }
+        p.sideB=p.sideB->next;
+    }
+     while(p.sideA != NULL){
+             switch (getNom(p.sideB->carte)){
+                 case Brunel:pt_DD_change(c,-1);break;
+                 case Bourard:pt_Dur_change(c,-1);break;
+                 case Goilard:pt_DD_change(c,-1);break;
+                 case Jeannas:pt_Dur_change(c,-1);break;
+                 case Mathias:pt_Dur_change(c,-1); break;
+                 default: break;
+             }
+             p.sideA=p.sideA->next;
+         }
+     }
+}
 
 
+void ajout_effet_FISE(carte *c,plateau p,char id){
+    if (id=='A'){
+        while (p.sideA != NULL){
+            switch (getNom(p.sideA->carte)){
+                case Lim: pt_DD_change(c,1); break;
+                case Szafranski: pt_Dur_change(c,1); break;
+                case Watel:pt_DD_change(c,1);break;
+                case Y:pt_Dur_change(c,1);break;
+                case Lejeune:
+                    pt_DD_change(c,1);
+                    pt_Dur_change(c,1);
+                    break;
+                case Salhab:
+                    pt_DD_change(c,2);
+                    pt_Dur_change(c,2);
+                    break;
+                case Prevel:
+                    pt_DD_change(c,2);
+                    pt_Dur_change(c,2);
+                    break;
+                default: break;
+            }
+            p.sideA=p.sideA->next;
+        }
+        while(p.sideB != NULL){
+            switch (getNom(p.sideA->carte)){
+                case Dumbrava:pt_DD_change(c,-1);break;
+                case Forest:pt_Dur_change(c,-1);break;
+                case Goilard:pt_DD_change(c,-1);break;
+                case Jeannas:pt_Dur_change(c,-1);break;
+                case Lejeune:pt_Dur_change(c,-1); break;
+                default: break;
+            }
+            p.sideB=p.sideB->next;
+        }
+    }
+    else{
+        while (p.sideB != NULL){
+            switch (getNom(p.sideB->carte)){
+                case Lim: pt_DD_change(c,1); break;
+                case Szafranski: pt_Dur_change(c,1); break;
+                case Watel:pt_DD_change(c,1);break;
+                case Y:pt_Dur_change(c,1);break;
+                case Lejeune:
+                    pt_DD_change(c,1);
+                    pt_Dur_change(c,1);
+                    break;
+                case Salhab:
+                    pt_DD_change(c,2);
+                    pt_Dur_change(c,2);
+                    break;
+                case Prevel:
+                    pt_DD_change(c,2);
+                    pt_Dur_change(c,2);
+                    break;
+                default: break;
+            }
+            p.sideB=p.sideB->next;
+        }
+        while(p.sideA != NULL){
+            switch (getNom(p.sideA->carte)){
+                case Dumbrava:pt_DD_change(c,-1);break;
+                case Forest:pt_Dur_change(c,-1);break;
+                case Goilard:pt_DD_change(c,-1);break;
+                case Jeannas:pt_Dur_change(c,-1);break;
+                case Lejeune:pt_Dur_change(c,-1); break;
+                default: break;
+            }
+            p.sideA=p.sideA->next;
+        }
+    }
+}
+
+void aux_action(carte c, ){
+    case Cours_developpemnt_durable: printf("cours_developpement durable");break;
+    case Recrutement: printf("Recrutement");break;
+    case Rentrée_FISE: printf("Rentrée_FISE");break;
+    case Rentrée_FISA: printf("Rentrée_FISA");break;
+    case Energie_verte: printf("Energie_verte");break;
+    case Diplomation: printf("Diplomation");break;
+    case Decharge: printf("decharge");break;
+    case Recyclage: printf("Recyclage");break;
+    case Zero_papier: printf("Zero_papier");break;
+    case Repas_vegetarien: printf("Repas_vegetarien");break;
+    case Fermeture_annuelle: printf("Fermeture_annuelle");break;
+}
+
+
+
+    
+    
 /* Les fonctions principales (accessibles depuis le header) */
 
 carte carte_new(Nom carte_nom){
@@ -300,6 +464,11 @@ void carte_print(carte c){
 
 
 
+
+
+
+
+//a voir avec Florian
 int pioche_eleve(plateau p, char id){
     if (id=='A'){
         return p.piocheA;
@@ -309,41 +478,41 @@ int pioche_eleve(plateau p, char id){
     }
 }
 
-void carte_ajouter(Nom nom, plateau* p, char id){
+
+
+
+void carte_ajouter(Nom nom, plateau *p, char id){
+    carte carte=carte_new(nom);
     if (id=='A'){
         if (nom==Fise){
-            carte carte=carte_new(Fise);
-        /*parcours des cartes perso pour savoir si des effets sont à appliqués*/
+            ajout_effet_FISE(&carte,*p,'A');
             deck_add_last(carte,&(p->pileFiseA));
         }
-        else if (nom==Fisa){
-            carte carte=carte_new(Fisa);
-            
-            deck_add_last(carte,&(p->pileFiseA));
+        else if (nom==Fisa){            ajout_effet_FISA(&carte,*p,'A');
+            deck_add_last(carte,&(p->pileFisaA));
         
         }
         else printf ("ce n'est pas une carte eleve");
     }
     else{
         if (nom==Fise){
-            carte carte=carte_new(Fise);
-        /*parcours des cartes perso pour savoir si des effets sont à appliqués*/
+            ajout_effet_FISE(&carte,*p,'B');
             deck_add_last(carte,&(p->pileFiseB));
         }
         else if (nom==Fisa){
-            carte carte=carte_new(Fisa);
-            
-            deck_add_last(carte,&(p->pileFiseB));
-        
+            ajout_effet_FISA(&carte,*p,'B');
+            deck_add_last(carte,&(p->pileFisaB));
         }
         else printf ("ce n'est pas une carte eleve");
     }
 }
+
+
+
 
 int carte_pointPE(plateau p, char id){
     if (id=='A'){
         int res;
-      //parcours tas
         return res;
     }
     else{
@@ -351,10 +520,6 @@ int carte_pointPE(plateau p, char id){
         
         return res;
     }
-}
-
-void carte_fin(plateau p){
-    
 }
 
 
@@ -433,6 +598,33 @@ void carte_personnel(carte c,plateau *p,char id){
                 printf("n'est pas une carte personnel");
         }
     }
+
+void carte_jouer(carte c, plateau *p, char id){
+        switch(getType(c)){
+            case Personnel:
+                if(id=='A'){
+                    deck_add_last(carte,p->sideA);
+                }
+                else (deck_add_last(carte,p->sideA)
+                
+                
+                carte_personnel(c,p,id);
+                break;
+            case Action:
+                deck_add_last(carte,p->defausseA);
+                break;
+            default: printf("carte non reconnu"); break;
+        }
+    }
+}
+
+
+
+
+
+void carte_fin(plateau p){
+    
+}
 
 
 
