@@ -163,11 +163,11 @@ void carte_personnel(carte,plateau*,char );
 
 /**
  \Brief: une fonction pour permettre à une ENSIIE de jouer une carte de sa main
- \param: un plateau et une carte appartenant a la main du joueur
+ \param: un plateau et une carte appartenant a la main du joueur (la fonction n'extrait pas la carte de la main), l'identifiant de l'Ensiie
  \return: nothing
  */
 
-void carte_jouer(carte, plateau, char);
+void carte_jouer(carte, plateau*, char);
 
 /**
  \Brief: signifier au plateau que le tour est terminé. Elle permettra, entre autres, de faire le calcul des DD gagnés par chaque ENSIIE à la fin du tour.
