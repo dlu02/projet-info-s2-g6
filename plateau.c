@@ -5,7 +5,7 @@
 
 int alea (int a, int b){
     int res;
-    sleep(1);
+    //sleep(1);
     srand(time(NULL));
     res= rand()%(b-a)+a;
     return res;
