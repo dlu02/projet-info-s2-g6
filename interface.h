@@ -1,9 +1,9 @@
 //
-//  plateau.h
+//  interface.h
 //  
 //
 //  Created by Lu Damien on 14/03/2020.
-//  Modified : 10/04/2020 17:58 (v2)
+//  Modified : 16/04/2020 17:37 (v6)
 //
 
 #ifndef INTERFACE_H
@@ -33,18 +33,11 @@ void print_new_phase(char);
 void print_plateau(plateau);
 
 /**
- \brief: demande au joueur A de choisir entre une carte de sa main ou finir la phase en cours
- \param: un plateau 
- \return: son choix (en chaine de caractères)
+ \brief: demande au joueur char de choisir entre une carte de sa main ou finir la phase en cours
+ \param: un plateau et le joueur concerné
+ \return: le nom (entier) de la carte de son choix
 */
-char *ask_carte_ou_finA(plateau);
-
-/**
- \brief: demande au joueur B de choisir entre une carte de sa main ou finir la phase en cours
- \param: un plateau 
- \return: son choix (en chaine de caractères)
-*/
-char *ask_carte_ou_finB(plateau);
+int ask_carte_ou_fin(plateau,char);
 
 /**
  \brief: affiche le gagnant du jeu ou l'égalité
@@ -59,18 +52,4 @@ void print_win_player(plateau);
  * return : fise ou fisa
  */
 Nom ajout_fise_fisa();
-
-/**
- * brief : compte le nombre de points énergie du joueur A
- * param : un plateau
- * return : le nombre de points énergie du joueur A
- */
-int count_PE_A(plateau);
-
-/**
- * brief : compte le nombre de points énergie du joueur B
- * param : un plateau
- * return : le nombre de points énergie du joueur B
- */
-int count_PE_B(plateau);
 #endif
