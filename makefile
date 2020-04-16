@@ -1,5 +1,5 @@
 cc=gcc -Wall -Wextra 
-OBJ1= test.o structure.o carte.o plateau.o interface.o
+OBJ1= main.o structure.o carte.o plateau.o interface.o
 
 all: test_romain
 
@@ -11,7 +11,7 @@ plateau.o= plateau.c carte.h structure.h
 
 interface.o= interface.c plateau.h
 
-test.o= test.c carte.h structure.h plateau.h 
+main.o= main.c carte.h structure.h plateau.h interface.h
 
 test_romain: $(OBJ1)
 	$(cc) $^ -o $@
