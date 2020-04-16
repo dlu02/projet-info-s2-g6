@@ -3,7 +3,7 @@
 //  
 //
 //  Created by Lu Damien on 14/03/2020.
-//  Modified : 16/04/2020 17:37 (v6)
+//  Modified : 16/04/2020 18:19 (v7)
 //
 
 #ifndef INTERFACE_H
@@ -35,7 +35,7 @@ void print_plateau(plateau);
 /**
  \brief: demande au joueur char de choisir entre une carte de sa main ou finir la phase en cours
  \param: un plateau et le joueur concerné
- \return: le nom (entier) de la carte de son choix
+ \return: le nom (entier) de la carte de son choix, -1 si la phase est finie
 */
 int ask_carte_ou_fin(plateau,char);
 
