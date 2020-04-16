@@ -3,9 +3,9 @@ OBJ1= test.o structure.o carte.o plateau.o interface.o
 
 all: test_romain
 
-carte.o: carte.c structure.h
+carte.o= carte.c structure.h
 
-structure.o: structure.c carte.h
+structure.o= structure.c carte.h
 
 plateau.o= plateau.c carte.h structure.h
 
