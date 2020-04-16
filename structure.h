@@ -59,6 +59,8 @@ typedef struct plateau {
     int RDD_effetA, RDD_effetB;
     int piocheA, piocheB;
     int EA, EB;
+    int RVA,RVB; // gerer efffet repas vegetarien
+    int ZDA,ZDB; //gerer zero dechet
     int tour;    // indice de tour
     char debutEnsiie;    /* lettre 'A' ou 'B' calculée de facon aléatoire qui détermine
                           la première ENSIIE à débuter */
@@ -129,6 +131,8 @@ int deck_length(deck);
 */
 void deck_print(deck);
 
+void deck_concatenate(deck*,deck*);
+
 
 
 /*retirer les elements*/
@@ -172,6 +176,16 @@ carte deck_remove_indice(deck*, int);
 */
 
 void deck_addPt(deck* ,long , int);
+
+void melanger_deck (deck*);
+
+int deck_parcours_energie(deck);
+
+int deck_parcours_durabilite(deck);
+
+int deck_parcours_devellopement(deck);
+
+
 
 
 #endif /* carte_file_h */
