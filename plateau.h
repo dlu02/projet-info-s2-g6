@@ -66,8 +66,6 @@ int win(plateau);
 
 void remplir_deck(deck*);
 
-void melanger_deck (deck*);
-
 
 #endif
 
