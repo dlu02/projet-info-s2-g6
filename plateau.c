@@ -3,13 +3,7 @@
 #include"time.h"
 #include <unistd.h>
 
-int alea (int a, int b){
-    int res;
-    //sleep(1);
-    srand(time(NULL));
-    res= rand()%(b-a)+a;
-    return res;
-}
+
 
 void remplir_deck(deck *res) {
     int i;
@@ -34,13 +28,6 @@ void remplir_deck(deck *res) {
     }
 }
 
-void melanger_deck (deck *res) {
-    for (int i=0;i<60;i++){
-        int aux=alea(0,deck_length(*res));
-        carte caux= deck_remove_indice(res,aux);
-        deck_add_last(caux,res);
-    }
-}
 
 plateau new_plateau() {
     plateau new;
@@ -81,6 +68,10 @@ plateau new_plateau() {
     new.piocheB=1;
     new.EA=0;
     new.EB=0;
+    new.RVA=0;
+    new.RVB=0;
+    new.ZDA=0;
+    new.ZDB=0;
     if (rand()%2==0) {new.debutEnsiie = 'A';} else {new.debutEnsiie = 'B';};
     return new;
 }
