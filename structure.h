@@ -19,7 +19,7 @@ enum Nom {
     //Nom des cartes Personnels (20)
     Lim, Szafranski, Faye, Mouilleron, Dumbrava, Forest, Brunel, Bourard, Watel, Y, Goilard, Jeannas, Merabet, Ligozat, Dubois, Lejeune, Mathias, Salhab, Sagna, Prevel,
     //Nom des cartes Actions (11)
-    Cours_developpemnt_durable, Recrutement, Rentrée_FISE, Rentrée_FISA, Energie_verte, Diplomation, Decharge, Recyclage, Zero_papier, Repas_vegetarien, Fermeture_annuelle
+    Cours_developpemnt_durable, Recrutement, Rentree_FISE, Rentree_FISA, Energie_verte, Diplomation, Decharge, Recyclage, Zero_papier, Repas_vegetarien, Fermeture_annuelle
 };
 
 typedef enum Type Type;
