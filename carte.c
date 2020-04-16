@@ -99,8 +99,8 @@ void aux_NomPrint(carte c){
         case Prevel: printf("Prevel");break;
         case Cours_developpemnt_durable: printf("cours_developpement durable");break;
         case Recrutement: printf("Recrutement");break;
-        case Rentrée_FISE: printf("Rentrée_FISE");break;
-        case Rentrée_FISA: printf("Rentrée_FISA");break;
+        case Rentree_FISE: printf("Rentrée_FISE");break;
+        case Rentree_FISA: printf("Rentrée_FISA");break;
         case Energie_verte: printf("Energie_verte");break;
         case Diplomation: printf("Diplomation");break;
         case Decharge: printf("decharge");break;
@@ -139,8 +139,8 @@ long aux_code(Nom nom){
         case Prevel: return 2;break;
         case Cours_developpemnt_durable: return 2;break;
         case Recrutement: return 2;break;
-        case Rentrée_FISE:return 3;break;
-        case Rentrée_FISA:return 3;break;
+        case Rentree_FISE:return 3;break;
+        case Rentree_FISA:return 3;break;
         case Energie_verte: return 4;break;
         case Diplomation: return 5;break;
         case Decharge: return 5;break;
@@ -415,10 +415,10 @@ void aux_action(carte *c, plateau *p, char id){
             case Cours_developpemnt_durable:
                 p->ddA=p->ddA+1;
                 break;
-            case Rentrée_FISE:
+            case Rentree_FISE:
                 carte_ajouter(Fise, p, 'A');
                 break;
-            case Rentrée_FISA:
+            case Rentree_FISA:
                 carte_ajouter(Fisa,p,'A');
                 break;
             case Energie_verte:
@@ -486,10 +486,10 @@ void aux_action(carte *c, plateau *p, char id){
             ;carte aux=deck_remove_queue(&(p->deckB));
             deck_add_last(aux,&(p->mainB));
             break;
-        case Rentrée_FISE:
+        case Rentree_FISE:
             carte_ajouter(Fise, p, 'B');
             break;
-        case Rentrée_FISA:
+        case Rentree_FISA:
             carte_ajouter(Fisa,p,'B');
             break;
         case Energie_verte:
