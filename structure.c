@@ -9,6 +9,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include"time.h"
+#include <unistd.h>
 
 
 
@@ -94,6 +96,15 @@ void deck_print(deck l){
             carte_print(curl->carte);
             curl=curl->next;
         }
+    }
+}
+
+void deck_concatenate(deck *l1,deck *l2){
+    deck tmp = *l2;
+    while(tmp != NULL){
+        carte aux=deck_remove_head(&tmp);
+        deck_add_last(aux,&tmp);
+        tmp=tmp->next;
     }
 }
 
@@ -202,6 +213,7 @@ carte deck_remove_indice(deck *l, int indice){
     return res;
 }
 
+
 void deck_addPt(deck *l,long pt, int id){
     deck tmp = *l;
     switch(id){
@@ -229,6 +241,48 @@ void deck_addPt(deck *l,long pt, int id){
 }
 
 
+int alea (int a, int b){
+    int res;
+    //sleep(1);
+    srand(time(NULL));
+    res= rand()%(b-a)+a;
+    return res;
+}
+
+void melanger_deck (deck *res) {
+    for (int i=0;i<60;i++){
+        int aux=alea(0,deck_length(*res));
+        carte caux= deck_remove_indice(res,aux);
+        deck_add_last(caux,res);
+    }
+}
+
+int deck_parcours_energie(deck l){
+    int res=0;
+        while (l != NULL){
+            res=res+pt_nrj(l->carte);
+            l=l->next;
+        }
+    return res;
+}
+
+int deck_parcours_durabilite(deck l){
+    int res=0;
+        while (l != NULL){
+            res=res+pt_Dur(l->carte);
+            l=l->next;
+        }
+    return res;
+}
+
+int deck_parcours_devellopement(deck l){
+    int res=0;
+        while (l != NULL){
+            res=res+pt_DD(l->carte);
+            l=l->next;
+        }
+    return res;
+}
 
 
 
