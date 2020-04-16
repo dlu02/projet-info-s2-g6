@@ -151,7 +151,7 @@ void carte_ajouter(Nom, plateau*, char);
  \return: un entier, le nombre de point PE du joueur
  */
 
-int carte_pointPE(plateau, char);
+int carte_pointPE(plateau*, char);
 
 /**
  \brief: réalise l'action décrite par une carte personnel
@@ -175,7 +175,7 @@ void carte_jouer(carte, plateau*, char);
  \return: les point DD
  */
  
-void carte_fin(plateau);
+void carte_fin(plateau*);
 
 
 
