@@ -66,8 +66,8 @@ plateau new_plateau() {
     new.RDD_effetB=0;
     new.piocheA=1;
     new.piocheB=1;
-    new.EA=0;
-    new.EB=0;
+    new.EA=1;
+    new.EB=1;
     new.RVA=0;
     new.RVB=0;
     new.ZDA=0;
