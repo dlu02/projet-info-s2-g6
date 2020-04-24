@@ -20,9 +20,30 @@ int main() {
 		for (int i=0;i<2;i++) {		// 2 phases par tour
 
 			print_new_phase(p.debutEnsiie); // message de nouvelle phase (une par ENSIIE)
-            //pioche(&p,p.debutEnsiie);
+            pioche(&p,p.debutEnsiie);
             print_plateau(p);
             
+            // j'ai un seg fault à cette endroit
+            int numero_carte= ask_carte_ou_fin(p,p.debutEnsiie);
+            
+            while (numero_carte!=-1){
+                
+                if (p.debutEnsiie=='A'){
+                    //si on demande une carte FISE ou FISA
+                    if(numero_carte==Fise || numero_carte==Fisa){
+                        carte_ajouter(numero_carte,&p,p.debutEnsiie); //ok
+                    }
+                    //si on veut jouer une carte de la main
+                    else if (deck_carteIn(p.mainA, numero_carte)){
+                        carte c= deck_remove_indice(&(p.mainA), numero_carte);
+                        carte_jouer(c,&p,p.debutEnsiie);
+                    }
+                }
+                
+                else{
+                }
+            }
+                    
             if (i!=1){
                 if(p.debutEnsiie=='A'){
                     p.debutEnsiie='B';
@@ -34,7 +55,7 @@ int main() {
 
         }
     }
-
+    carte_fin(&p);
 	print_win_player(p);	// affiche le gagnant de la partie 
 	free_plateau (p); // libère la mémoire occupée par le plateau
 
