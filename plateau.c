@@ -135,8 +135,9 @@ void free_plateau(plateau p) {
 }
 
 int nb_cartes(plateau p, char ensiie) {
+    int res;
     if (ensiie=='A') {
-        int res=p.piocheA;
+        res=p.piocheA;
         /*if(deck_carteIn(p.sideA,Prevel)){
             res+=1;
         }
@@ -165,7 +166,7 @@ int nb_cartes(plateau p, char ensiie) {
         }*/
     }
     else {
-        int res=p.piocheB;
+        res=p.piocheB;
         /*if(deck_carteIn(p.sideB,Prevel)){
             res+=1;
         }
