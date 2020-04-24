@@ -199,14 +199,18 @@ void pioche(plateau *p, char ensiie) {
     int nb= nb_cartes(*p,ensiie);
     if (ensiie=='A') {
         for (int i=0;i<nb;i++) {
-            carte c= deck_remove_head(&(p->deckA));
-            deck_add_last(c,&(p->mainA));
+            if (!deck_isEmpty(p->deckA)){
+                carte c= deck_remove_head(&(p->deckA));
+                deck_add_last(c,&(p->mainA));
+            }
         };
     }
     else {
         for (int i=0;i<nb;i++){
-           carte c= deck_remove_head(&(p->deckB));
-            deck_add_last(c,&(p->mainB));
+             if (!deck_isEmpty(p->deckA)){
+                 carte c= deck_remove_head(&(p->deckB));
+                 deck_add_last(c,&(p->mainB));
+             }
         }
     }
 }
