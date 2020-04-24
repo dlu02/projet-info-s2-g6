@@ -135,9 +135,9 @@ void free_plateau(plateau p) {
 }
 
 int nb_cartes(plateau p, char ensiie) {
-    int res=1;
     if (ensiie=='A') {
-        if(deck_carteIn(p.sideA,Prevel)){
+        int res=p.piocheA;
+        /*if(deck_carteIn(p.sideA,Prevel)){
             res+=1;
         }
         if(deck_carteIn(p.sideA,Dubois)){
@@ -148,7 +148,7 @@ int nb_cartes(plateau p, char ensiie) {
         }
         if(deck_carteIn(p.sideA,Merabet)){
             res+=1;
-        }
+        }*/
         /*while(p.sideA!=NULL) {
             if(getNom(p.sideA->carte)==Prevel) {
                 res+=1;
@@ -165,7 +165,8 @@ int nb_cartes(plateau p, char ensiie) {
         }*/
     }
     else {
-        if(deck_carteIn(p.sideB,Prevel)){
+        int res=p.piocheB;
+        /*if(deck_carteIn(p.sideB,Prevel)){
             res+=1;
         }
         if(deck_carteIn(p.sideB,Dubois)){
@@ -176,7 +177,7 @@ int nb_cartes(plateau p, char ensiie) {
         }
         if(deck_carteIn(p.sideB,Merabet)){
             res+=1;
-        }
+        }*/
         /*while(p->sideB!=NULL) {
             if(getNom(p->sideB->carte)==Prevel) {
                 res+=1;
@@ -198,7 +199,7 @@ int nb_cartes(plateau p, char ensiie) {
 void pioche(plateau *p, char ensiie) {
     int nb= nb_cartes(*p,ensiie);
     if (ensiie=='A') {
-        for (int i=1;i<nb;i++) {
+        for (int i=0;i<nb;i++) {
             if (!deck_isEmpty(p->deckA)){
                 carte c= deck_remove_head(&(p->deckA));
                 deck_add_last(c,&(p->mainA));
@@ -206,7 +207,7 @@ void pioche(plateau *p, char ensiie) {
         };
     }
     else {
-        for (int i=1;i<nb;i++){
+        for (int i=0;i<nb;i++){
              if (!deck_isEmpty(p->deckA)){
                  carte c= deck_remove_head(&(p->deckB));
                  deck_add_last(c,&(p->mainB));
