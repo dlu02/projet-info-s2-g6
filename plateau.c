@@ -208,7 +208,7 @@ void pioche(plateau *p, char ensiie) {
     }
     else {
         for (int i=1;i<=nb;i++){
-             if (!deck_isEmpty(p->deckA)){
+             if (!deck_isEmpty(p->deckB)){
                  carte c= deck_remove_head(&(p->deckB));
                  deck_add_last(c,&(p->mainB));
              }
