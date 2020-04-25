@@ -30,31 +30,28 @@ int main() {
 
 			print_plateau(p); 	// affiche l'état du jeu
             
-            /*
-            // j'ai un seg fault à cette endroit
+            //jouer une carte Fise ou FISa au choix
+            Nom eleve= ajout_fise_fisa();
+            carte_ajouter(eleve, &p, p.debutEnsiie);
+            
+            //jouer les cartes de la main
             int numero_carte= ask_carte_ou_fin(p,p.debutEnsiie);
             
-            while (numero_carte!=-1){ //une Ensiie peut jouer autant de carte de son deck qu'elle le désire.
+            while (numero_carte!=-1){ //une Ensiie peut jouer autant de carte de sa main
                 
                 if (p.debutEnsiie=='A'){
-                    
-                    //si on demande une carte FISE ou FISA
-                    if(numero_carte==Fise || numero_carte==Fisa){
-                        carte_ajouter(numero_carte,&p,p.debutEnsiie); //ok
-                    }
-                    
-                    //si on veut jouer une carte de la main
-                    else if (deck_carteIn(p.mainA, numero_carte)){
-                        carte c= deck_remove_indice(&(p.mainA), numero_carte);
-                        carte_jouer(c,&p,p.debutEnsiie);
-                    }
-                    // controle de la validité de la saisie dans ask_carte_ou_fin donc pas de else utile ici.
+                    carte c= deck_remove_carte(&(p.mainA), numero_carte);
+                    carte_jouer(c,&p,p.debutEnsiie);
                 }
                 
                 else{
+                    carte c= deck_remove_carte(&(p.mainB), numero_carte);
+                    carte_jouer(c,&p,p.debutEnsiie);
                 }
+                numero_carte=ask_carte_ou_fin(p,p.debutEnsiie);
             }
-             */
+            
+                
 
 
 			if (i == 0) {
@@ -65,7 +62,7 @@ int main() {
 			}
 
 		}
-		//carte_fin(&p);	// fin du tour (compter les points)
+		carte_fin(&p);
 	}
 
 	print_win_player(p);	// affiche le gagnant de la partie 
