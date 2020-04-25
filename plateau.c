@@ -8,8 +8,13 @@
 void remplir_deck(deck *res) {
     int i;
     for (i=0;i<33;i++){
+
         carte c=carte_new(i);
-        if (i==22 || i==23){
+
+        if(i == 0 || i == 1){   // carte eleves, elles ne sont pas dans le deck
+            continue;
+        }
+        else if (i==22 || i==23){
             deck_add_last(c,res);
             deck_add_last(c,res);
             deck_add_last(c,res);
@@ -53,10 +58,10 @@ plateau new_plateau() {
     new.ddA = 0;
     new.ddB = 0;
     new.maxcarte = 1;
-    pioche(&new,'A');
+   /* pioche(&new,'A');     // Ce bout de code à été déplacé dans le fichier main.c
     pioche(&new,'A');
     pioche(&new,'B');
-    pioche(&new,'B');
+    pioche(&new,'B');*/
     srand(time(NULL));
     new.nrjA=0;
     new.nrjB=0;
@@ -135,10 +140,10 @@ void free_plateau(plateau p) {
 }
 
 int nb_cartes(plateau p, char ensiie) {
-    int res;
+    int res = 1;
     if (ensiie=='A') {
         res=p.piocheA;
-        /*if(deck_carteIn(p.sideA,Prevel)){
+        if(deck_carteIn(p.sideA,Prevel)){
             res+=1;
         }
         if(deck_carteIn(p.sideA,Dubois)){
@@ -149,7 +154,7 @@ int nb_cartes(plateau p, char ensiie) {
         }
         if(deck_carteIn(p.sideA,Merabet)){
             res+=1;
-        }*/
+        }
         /*while(p.sideA!=NULL) {
             if(getNom(p.sideA->carte)==Prevel) {
                 res+=1;
@@ -167,7 +172,7 @@ int nb_cartes(plateau p, char ensiie) {
     }
     else {
         res=p.piocheB;
-        /*if(deck_carteIn(p.sideB,Prevel)){
+        if(deck_carteIn(p.sideB,Prevel)){
             res+=1;
         }
         if(deck_carteIn(p.sideB,Dubois)){
@@ -178,7 +183,7 @@ int nb_cartes(plateau p, char ensiie) {
         }
         if(deck_carteIn(p.sideB,Merabet)){
             res+=1;
-        }*/
+        }
         /*while(p->sideB!=NULL) {
             if(getNom(p->sideB->carte)==Prevel) {
                 res+=1;
@@ -204,14 +209,16 @@ void pioche(plateau *p, char ensiie) {
             if (!deck_isEmpty(p->deckA)){
                 carte c= deck_remove_head(&(p->deckA));
                 deck_add_last(c,&(p->mainA));
+                p->nbcarteA++;;
             }
-        };
+        }
     }
     else {
         for (int i=1;i<=nb;i++){
              if (!deck_isEmpty(p->deckB)){
                  carte c= deck_remove_head(&(p->deckB));
                  deck_add_last(c,&(p->mainB));
+                 p->nbcarteB++;;
              }
         }
     }
@@ -221,19 +228,17 @@ void pioche(plateau *p, char ensiie) {
 void new_tour(plateau *p) {
     p->tour+=1;
     if (p->tour==6) {
-        p->maxcarte+=1;
-    };
+        p->maxcarte++;
+    }
     if (p->tour==11) {
-        p->tour+=1;
-    };
-    pioche(p,'A');
-    pioche(p,'B');
+        p->maxcarte++;
+    }
 }
 
 int win(plateau p) {
     if(p.ddA==20) {
         return 1;
-    };
+    }
     if(p.ddB==20) {
         return 2;
     }
