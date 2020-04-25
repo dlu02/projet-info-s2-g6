@@ -18,17 +18,22 @@ void print_new_phase(char c){
 }
 
 void print_plateau(plateau p){
-	printf("Tour %i\n",p.tour);
-	printf("Nombre de points DD pour l'ENSIIE A : %i\n",p.ddA);
-	printf("Nombre de points DD pour l'ENSIIE B : %i\n",p.ddB);
-	printf("Nombre de points énergie pour l'ENSIIE A: %i\n",p.nrjA);
-	printf("Nombre de points énergie pour l'ENSIIE B: %i\n",p.nrjB);
-	printf("Nombre de cartes pour l'ENSIIE A : %i\n",p.nbcarteA);
-	printf("Nombre de cartes pour l'ENSIIE B : %i\n",p.nbcarteB);
-	printf("Deck de l'ENSIIE A : \n");
-	deck_print(p.deckA);
-	printf("Deck de l'ENSIIE B : \n");
-	deck_print(p.deckB);
+	//printf("Tour %i\n",p.tour);
+	//printf("Nombre de points DD pour l'ENSIIE A : %i\n",p.ddA);
+	//printf("Nombre de points DD pour l'ENSIIE B : %i\n",p.ddB);
+
+	if(p.debutEnsiie == 'A') {
+		printf("Nombre de cartes dans la main de l'ENSIIE A : %i\n",p.nbcarteA);
+		//printf("Nombre de points énergie pour l'ENSIIE A: %i\n",p.nrjA);
+		printf("Main de l'ENSIIE A : \n");
+		deck_print(p.mainA);
+	}
+	else {
+		printf("Nombre de cartes dans la main de l'ENSIIE B : %i\n",p.nbcarteB);
+		//printf("Nombre de points énergie pour l'ENSIIE B: %i\n",p.nrjB);
+		printf("Main de l'ENSIIE B : \n");
+		deck_print(p.mainB);
+	}
 }
 
 int ask_carte_ou_fin(plateau p,char c){
