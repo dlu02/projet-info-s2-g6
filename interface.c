@@ -55,7 +55,8 @@ int ask_carte_ou_fin(plateau p,char c){
 			deck_print(res);
 			while (1){
 				int n;
-				printf("Choisissez un numéro de carte parmi le choix possible : ");
+				printf("Choisissez un numéro de carte parmi le choix possible.\n");
+				printf("Si vous ne voulez pas jouer de carte, saisir -1. Votre choix : ");
 				int ask=scanf("%d",&n);
 				if (ask==1){
 					if ((n>=0) && (n<deck_length(res))){
@@ -96,7 +97,8 @@ int ask_carte_ou_fin(plateau p,char c){
 			deck_print(res);
 			while (1){
 				int n;
-				printf("Choisissez un numéro de carte parmi le choix possible : ");
+				printf("Choisissez un numéro de carte parmi le choix possible.\n");
+				printf("Si vous ne voulez pas jouer de carte, saisir -1. Votre choix : ");
 				int ask=scanf("%d",&n);
 				if (ask==1){
 					if ((n>=0) && (n<deck_length(res))){
