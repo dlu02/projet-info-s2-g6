@@ -38,83 +38,83 @@ void print_plateau(plateau p){
 
 int ask_carte_ou_fin(plateau p,char c){
 	if (c=='A'){
-		deck m=p.deckA;
-		deck n=p.deckA;
+		deck m=p.mainA;
+		deck res=deck_create();
 		while (m!=NULL){
 			if (cout(m->carte)>(p.EA)){
-				deck_remove_carte(&n,getNom(m->carte));
+				deck_add_last(m->carte,&res);
 			}
 			m=m->next;
 		}
-		if (n==NULL){
+		if (res==NULL){
 			printf("Vous ne pouvez que finir la phase. \n");
 			return -1;
 		}
 		else{
 			printf("Votre choix de cartes possibles est : \n");
-			deck_print(n);
+			deck_print(res);
 			while (1){
-				int carte_choisie;
+				int n;
 				printf("Choisissez un numéro de carte parmi le choix possible : ");
-				int ask=scanf("%d",&carte_choisie);
+				int ask=scanf("%d",&n);
 				if (ask==1){
-					if (deck_carteIn(n,carte_choisie)==1){
+					if ((n>=0) && (n<deck_length(res))){
 						int i=0;
-						while (n!=NULL){
-							if (i==carte_choisie){
-								return getNom(n->carte);
+						while (res!=NULL){
+							if (i==n){
+								return getNom(res->carte);
 							}
-							n=n->next;
+							res=res->next;
 							i=i+1;
 						}
 					}
 					else{
-						printf("Choix incorrect, veuillez recommencer");
+						printf("Choix incorrect, veuillez recommencer.\n");
 					}
 				}
 				else{
-					printf("Problème de saisie, veuillez recommencer.");
+					printf("Problème de saisie, veuillez recommencer.\n");
 				}
 			}
 		}
 	}
 	else{
-		deck m=p.deckB;
-		deck n=p.deckB;
+		deck m=p.mainB;
+		deck res=deck_create();
 		while (m!=NULL){
 			if (cout(m->carte)>(p.EB)){
-				deck_remove_carte(&n,getNom(m->carte));
+				deck_add_last(m->carte,&res);
 			}
 			m=m->next;
 		}
-		if (n==NULL){
+		if (res==NULL){
 			printf("Vous ne pouvez que finir la phase. \n");
 			return -1;
 		}
 		else{
 			printf("Votre choix de cartes possibles est : \n");
-			deck_print(n);
+			deck_print(res);
 			while (1){
-				int carte_choisie;
+				int n;
 				printf("Choisissez un numéro de carte parmi le choix possible : ");
-				int ask=scanf("%d",&carte_choisie);
+				int ask=scanf("%d",&n);
 				if (ask==1){
-					if (deck_carteIn(n,carte_choisie)==1){
+					if ((n>=0) && (n<deck_length(res))){
 						int i=0;
-						while (n!=NULL){
-							if (i==carte_choisie){
-								return getNom(n->carte);
+						while (res!=NULL){
+							if (i==n){
+								return getNom(res->carte);
 							}
-							n=n->next;
+							res=res->next;
 							i=i+1;
 						}
 					}
 					else{
-						printf("Choix incorrect, veuillez recommencer");
+						printf("Choix incorrect, veuillez recommencer.\n");
 					}
 				}
 				else{
-					printf("Problème de saisie, veuillez recommencer.");
+					printf("Problème de saisie, veuillez recommencer.\n");
 				}
 			}
 		}
@@ -171,6 +171,7 @@ Nom ajout_fise_fisa(){
 			nom=Fisa;
 			return nom;
 		}
+		printf("\n");
 	}
 }
 
