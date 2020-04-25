@@ -59,6 +59,9 @@ int ask_carte_ou_fin(plateau p,char c){
 				printf("Si vous ne voulez pas jouer de carte, saisir -1. Votre choix : ");
 				int ask=scanf("%d",&n);
 				if (ask==1){
+					if (n==-1){
+						return -1;
+					}
 					if ((n>=0) && (n<deck_length(res))){
 						int i=0;
 						while (res!=NULL){
@@ -101,6 +104,9 @@ int ask_carte_ou_fin(plateau p,char c){
 				printf("Si vous ne voulez pas jouer de carte, saisir -1. Votre choix : ");
 				int ask=scanf("%d",&n);
 				if (ask==1){
+					if (n==-1){
+						return -1;
+					}
 					if ((n>=0) && (n<deck_length(res))){
 						int i=0;
 						while (res!=NULL){
