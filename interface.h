@@ -3,7 +3,7 @@
 //  
 //
 //  Created by Lu Damien on 14/03/2020.
-//  Modified : 16/04/2020 18:19 (v7)
+//  Modified : 03/05/2020 17:00 (v9)
 //
 
 #ifndef INTERFACE_H
@@ -13,21 +13,21 @@
 
 /**
  \brief: afficher un message de début de nouveau tour
- \param: 
+ \param: un plateau p
  \return: message de début de nouveau tour
 */
 void print_new_tour(plateau p);
 
 /**
  \brief: afficher un message de début de nouvelle phase en fonction du nom de l'ENSIIE
- \param: 
+ \param: un plateau et un char représentant l'ensiie
  \return: message de début de nouveau tour
 */
 void print_new_phase(plateau, char);
 
 /**
  \brief: afficher les points de développement durable de chaque ENSIIE à la fin de chaque tour
- \param: 
+ \param: un plateau
  \return: message de début de nouveau tour
 */
 void print_points_DD(plateau);
