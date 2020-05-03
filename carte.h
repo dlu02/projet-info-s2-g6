@@ -145,13 +145,6 @@ int pioche_eleve(plateau, char);
 
 void carte_ajouter(Nom, plateau*, char);
 
-/**
- \Brief: calculer le nombre de PE disponibles par ENSIIE après avoir posé sa ou ses nouvelles cartes Élèves.
- \param: le plateau 
- \return: un entier, le nombre de point PE du joueur
- */
-
-int carte_pointPE(plateau*, char);
 
 /**
  \brief: réalise l'action décrite par une carte personnel
@@ -160,6 +153,7 @@ int carte_pointPE(plateau*, char);
  */
 
 void carte_personnel(carte,plateau*,char );
+
 
 /**
  \Brief: une fonction pour permettre à une ENSIIE de jouer une carte de sa main

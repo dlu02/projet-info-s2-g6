@@ -209,7 +209,7 @@ void RE2(plateau *p,int x,char id ){
 
 void RA1(plateau *p,int x,char id){
     if (id=='A'){
-        deck_addPt(&(p->pileFisaB),-x,1);
+         deck_addPt(&(p->pileFisaB),-x,1);
     }
     else{
         deck_addPt(&(p->pileFisaA),-x,1);
@@ -221,7 +221,7 @@ void RA2(plateau *p,int x,char id){
         deck_addPt(&(p->pileFisaB),-x,2);
     }
     else{
-        deck_addPt(&(p->pileFisaA),-x,2);
+       deck_addPt(&(p->pileFisaA),-x,2);
     }
 }
 
@@ -260,158 +260,10 @@ void E(plateau *p,int x,char id){
          p->EB= p->EB+x;
     }
 }
-
-//prend en paramétre une carte FISA, ajoute un effet qi la carte personnel est deja present sur le plateau
-void ajout_effet_FISA(carte *c,plateau p,char id){
-     if (id=='A'){
-           while (p.sideA != NULL){
-               switch (getNom(p.sideA->carte)){
-                   case Faye: pt_DD_change(c,1);break;
-                   case Mouilleron: pt_Dur_change(c,1);break;
-                   case Watel:pt_DD_change(c,1);break;
-                   case Y:pt_Dur_change(c,1);break;
-                   case Mathias:
-                       pt_DD_change(c,1);
-                       pt_Dur_change(c,1);
-                       break;
-                   case Sagna:
-                       pt_DD_change(c,2);
-                       pt_Dur_change(c,2);
-                       break;
-                   case Prevel:
-                       pt_DD_change(c,2);
-                       pt_Dur_change(c,2);
-                       break;
-                default: break;
-               }
-            p.sideA=p.sideA->next;
-        }
-         while(p.sideB != NULL){
-                 switch (getNom(p.sideB->carte)){
-                     case Brunel:pt_DD_change(c,-1);break;
-                     case Bourard:pt_Dur_change(c,-1);break;
-                     case Goilard:pt_DD_change(c,-1);break;
-                     case Jeannas:pt_Dur_change(c,-1);break;
-                     case Mathias:pt_Dur_change(c,-1); break;
-                     default: break;
-                 }
-                 p.sideB=p.sideB->next;
-             }
-         }
-     else {
-         while (p.sideB != NULL){
-           switch (getNom(p.sideB->carte)){
-               case Faye: pt_DD_change(c,1);break;
-               case Mouilleron: pt_Dur_change(c,1);break;
-               case Watel:pt_DD_change(c,1);break;
-               case Y:pt_Dur_change(c,1);break;
-               case Mathias:
-                   pt_DD_change(c,1);
-                   pt_Dur_change(c,1);
-                   break;
-               case Sagna:
-                   pt_DD_change(c,2);
-                   pt_Dur_change(c,2);
-                   break;
-               case Prevel:
-                   pt_DD_change(c,2);
-                   pt_Dur_change(c,2);
-                   break;
-            default: break;
-           }
-        p.sideB=p.sideB->next;
-    }
-     while(p.sideA != NULL){
-             switch (getNom(p.sideB->carte)){
-                 case Brunel:pt_DD_change(c,-1);break;
-                 case Bourard:pt_Dur_change(c,-1);break;
-                 case Goilard:pt_DD_change(c,-1);break;
-                 case Jeannas:pt_Dur_change(c,-1);break;
-                 case Mathias:pt_Dur_change(c,-1); break;
-                 default: break;
-             }
-             p.sideA=p.sideA->next;
-         }
-     }
-}
-
-
-void ajout_effet_FISE(carte *c,plateau p,char id){
-    if (id=='A'){
-        while (p.sideA != NULL){
-            switch (getNom(p.sideA->carte)){
-                case Lim: pt_DD_change(c,1); break;
-                case Szafranski: pt_Dur_change(c,1); break;
-                case Watel:pt_DD_change(c,1);break;
-                case Y:pt_Dur_change(c,1);break;
-                case Lejeune:
-                    pt_DD_change(c,1);
-                    pt_Dur_change(c,1);
-                    break;
-                case Salhab:
-                    pt_DD_change(c,2);
-                    pt_Dur_change(c,2);
-                    break;
-                case Prevel:
-                    pt_DD_change(c,2);
-                    pt_Dur_change(c,2);
-                    break;
-                default: break;
-            }
-            p.sideA=p.sideA->next;
-        }
-        while(p.sideB != NULL){
-            switch (getNom(p.sideA->carte)){
-                case Dumbrava:pt_DD_change(c,-1);break;
-                case Forest:pt_Dur_change(c,-1);break;
-                case Goilard:pt_DD_change(c,-1);break;
-                case Jeannas:pt_Dur_change(c,-1);break;
-                case Lejeune:pt_Dur_change(c,-1); break;
-                default: break;
-            }
-            p.sideB=p.sideB->next;
-        }
-    }
-    else{
-        while (p.sideB != NULL){
-            switch (getNom(p.sideB->carte)){
-                case Lim: pt_DD_change(c,1); break;
-                case Szafranski: pt_Dur_change(c,1); break;
-                case Watel:pt_DD_change(c,1);break;
-                case Y:pt_Dur_change(c,1);break;
-                case Lejeune:
-                    pt_DD_change(c,1);
-                    pt_Dur_change(c,1);
-                    break;
-                case Salhab:
-                    pt_DD_change(c,2);
-                    pt_Dur_change(c,2);
-                    break;
-                case Prevel:
-                    pt_DD_change(c,2);
-                    pt_Dur_change(c,2);
-                    break;
-                default: break;
-            }
-            p.sideB=p.sideB->next;
-        }
-        while(p.sideA != NULL){
-            switch (getNom(p.sideA->carte)){
-                case Dumbrava:pt_DD_change(c,-1);break;
-                case Forest:pt_Dur_change(c,-1);break;
-                case Goilard:pt_DD_change(c,-1);break;
-                case Jeannas:pt_Dur_change(c,-1);break;
-                case Lejeune:pt_Dur_change(c,-1); break;
-                default: break;
-            }
-            p.sideA=p.sideA->next;
-        }
-    }
-}
-
+    
 void aux_action(carte *c, plateau *p, char id){
     if (id=='A'){
-        switch( getNom(*c)){
+        switch(getNom(*c)) {
             case Cours_developpemnt_durable:
                 p->ddA=p->ddA+1;
                 break;
@@ -419,7 +271,7 @@ void aux_action(carte *c, plateau *p, char id){
                 carte_ajouter(Fise, p, 'A');
                 break;
             case Rentree_FISA:
-                carte_ajouter(Fisa,p,'A');
+                if((p->tour)%2==0) carte_ajouter(Fisa, p, 'A');
                 break;
             case Energie_verte:
                 p->nrjA=p->nrjA+6;
@@ -432,16 +284,18 @@ void aux_action(carte *c, plateau *p, char id){
                     carte carteFISE= deck_remove_head(&(p->pileFiseB));
                     deck_add_last(carteFISE,&(p->defausseB));
                 }
-                if (deck_isEmpty(p->pileFisaB)){
-                    printf ("vous ne pouvez pas retirer de carte FISA au platau de l'adversaire\n");
-                }
-                else{
-                    carte carteFISA= deck_remove_head(&(p->pileFisaB));
-                    deck_add_last(carteFISA,&(p->defausseB));
+                if((p->tour)%2==0){
+                    if (deck_isEmpty(p->pileFisaB)){
+                        printf ("vous ne pouvez pas retirer de carte FISA au platau de l'adversaire\n");
+                    }
+                    else{
+                        carte carteFISA= deck_remove_head(&(p->pileFisaB));
+                        deck_add_last(carteFISA,&(p->defausseB));
+                    }
                 }
                 break;
             case Decharge:
-                if (deck_isEmpty(p->sideA)){
+                if (deck_isEmpty(p->sideB)){
                     printf ("vous ne pouvez pas retirer de carte personnel au platau de l'adversaire\n");
                 }
                 else{
@@ -466,9 +320,9 @@ void aux_action(carte *c, plateau *p, char id){
                 break;
             case Fermeture_annuelle:
                 deck_concatenate(&(p->defausseA),&(p->pileFisaA));
-                deck_concatenate(&(p->defausseA),&(p->pileFiseA));
+                if((p->tour)%2==0)deck_concatenate(&(p->defausseA),&(p->pileFiseA));
                 deck_concatenate(&(p->defausseB),&(p->pileFisaB));
-                deck_concatenate(&(p->defausseB),&(p->pileFiseB));
+                if((p->tour)%2==0)deck_concatenate(&(p->defausseB),&(p->pileFiseB));
                 break;
             case Recrutement:
                 ;carte aux= deck_remove_queue(&(p->deckA));
@@ -478,74 +332,178 @@ void aux_action(carte *c, plateau *p, char id){
         }
     }
     else{
-    switch( getNom(*c)){
-        case Cours_developpemnt_durable:
-            p->ddB=p->ddB+1;
-            break;
-        case Recrutement:
-            ;carte aux=deck_remove_queue(&(p->deckB));
-            deck_add_last(aux,&(p->mainB));
-            break;
-        case Rentree_FISE:
-            carte_ajouter(Fise, p, 'B');
-            break;
-        case Rentree_FISA:
-            carte_ajouter(Fisa,p,'B');
-            break;
-        case Energie_verte:
-            p->nrjB=p->nrjB+6;
-            break;
-        case Diplomation:
-            if (deck_isEmpty(p->pileFiseA)){
-                printf ("vous ne pouvez pas retirer de carte FISE au platau de l'adversaire\n");
-            }
-            else{
-                carte carteFISE= deck_remove_head(&(p->pileFiseA));
-                deck_add_last(carteFISE,&(p->defausseA));
-            }
-            if (deck_isEmpty(p->pileFisaA)){
-                printf ("vous ne pouvez pas retirer de carte FISA au platau de l'adversaire\n");
-            }
-            else{
-                carte carteFISA= deck_remove_head(&(p->pileFisaA));
-                deck_add_last(carteFISA,&(p->defausseA));
-            }
-            break;
-        case Decharge:
-            if (deck_isEmpty(p->sideB)){
-                printf ("vous ne pouvez pas retirer de carte personnel au platau de l'adversaire\n");
-            }
-            else{
-                carte cartePerso= deck_remove_head(&(p->sideA));
-                deck_add_last(cartePerso,&(p->defausseA));
-            }
-            break;
-        case Recyclage:
-            deck_add_last(*c,&(p->deckB));
-            deck_concatenate(&(p->deckB),&(p->defausseA));
-            
-            melanger_deck(&(p->deckB));
-            break;
-        case Zero_papier:
-            p->ZDB=p->ZDB+1;
-            AE1(p,1,'B');
-            AA1(p,1,'B');
-            break;
-        case Repas_vegetarien:
-            p->RVB=p->RVB+1;
-            AE2(p,1,'B');
-            AA2(p,1,'B');
-            break;
-        case Fermeture_annuelle: deck_concatenate(&(p->defausseA),&(p->pileFisaA));
-    deck_concatenate(&(p->defausseA),&(p->pileFiseA));
-            deck_concatenate(&(p->defausseB),&(p->pileFisaB));
-            deck_concatenate(&(p->defausseB),&(p->pileFiseB));
-            break;
-        default: printf("n'est pas une carte action");break;
+        switch(getNom(*c)){
+            case Cours_developpemnt_durable:
+                p->ddB=p->ddB+1;
+                break;
+            case Recrutement:
+                ;carte aux=deck_remove_queue(&(p->deckB));
+                deck_add_last(aux,&(p->mainB));
+                break;
+            case Rentree_FISE:
+                carte_ajouter(Fise, p, 'B');
+                break;
+            case Rentree_FISA:
+                if((p->tour)%2==0)carte_ajouter(Fisa,p,'B');
+                break;
+            case Energie_verte:
+                p->nrjB=p->nrjB+6;
+                break;
+            case Diplomation:
+                if (deck_isEmpty(p->pileFiseA)){
+                    printf ("vous ne pouvez pas retirer de carte FISE au platau de l'adversaire\n");
+                }
+                else{
+                    carte carteFISE= deck_remove_head(&(p->pileFiseA));
+                    deck_add_last(carteFISE,&(p->defausseA));
+                }
+                if((p->tour)%2==0){
+                    if (deck_isEmpty(p->pileFisaA)){
+                        printf ("vous ne pouvez pas retirer de carte FISA au platau de l'adversaire\n");
+                    }
+                    else{
+                        carte carteFISA= deck_remove_head(&(p->pileFisaA));
+                        deck_add_last(carteFISA,&(p->defausseA));
+                    }
+                }
+                break;
+            case Decharge:
+                if (deck_isEmpty(p->sideA)){
+                    printf ("vous ne pouvez pas retirer de carte personnel au platau de l'adversaire\n");
+                }
+                else{
+                    carte cartePerso= deck_remove_head(&(p->sideA));
+                    deck_add_last(cartePerso,&(p->defausseA));
+                }
+                break;
+            case Recyclage:
+                deck_add_last(*c,&(p->deckB));
+                deck_concatenate(&(p->deckB),&(p->defausseB));
+                melanger_deck(&(p->deckB));
+                break;
+            case Zero_papier:
+                p->ZDB=p->ZDB+1;
+                AE1(p,1,'B');
+                AA1(p,1,'B');
+                break;
+            case Repas_vegetarien:
+                p->RVB=p->RVB+1;
+                AE2(p,1,'B');
+                AA2(p,1,'B');
+                break;
+            case Fermeture_annuelle: 
+                if((p->tour)%2==0)deck_concatenate(&(p->defausseA),&(p->pileFisaA));
+                deck_concatenate(&(p->defausseA),&(p->pileFiseA));
+                if((p->tour)%2==0) deck_concatenate(&(p->defausseB),&(p->pileFisaB));
+                deck_concatenate(&(p->defausseB),&(p->pileFiseB));
+                break;
+            default: printf("n'est pas une carte action");break;
+        }
     }
 }
+
+void ajout_effet_FISA(carte *c,plateau P,char id){
+     if (id=='A'){
+         if(deck_carteIn(P.sideA,Faye)) pt_DD_change(c,1);
+         if(deck_carteIn(P.sideA,Mouilleron)) pt_Dur_change(c,1);
+         if(deck_carteIn(P.sideA,Watel)) pt_DD_change(c,1);
+         if(deck_carteIn(P.sideA,Y)) pt_Dur_change(c,1);;
+         if(deck_carteIn(P.sideA,Mathias)){
+             pt_DD_change(c,1);
+             pt_Dur_change(c,1);
+         }
+         if(deck_carteIn(P.sideA,Sagna)){
+             pt_DD_change(c,2);
+             pt_Dur_change(c,2);
+         }
+         if(deck_carteIn(P.sideA,Prevel)){
+             pt_DD_change(c,2);
+             pt_Dur_change(c,2);
+         }
+        
+         if(deck_carteIn(P.sideB,Brunel)) pt_DD_change(c,-1);
+         if(deck_carteIn(P.sideB,Bourard)) pt_Dur_change(c,-1);
+         if(deck_carteIn(P.sideB,Goilard)) pt_DD_change(c,-1);
+         if(deck_carteIn(P.sideB,Jeannas)) pt_Dur_change(c,-1);
+         if(deck_carteIn(P.sideB,Mathias)) pt_Dur_change(c,-1);
+     }
+         
+     else {
+         if(deck_carteIn(P.sideB,Faye)) pt_DD_change(c,1);
+          if(deck_carteIn(P.sideB,Mouilleron)) pt_Dur_change(c,1);
+          if(deck_carteIn(P.sideB,Watel)) pt_DD_change(c,1);
+          if(deck_carteIn(P.sideB,Y)) pt_Dur_change(c,1);;
+          if(deck_carteIn(P.sideB,Mathias)){
+              pt_DD_change(c,1);
+              pt_Dur_change(c,1);
+          }
+          if(deck_carteIn(P.sideB,Sagna)){
+              pt_DD_change(c,2);
+              pt_Dur_change(c,2);
+          }
+          if(deck_carteIn(P.sideB,Prevel)){
+              pt_DD_change(c,2);
+              pt_Dur_change(c,2);
+          }
+         
+          if(deck_carteIn(P.sideA,Brunel)) pt_DD_change(c,-1);
+          if(deck_carteIn(P.sideA,Bourard)) pt_Dur_change(c,-1);
+          if(deck_carteIn(P.sideA,Goilard)) pt_DD_change(c,-1);
+          if(deck_carteIn(P.sideA,Jeannas)) pt_Dur_change(c,-1);
+          if(deck_carteIn(P.sideA,Mathias)) pt_Dur_change(c,-1);
+     }
 }
 
+void ajout_effet_FISE(carte *c,plateau P,char id){
+    if (id=='A'){
+        if(deck_carteIn(P.sideA,Lim))pt_DD_change(c,1);
+        if(deck_carteIn(P.sideA,Szafranski))pt_Dur_change(c,1);
+        if(deck_carteIn(P.sideA,Watel))pt_DD_change(c,1);
+        if(deck_carteIn(P.sideA,Y))pt_Dur_change(c,1);
+        if(deck_carteIn(P.sideA,Lejeune)){
+            pt_DD_change(c,1);
+            pt_Dur_change(c,1);
+        }
+        if(deck_carteIn(P.sideA,Salhab)){
+            pt_DD_change(c,2);
+            pt_Dur_change(c,2);
+        }
+        if(deck_carteIn(P.sideA,Prevel)){
+            pt_DD_change(c,2);
+            pt_Dur_change(c,2);
+        }
+    
+        if(deck_carteIn(P.sideB,Dumbrava))pt_DD_change(c,-1);
+        if(deck_carteIn(P.sideB,Forest))pt_Dur_change(c,-1);
+        if(deck_carteIn(P.sideB,Goilard))pt_DD_change(c,-1);
+        if(deck_carteIn(P.sideB,Jeannas))pt_Dur_change(c,-1);
+        if(deck_carteIn(P.sideB,Lejeune))pt_Dur_change(c,-1);
+    }
+    else{
+        if(deck_carteIn(P.sideB,Lim))pt_DD_change(c,1);
+        if(deck_carteIn(P.sideB,Szafranski))pt_Dur_change(c,1);
+        if(deck_carteIn(P.sideB,Watel))pt_DD_change(c,1);
+        if(deck_carteIn(P.sideB,Y))pt_Dur_change(c,1);
+        if(deck_carteIn(P.sideB,Lejeune)){
+            pt_DD_change(c,1);
+            pt_Dur_change(c,1);
+        }
+        if(deck_carteIn(P.sideB,Salhab)){
+            pt_DD_change(c,2);
+            pt_Dur_change(c,2);
+        }
+        if(deck_carteIn(P.sideB,Prevel)){
+            pt_DD_change(c,2);
+            pt_Dur_change(c,2);
+        }
+    
+        if(deck_carteIn(P.sideA,Dumbrava))pt_DD_change(c,-1);
+        if(deck_carteIn(P.sideA,Forest))pt_Dur_change(c,-1);
+        if(deck_carteIn(P.sideA,Goilard))pt_DD_change(c,-1);
+        if(deck_carteIn(P.sideA,Jeannas))pt_Dur_change(c,-1);
+        if(deck_carteIn(P.sideA,Lejeune))pt_Dur_change(c,-1);
+    }
+}
 
 
     
@@ -560,7 +518,7 @@ carte carte_new(Nom carte_nom){
     else {res.type=2;}
     res.code=aux_code(carte_nom);
     return res;
-    }
+}
 
 
 void carte_print(carte c){
@@ -597,53 +555,41 @@ int pioche_eleve(plateau p, char id){
 }
 
 
+void carte_ajouter(Nom nom, plateau *p, char id) {
 
-
-void carte_ajouter(Nom nom, plateau *p, char id){
     carte carte=carte_new(nom);
+
     if (id=='A'){
+
         if (nom==Fise){
-            ajout_effet_FISE(&carte,*p,'A');
+            ajout_effet_FISE(&carte,*p,id);
             deck_add_last(carte,&(p->pileFiseA));
         }
-        else if (nom==Fisa){            ajout_effet_FISA(&carte,*p,'A');
-            deck_add_last(carte,&(p->pileFisaA));
         
+        else if (nom==Fisa){
+            ajout_effet_FISA(&carte,*p,id);
+            deck_add_last(carte,&(p->pileFisaA));
         }
-        else printf ("ce n'est pas une carte eleve");
+        
+        else 
+            printf ("Ce n'est pas une carte élève");
     }
-    else{
+    else {
+
         if (nom==Fise){
-            ajout_effet_FISE(&carte,*p,'B');
+            ajout_effet_FISE(&carte,*p,id);
             deck_add_last(carte,&(p->pileFiseB));
         }
+        
         else if (nom==Fisa){
-            ajout_effet_FISA(&carte,*p,'B');
+            ajout_effet_FISA(&carte,*p,id);
             deck_add_last(carte,&(p->pileFisaB));
         }
-        else printf ("ce n'est pas une carte eleve");
+        
+        else 
+            printf ("Ce n'est pas une carte élève");
     }
-}
 
-
-
-
-int carte_pointPE(plateau *p, char id){
-    int res;
-    if (id=='A'){
-        if ((p->tour % 2)==1){
-            res=res+deck_parcours_energie(p->pileFisaA);
-        }
-        res=res+deck_parcours_energie(p->pileFiseA);
-        return res;
-    }
-    else{
-        if ((p->tour % 2)==1){
-            res=res+deck_parcours_energie(p->pileFisaB);
-        }
-        res=res+deck_parcours_energie(p->pileFiseB);
-        return res;
-    }
 }
 
 
@@ -811,43 +757,81 @@ void carte_jouer(carte c, plateau *p, char id){
         
         case Personnel:
             if(id=='A') {
-                if(cout(c)<=p->nrjA) {
+                if(cout(c) <= p->nrjA) {
                     deck_add_last(c,&(p->sideA));
-                    if(deck_length(p->sideA)>p->nbcarteA) {
-                        retire_carte_personnel(deck_remove_head(&(p->sideA)),p,id);
-                    };
+                    carte_personnel(c,p,id);
+                    int nbCardsPerso = 0;
+                    deck d = p->sideA;
+                    while(d != NULL) {
+                        if(getType((d->carte)) == Personnel)    /* le plateau ne doit contenir que des cartes personnels, mais il est utile de vérifier 
+                                                                cette condition au cas ou l'on rajoute un nouveau type de carte par la suite dans le jeu */
+
+                            nbCardsPerso++;         // on récupère le nombre de cartes personnelles que l'on a jouée sur le plateau
+                        d= d -> next;
+                    }
+                    if(nbCardsPerso > p->maxcarte) {
+                        retire_carte_personnel(deck_remove_head(&(p->sideA)),p,id);         // on retire alors la plus ancienne carte perso déjà posée
+                    }
                     p->nrjA-=cout(c);
-                };
+                    p->nbcarteA --;
+                }
+                else {
+                    printf("\nVous ne pouvez pas jouer cette carte : pas assez d'énergie !!! \n\n");
+                    deck_add_last(c,&(p->mainA));   // on remet la carte dans la main de l'ENSIIE A
+                }
             }
             else {
-                if(cout(c)<=p->nrjB) {
+                if(cout(c) <= p->nrjB) {
                     deck_add_last(c,&(p->sideB));
-                    if(deck_length(p->sideB)>p->nbcarteB) {
+                    carte_personnel(c,p,id);
+                    int nbCardsPerso = 0;
+                    deck d = p->sideB;
+                    while(d != NULL) {
+                        if(getType((d->carte)) == Personnel)
+                            nbCardsPerso++;
+                        d= d -> next;
+                    }
+                    if(nbCardsPerso > p->maxcarte) {
                         retire_carte_personnel(deck_remove_head(&(p->sideB)),p,id);
-                    };
+                    }
                     p->nrjB-=cout(c);
-                                               
-                };
+                    p->nbcarteB --;                             
+                }
+                else {
+                    printf("\nVous ne pouvez pas jouer cette carte : pas assez d'énergie !!! \n\n");
+                    deck_add_last(c,&(p->mainB));
+                }
             };
-            carte_personnel(c,p,id);
+
             break;
        
         case Action:
             if(id=='A') {
                 if(cout(c)<=p->nrjA) {
                     deck_add_last(c,&(p->defausseA));
-                };
-                p->nrjA-=cout(c);
+                    p->nrjA-=cout(c);
+                    p->nbcarteA --;
+                    aux_action(&c,p,id);
+                }
+                else {
+                    printf("\nVous ne pouvez pas jouer cette carte : pas assez d'énergie !!! \n\n");
+                    deck_add_last(c,&(p->mainA));
+                }
             }
             else {
                 if(cout(c)<=p->nrjB) {
                     deck_add_last(c,&(p->defausseB));
-                };
-                p->nrjB=-cout(c);
-            };
-            aux_action(&c,p,id);
+                    p->nrjB=-cout(c);
+                    p->nbcarteB --;
+                    aux_action(&c,p,id);
+                }
+                else {
+                    printf(" \nVous ne pouvez pas jouer cette carte : pas assez d'énergie  !!! \n\n");
+                    deck_add_last(c,&(p->mainB));
+                }
+            }
             break;
-        default: printf("carte non reconnu"); break;
+        default: printf("Carte non reconnu\n"); break;
     };
                                                
 }
@@ -856,29 +840,46 @@ void carte_fin(plateau *p) {
     
     int aux_FISE_dur_B=deck_parcours_durabilite(p->pileFiseB);
     int aux_FISE_dev_B=deck_parcours_devellopement(p->pileFiseB);
-    int aux_FISA_dur_B=deck_parcours_durabilite(p->pileFisaB);
-    int aux_FISA_dev_B=deck_parcours_devellopement(p->pileFisaB);
-    
     int aux_FISE_dur_A=deck_parcours_durabilite(p->pileFiseA);
     int aux_FISE_dev_A=deck_parcours_devellopement(p->pileFiseA);
+    
+    int aux_FISA_dur_B=0;
+    int aux_FISA_dev_B=0;
+    int aux_FISA_dur_A=0;
+    int aux_FISA_dev_A=0;
+    
+    if((p->tour)%2==0){
+    int aux_FISA_dur_B=deck_parcours_durabilite(p->pileFisaB);
+    int aux_FISA_dev_B=deck_parcours_devellopement(p->pileFisaB);
     int aux_FISA_dur_A=deck_parcours_durabilite(p->pileFisaA);
-    int aux_FISA_dev_A=deck_parcours_devellopement(p->pileFiseA);
+    int aux_FISA_dev_A=deck_parcours_devellopement(p->pileFisaA);
+    }
     
-    int add_A= aux_FISE_dev_A + aux_FISA_dev_A + p->ADD_effetA;
-    int sous_A= aux_FISE_dur_B + aux_FISA_dur_B + p->RDD_effetA;
+    int add_A = aux_FISE_dev_A + aux_FISA_dev_A + p->ADD_effetA;
+    int sous_A = aux_FISE_dur_B + aux_FISA_dur_B + p->RDD_effetA;
     
-    int add_B= aux_FISE_dev_B + aux_FISA_dev_B + p->ADD_effetB;
-    int sous_B= aux_FISE_dur_A + aux_FISA_dur_A + p->RDD_effetB;
+    int add_B = aux_FISE_dev_B + aux_FISA_dev_B + p->ADD_effetB;
+    int sous_B = aux_FISE_dur_A + aux_FISA_dur_A + p->RDD_effetB;
     
-    p->ddA= add_A - sous_A;
-    if (p->ddA) p->ddA=0;
-    
-    p->ddB= add_A - sous_A;
-    if (p->ddB) p->ddB=0;
+
+    if((add_A - sous_A > add_B - sous_B) && (add_A - sous_A > 0)) {
+        p->ddA += (add_A - sous_A);
+        printf("\nL'ENSIIE A a gagné %d points de DD lors du tour numéro %d !!! \n\n",add_A - sous_A,p->tour);
+    }
+    else if ((add_A - sous_A < add_B - sous_B) && (add_B - sous_B > 0)) {
+        p->ddB += (add_B - sous_B);
+        printf("\nL'ENSIIE B a gagné %d points de DD lors du tour numéro %d !!! \n\n",add_B - sous_B,p->tour);
+    }
+    else if ((add_A - sous_A == add_B - sous_B) && (add_A - sous_A > 0)){
+        p->ddA += (add_A - sous_A);
+        p->ddB += (add_B - sous_B);
+        printf("\nChaque ENSIIE a gagné %d points de DD lors du tour numéro %d !!! \n\n",add_A - sous_A,p->tour);
+    }
+    else
+        printf("\nAucune ENSIIE n'a gagné de points de DD lors du tour numéro %d !!! \n\n",p->tour);
     
     p->nrjA=0;
     p->nrjB=0;
-
 }
 
 

@@ -67,6 +67,24 @@ int win(plateau);
 void remplir_deck(deck*);
 
 
+
+/**
+ \Brief: calculer le nombre de PE disponibles par ENSIIE après avoir posé sa ou ses nouvelles cartes Élèves.
+ \param: le plateau 
+ \return: un entier, le nombre de point PE du joueur
+ */
+
+void updateEnergy(plateau*);
+
+
+/**
+ \Brief: initialise à 0 la valeur de durabilité ou le nombre de points DD de la carte, si ceux-ci sont négatifs 
+ \param: le plateau 
+ \return: vide
+ */
+void setDefaultValueEleves(plateau *p);
+
+
 #endif
 
 

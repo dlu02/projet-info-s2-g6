@@ -92,7 +92,7 @@ void deck_print(deck l){
         int i=0;
         while(!deck_isEmpty(curl)){
             printf("carte n° %i",i);
-            i=i+1;
+            i++;
             carte_print(curl->carte);
             curl=curl->next;
         }
@@ -103,7 +103,7 @@ void deck_concatenate(deck *l1,deck *l2){
     deck tmp = *l2;
     while(tmp != NULL){
         carte aux=deck_remove_head(&tmp);
-        deck_add_last(aux,&tmp);
+        deck_add_last(aux,l1);
         tmp=tmp->next;
     }
 }
@@ -257,10 +257,10 @@ void melanger_deck (deck *res) {
     }
 }
 
-int deck_parcours_energie(deck l){
+int deck_parcours_energie(deck l,int value){
     int res=0;
         while (l != NULL){
-            res=res+pt_nrj(l->carte);
+            res += value;
             l=l->next;
         }
     return res;
@@ -283,7 +283,3 @@ int deck_parcours_devellopement(deck l){
         }
     return res;
 }
-
-
-
-

@@ -23,7 +23,14 @@ void print_new_tour(plateau p);
  \param: 
  \return: message de début de nouveau tour
 */
-void print_new_phase(char);
+void print_new_phase(plateau, char);
+
+/**
+ \brief: afficher les points de développement durable de chaque ENSIIE à la fin de chaque tour
+ \param: 
+ \return: message de début de nouveau tour
+*/
+void print_points_DD(plateau);
 
 /**
  \brief: afficher le plateau p

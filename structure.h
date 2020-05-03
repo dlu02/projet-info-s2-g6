@@ -58,7 +58,7 @@ typedef struct plateau {
     int ADD_effetA, ADD_effetB;
     int RDD_effetA, RDD_effetB;
     int piocheA, piocheB;
-    int EA, EB;
+    int EA, EB;  // effet E (on pioche x cartes etudiants supplémentaires au prochain tour)
     int RVA,RVB; // gerer efffet repas vegetarien
     int ZDA,ZDB; //gerer zero dechet
     int tour;    // indice de tour
@@ -179,7 +179,7 @@ void deck_addPt(deck* ,long , int);
 
 void melanger_deck (deck*);
 
-int deck_parcours_energie(deck);
+int deck_parcours_energie(deck,int);
 
 int deck_parcours_durabilite(deck);
 
