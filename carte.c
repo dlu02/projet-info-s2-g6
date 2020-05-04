@@ -9,14 +9,14 @@
 #include <stdio.h>
 
 
-// les fonctions pour manipuler les cartes//
-
-Type getType(carte c){
-    return c.type;
-}
+//les fonctions permettant d'accéder aux différentes informations d'une carte//
 
 Nom getNom(carte c){
     return c.nom;
+}
+
+Type getType(carte c){
+    return c.type;
 }
 
 long pt_DD(carte c){
@@ -47,6 +47,12 @@ long cout(carte c){
     else return c.code;
 }
 
+int carte_equal(carte c1,Nom nom){
+    return c1.nom==nom;
+}
+
+//fonctions permettant de modifier une carte//
+
 void pt_DD_change(carte *c,long pt){
     if (pt_DD(*c)+pt<0) c->code=pt_nrj(*c)*1000000+pt_Dur(*c)*1000;
     else c->code=c->code+pt;
@@ -62,57 +68,13 @@ void pt_nrj_change(carte *c,long pt){
     else c->code=c->code+(pt*1000000);
 }
 
-//deux cartes sont égales si elles ont le meme nom, unicité des cartes personnels et actions dans les decks, pour les cartes FISE et FISA, elles n'ont pas d'identité propre. Cas à part
-int carte_equal(carte c1,Nom nom){
-    return c1.nom==nom;
-}
+// fonctions utiles pour deck//
 
-
-
-/* les fonctions annexes. Elles sont utiles pour d'autres fonctions (non définis dans le header) */
-
-/*permet d'afficher le nom d'une carte
- utilisé avec carte_print*/
-void aux_NomPrint(carte c){
-    switch(getNom(c)){
-        case Fise: printf("fise"); break;
-        case Fisa: printf("fisa"); break;
-        case Lim: printf("lim"); break;
-        case Szafranski:printf("Szafranski"); break;
-        case Faye: printf("Faye"); break;
-        case Mouilleron: printf("Mouilleron");break;
-        case Dumbrava: printf("Dumbrava");break;
-        case Forest: printf("Forest");break;
-        case Brunel:printf("Brunel"); break;
-        case Bourard:printf("Bourard") ;break;
-        case Watel: printf("Watel");break;
-        case Y: printf("Y");break;
-        case Goilard:printf("Goilard") ;break;
-        case Jeannas: printf("Jeannas");break;
-        case Merabet: printf("Merabet");break;
-        case Ligozat: printf("Ligozat") ;break;
-        case Dubois:printf("Dubois") ;break;
-        case Lejeune: printf("Lejeune");break;
-        case Mathias: printf("Mathias") ;break;
-        case Salhab: printf("Salhab") ;break;
-        case Sagna: printf("Sagna") ;break;
-        case Prevel: printf("Prevel");break;
-        case Cours_developpemnt_durable: printf("cours_developpement durable");break;
-        case Recrutement: printf("Recrutement");break;
-        case Rentree_FISE: printf("Rentrée_FISE");break;
-        case Rentree_FISA: printf("Rentrée_FISA");break;
-        case Energie_verte: printf("Energie_verte");break;
-        case Diplomation: printf("Diplomation");break;
-        case Decharge: printf("decharge");break;
-        case Recyclage: printf("Recyclage");break;
-        case Zero_papier: printf("Zero_papier");break;
-        case Repas_vegetarien: printf("Repas_vegetarien");break;
-        case Fermeture_annuelle: printf("Fermeture_annuelle");break;
-    }
-}
-
-/*permet de déterminer le cout d'une carte en fonction de son nom
-  fonction utilse pour new_carte*/
+/**
+\brief:  trouver le code d'une carte
+\param: le nom d'une carte
+\return: le code de la carte correspondant au nom mis en paramétre
+*/
 long aux_code(Nom nom){
     switch(nom){
         case Fise: return 1001001; break;
@@ -151,7 +113,95 @@ long aux_code(Nom nom){
     }
 }
 
-/* ajoute x points de dévellopement à chacune de vos cartes FISE*/
+carte carte_new(Nom carte_nom){
+    carte res;
+    res.nom= carte_nom;
+    if (carte_nom<=1) {res.type=0;}
+    else if (carte_nom<=21) {res.type=1;}
+    else {res.type=2;}
+    res.code=aux_code(carte_nom);
+    return res;
+}
+
+/**
+\brief: affiche le nom d'une carte
+\param: une carte
+\return: nothing
+*/
+void aux_NomPrint(carte c){
+    switch(getNom(c)){
+        case Fise: printf("fise"); break;
+        case Fisa: printf("fisa"); break;
+        case Lim: printf("lim"); break;
+        case Szafranski:printf("Szafranski"); break;
+        case Faye: printf("Faye"); break;
+        case Mouilleron: printf("Mouilleron");break;
+        case Dumbrava: printf("Dumbrava");break;
+        case Forest: printf("Forest");break;
+        case Brunel:printf("Brunel"); break;
+        case Bourard:printf("Bourard") ;break;
+        case Watel: printf("Watel");break;
+        case Y: printf("Y");break;
+        case Goilard:printf("Goilard") ;break;
+        case Jeannas: printf("Jeannas");break;
+        case Merabet: printf("Merabet");break;
+        case Ligozat: printf("Ligozat") ;break;
+        case Dubois:printf("Dubois") ;break;
+        case Lejeune: printf("Lejeune");break;
+        case Mathias: printf("Mathias") ;break;
+        case Salhab: printf("Salhab") ;break;
+        case Sagna: printf("Sagna") ;break;
+        case Prevel: printf("Prevel");break;
+        case Cours_developpemnt_durable: printf("cours_developpement durable");break;
+        case Recrutement: printf("Recrutement");break;
+        case Rentree_FISE: printf("Rentrée_FISE");break;
+        case Rentree_FISA: printf("Rentrée_FISA");break;
+        case Energie_verte: printf("Energie_verte");break;
+        case Diplomation: printf("Diplomation");break;
+        case Decharge: printf("decharge");break;
+        case Recyclage: printf("Recyclage");break;
+        case Zero_papier: printf("Zero_papier");break;
+        case Repas_vegetarien: printf("Repas_vegetarien");break;
+        case Fermeture_annuelle: printf("Fermeture_annuelle");break;
+    }
+}
+
+void carte_print(carte c){
+    printf("\n");
+    printf("* "); aux_NomPrint(c); printf(" *\n");
+    switch(c.type){
+        case Eleve:
+            printf("- type: eleve\n");
+            printf("- point_déveleppement_durable= %ld \n",pt_DD(c));
+            printf("- point_durabilite= %ld \n",pt_Dur(c));
+            printf("- point_energie= %ld\n",pt_nrj(c));
+            break;
+        case Personnel:
+            printf("- type: personnel\n");
+            printf("- cout: %ld \n",cout(c));
+            break;
+        case Action:
+            printf("- type: action\n");
+            printf("- cout: %ld \n",cout(c));
+            break;
+    }
+    printf("\n");
+}
+
+
+
+//les fonction pour coder le jeu//
+
+/* les fonctions annexes. Elles sont utiles pour d'autres fonctions définis plus loin  */
+
+
+/**
+\brief: les fonctions suivantes réalise l'effet décrites dans le tableau
+\param: un plateau, le nombre de points, l'id identifiant l'ENSIIE
+\return: nothing
+*/
+
+//ajoute x points de dévellopement à chacune de vos cartes FISE
 void AE1(plateau *p,int x, char id){
     if (id=='A'){
         deck_addPt(&(p->pileFiseA),x,1);
@@ -161,6 +211,7 @@ void AE1(plateau *p,int x, char id){
     }
 }
 
+//Ajouter X points de Durabilité à chacune de vos cartes FISE
 void AE2(plateau *p,int x, char id){
     if (id=='A'){
         deck_addPt(&(p->pileFiseA),x,2);
@@ -170,6 +221,7 @@ void AE2(plateau *p,int x, char id){
     }
 }
 
+//Ajouter X points de dévellopement à chacune de vos cartes FISA
 void AA1(plateau *p,int x, char id){
     if (id=='A'){
         deck_addPt(&(p->pileFisaA),x,1);
@@ -179,6 +231,7 @@ void AA1(plateau *p,int x, char id){
     }
 }
 
+//Ajouter X points de Durabilité à chacune de vos cartes FISA
 void AA2(plateau *p,int x,char id){
     if (id=='A'){
         deck_addPt(&(p->pileFisaA),x,2);
@@ -188,7 +241,7 @@ void AA2(plateau *p,int x,char id){
     }
 }
 
-/*retirer x*/
+//Retirer X points de Durabilité à chacune des cartes FISE de l’adversaire
 void RE1(plateau *p,int x,char id){
     if (id=='A'){
         deck_addPt(&(p->pileFiseB),-x,1);
@@ -198,6 +251,7 @@ void RE1(plateau *p,int x,char id){
     }
 }
 
+//Retirer X points de Durabilité à chacune des cartes FISE de l’adversaire
 void RE2(plateau *p,int x,char id ){
     if (id=='A'){
         deck_addPt(&(p->pileFiseB),-x,2);
@@ -207,6 +261,7 @@ void RE2(plateau *p,int x,char id ){
     }
 }
 
+//Retirer X points de Durabilité à chacune des cartes FISA de l'adversaire
 void RA1(plateau *p,int x,char id){
     if (id=='A'){
          deck_addPt(&(p->pileFisaB),-x,1);
@@ -216,6 +271,7 @@ void RA1(plateau *p,int x,char id){
     }
 }
 
+//Retirer X points de Durabilité à chacune des cartes FISA de l’adversaire
 void RA2(plateau *p,int x,char id){
     if (id=='A'){
         deck_addPt(&(p->pileFisaB),-x,2);
@@ -225,6 +281,7 @@ void RA2(plateau *p,int x,char id){
     }
 }
 
+//Gagner X DD de plus à la fin du tour
 void ADD(plateau *p,int x,char id){
     if (id=='A'){
        p->ADD_effetA= p->ADD_effetA+x ;
@@ -234,6 +291,7 @@ void ADD(plateau *p,int x,char id){
     }
 }
 
+//L’adversaire retranche X DD au total gagné à la fin du tour
 void RDD(plateau *p,int x,char id){
     if (id=='A'){
          p->RDD_effetB= p->RDD_effetB+x ;
@@ -243,6 +301,7 @@ void RDD(plateau *p,int x,char id){
     }
 }
 
+//Piocher X cartes de plus au début de votre phase
 void DR(plateau *p,int x,char id){
     if (id=='A'){
          p->piocheA= p->piocheA+x ;
@@ -252,6 +311,7 @@ void DR(plateau *p,int x,char id){
     }
 }
 
+//Mettez en jeu X cartes Élève de plus au début de votre phase
 void E(plateau *p,int x,char id){
     if (id=='A'){
          p->EA= p->EA+x ;
@@ -261,7 +321,329 @@ void E(plateau *p,int x,char id){
     }
 }
     
-void aux_action(carte *c, plateau *p, char id){
+/**
+\brief:  permet d'ajouter des effets à une nouvelle carte FISA lorsque elle est ajouté au plateau (recherche les cartes actions déjà mise en jeu et application de leur effets)
+\param: une carte FISA, un plateau et l'identifiant de l'ENSIIE
+\return: nothing
+*/
+void ajout_effet_FISA(carte *c,plateau P,char id){
+     if (id=='A'){
+         if(deck_carteIn(P.sideA,Faye)) pt_DD_change(c,1);
+         if(deck_carteIn(P.sideA,Mouilleron)) pt_Dur_change(c,1);
+         if(deck_carteIn(P.sideA,Watel)) pt_DD_change(c,1);
+         if(deck_carteIn(P.sideA,Y)) pt_Dur_change(c,1);;
+         if(deck_carteIn(P.sideA,Mathias)){
+             pt_DD_change(c,1);
+             pt_Dur_change(c,1);
+         }
+         if(deck_carteIn(P.sideA,Sagna)){
+             pt_DD_change(c,2);
+             pt_Dur_change(c,2);
+         }
+         if(deck_carteIn(P.sideA,Prevel)){
+             pt_DD_change(c,2);
+             pt_Dur_change(c,2);
+         }
+        
+         if(deck_carteIn(P.sideB,Brunel)) pt_DD_change(c,-1);
+         if(deck_carteIn(P.sideB,Bourard)) pt_Dur_change(c,-1);
+         if(deck_carteIn(P.sideB,Goilard)) pt_DD_change(c,-1);
+         if(deck_carteIn(P.sideB,Jeannas)) pt_Dur_change(c,-1);
+         if(deck_carteIn(P.sideB,Mathias)) pt_Dur_change(c,-1);
+     }
+         
+     else {
+         if(deck_carteIn(P.sideB,Faye)) pt_DD_change(c,1);
+          if(deck_carteIn(P.sideB,Mouilleron)) pt_Dur_change(c,1);
+          if(deck_carteIn(P.sideB,Watel)) pt_DD_change(c,1);
+          if(deck_carteIn(P.sideB,Y)) pt_Dur_change(c,1);;
+          if(deck_carteIn(P.sideB,Mathias)){
+              pt_DD_change(c,1);
+              pt_Dur_change(c,1);
+          }
+          if(deck_carteIn(P.sideB,Sagna)){
+              pt_DD_change(c,2);
+              pt_Dur_change(c,2);
+          }
+          if(deck_carteIn(P.sideB,Prevel)){
+              pt_DD_change(c,2);
+              pt_Dur_change(c,2);
+          }
+         
+          if(deck_carteIn(P.sideA,Brunel)) pt_DD_change(c,-1);
+          if(deck_carteIn(P.sideA,Bourard)) pt_Dur_change(c,-1);
+          if(deck_carteIn(P.sideA,Goilard)) pt_DD_change(c,-1);
+          if(deck_carteIn(P.sideA,Jeannas)) pt_Dur_change(c,-1);
+          if(deck_carteIn(P.sideA,Mathias)) pt_Dur_change(c,-1);
+     }
+}
+
+/**
+ \brief:  permet d'ajouter des effets à une nouvelle carte FISE lorsque elle est ajouté au plateau (recherche les cartes actions déjà mise en jeu et application de leur effets)
+ \param: une carte FISE, un plateau et l'identifiant de l'ENSIIE
+ \return: nothing
+ */
+void ajout_effet_FISE(carte *c,plateau P,char id){
+    if (id=='A'){
+        if(deck_carteIn(P.sideA,Lim))pt_DD_change(c,1);
+        if(deck_carteIn(P.sideA,Szafranski))pt_Dur_change(c,1);
+        if(deck_carteIn(P.sideA,Watel))pt_DD_change(c,1);
+        if(deck_carteIn(P.sideA,Y))pt_Dur_change(c,1);
+        if(deck_carteIn(P.sideA,Lejeune)){
+            pt_DD_change(c,1);
+            pt_Dur_change(c,1);
+        }
+        if(deck_carteIn(P.sideA,Salhab)){
+            pt_DD_change(c,2);
+            pt_Dur_change(c,2);
+        }
+        if(deck_carteIn(P.sideA,Prevel)){
+            pt_DD_change(c,2);
+            pt_Dur_change(c,2);
+        }
+    
+        if(deck_carteIn(P.sideB,Dumbrava))pt_DD_change(c,-1);
+        if(deck_carteIn(P.sideB,Forest))pt_Dur_change(c,-1);
+        if(deck_carteIn(P.sideB,Goilard))pt_DD_change(c,-1);
+        if(deck_carteIn(P.sideB,Jeannas))pt_Dur_change(c,-1);
+        if(deck_carteIn(P.sideB,Lejeune))pt_Dur_change(c,-1);
+    }
+    else{
+        if(deck_carteIn(P.sideB,Lim))pt_DD_change(c,1);
+        if(deck_carteIn(P.sideB,Szafranski))pt_Dur_change(c,1);
+        if(deck_carteIn(P.sideB,Watel))pt_DD_change(c,1);
+        if(deck_carteIn(P.sideB,Y))pt_Dur_change(c,1);
+        if(deck_carteIn(P.sideB,Lejeune)){
+            pt_DD_change(c,1);
+            pt_Dur_change(c,1);
+        }
+        if(deck_carteIn(P.sideB,Salhab)){
+            pt_DD_change(c,2);
+            pt_Dur_change(c,2);
+        }
+        if(deck_carteIn(P.sideB,Prevel)){
+            pt_DD_change(c,2);
+            pt_Dur_change(c,2);
+        }
+    
+        if(deck_carteIn(P.sideA,Dumbrava))pt_DD_change(c,-1);
+        if(deck_carteIn(P.sideA,Forest))pt_Dur_change(c,-1);
+        if(deck_carteIn(P.sideA,Goilard))pt_DD_change(c,-1);
+        if(deck_carteIn(P.sideA,Jeannas))pt_Dur_change(c,-1);
+        if(deck_carteIn(P.sideA,Lejeune))pt_Dur_change(c,-1);
+    }
+}
+
+/**
+\brief:  supprimer  les effets d'une carte personnel lorsque celle-ci est retirée du plateau
+\param: la carte personnel,  un plateau et l'identifiant de l'ENSIIE
+\return: nothing
+*/
+
+void retire_carte_personnel(carte c, plateau *p, char id) {
+    switch(getNom(c)){
+        case Lim: AE1(p,-1,id); break;
+        case Szafranski: AE2(p,-1,id); break;
+        case Faye: AA1(p,-1,id);break;
+        case Mouilleron:AA2(p,-1,id);break;
+        case Dumbrava:RE1(p,-1,id);break;
+        case Forest:RE2(p,-1,id);break;
+        case Brunel:RA1(p,-1,id); break;
+        case Bourard:RA2(p,-1,id) ;break;
+        case Watel:
+            AE1(p,-1,id);
+            AA1(p,-1,id);
+            break;
+        case Y:
+            AE2(p,-1,id);
+            AA2(p,-1,id);
+            break;
+        case Goilard:
+            RE1(p,-1,id);
+            RA1(p,-1,id);
+            break;
+        case Jeannas:
+            RE2(p,-1,id);
+            RA2(p,-1,id);
+            break;
+        case Merabet:
+            DR(p,-2,id);
+            break;
+        case Ligozat:
+            ADD(p,-2,id);
+            DR(p,-1,id);
+            E(p,-1,id);
+            break;
+        case Dubois:
+            RDD(p,-2,id);
+            DR(p,-1,id);
+            E(p,-1,id);
+            break;
+        case Lejeune:
+            AE1(p,-1,id);
+            AE2(p,-1,id);
+            RE2(p,-1,id);
+            RDD(p,-1,id);
+            break;
+        case Mathias:
+            AA1(p,-1,id);
+            AA2(p,-1,id);
+            RA2(p,-1,id);
+            RDD(p,-1,id);
+            break;
+        case Salhab:
+            AE1(p,-2,id);
+            AE2(p,-2,id);
+            E(p,-1,id);
+            break;
+        case Sagna:
+            AA1(p,-2,id);
+            AA2(p,-2,id);
+            E(p,-1,id);
+            break;
+        case Prevel:
+            AE1(p,-2,id);
+            AE2(p,-2,id);
+            AA1(p,-2,id);
+            AA2(p,-2,id);
+            ADD(p,-1,id);
+            RDD(p,-1,id);
+            DR(p,-1,id);
+            E(p,-2,id);
+            break;
+        default:
+            printf("n'est pas une carte personnel");
+    };
+    if(id=='A') {
+        deck_add_last(c,&(p->defausseA));
+    }
+    else {
+        deck_add_last(c,&(p->defausseB));
+    };
+}
+
+
+    
+    
+/* Les fonctions utiles pour coder le jeu (accessibles depuis le header) */
+
+int pioche_eleve(plateau p, char id){
+    if (id=='A'){
+        return p.piocheA;
+    }
+    else {
+        return p.piocheB;
+    }
+}
+
+
+void carte_ajouter(Nom nom, plateau *p, char id) {
+    carte carte=carte_new(nom);
+    if (id=='A'){
+        if (nom==Fise){
+            ajout_effet_FISE(&carte,*p,id);
+            deck_add_last(carte,&(p->pileFiseA));
+        }
+        else if (nom==Fisa){
+            ajout_effet_FISA(&carte,*p,id);
+            deck_add_last(carte,&(p->pileFisaA));
+        }
+        else 
+            printf ("Ce n'est pas une carte élève");
+    }
+    else {
+        if (nom==Fise){
+            ajout_effet_FISE(&carte,*p,id);
+            deck_add_last(carte,&(p->pileFiseB));
+        }
+        else if (nom==Fisa){
+            ajout_effet_FISA(&carte,*p,id);
+            deck_add_last(carte,&(p->pileFisaB));
+        }
+        else 
+            printf ("Ce n'est pas une carte élève");
+    }
+
+}
+
+
+void carte_personnel(carte c,plateau *p,char id){
+        switch(getNom(c)){
+            case Lim: AE1(p,1,id); break;
+            case Szafranski: AE2(p,1,id); break;
+            case Faye: AA1(p,1,id);break;
+            case Mouilleron:AA2(p,1,id);break;
+            case Dumbrava:RE1(p,1,id);break;
+            case Forest:RE2(p,1,id);break;
+            case Brunel:RA1(p,1,id); break;
+            case Bourard:RA2(p,1,id) ;break;
+            case Watel:
+                AE1(p,1,id);
+                AA1(p,1,id);
+                break;
+            case Y:
+                AE2(p,1,id);
+                AA2(p,1,id);
+                break;
+            case Goilard:
+                RE1(p,1,id);
+                RA1(p,1,id);
+                break;
+            case Jeannas:
+                RE2(p,1,id);
+                RA2(p,1,id);
+                break;
+            case Merabet:
+                DR(p,2,id);
+                break;
+            case Ligozat:
+                ADD(p,2,id);
+                DR(p,1,id);
+                E(p,1,id);
+                break;
+            case Dubois:
+                RDD(p,2,id);
+                DR(p,1,id);
+                E(p,1,id);
+                break;
+            case Lejeune:
+                AE1(p,1,id);
+                AE2(p,1,id);
+                RE2(p,1,id);
+                RDD(p,1,id);
+                break;
+            case Mathias:
+                AA1(p,1,id);
+                AA2(p,1,id);
+                RA2(p,1,id);
+                RDD(p,1,id);
+                break;
+            case Salhab:
+                AE1(p,2,id);
+                AE2(p,2,id);
+                E(p,1,id);
+                break;
+            case Sagna:
+                AA1(p,2,id);
+                AA2(p,2,id);
+                E(p,1,id);
+                break;
+            case Prevel:
+                AE1(p,2,id);
+                AE2(p,2,id);
+                AA1(p,2,id);
+                AA2(p,2,id);
+                ADD(p,1,id);
+                RDD(p,1,id);
+                DR(p,1,id);
+                E(p,2,id);
+                break;
+            default:
+                printf("n'est pas une carte personnel");
+        }
+    }
+
+void carte_action(carte *c, plateau *p, char id){
     if (id=='A'){
         switch(getNom(*c)) {
             case Cours_developpemnt_durable:
@@ -391,7 +773,7 @@ void aux_action(carte *c, plateau *p, char id){
                 AE2(p,1,'B');
                 AA2(p,1,'B');
                 break;
-            case Fermeture_annuelle: 
+            case Fermeture_annuelle:
                 if((p->tour)%2==0)deck_concatenate(&(p->defausseA),&(p->pileFisaA));
                 deck_concatenate(&(p->defausseA),&(p->pileFiseA));
                 if((p->tour)%2==0) deck_concatenate(&(p->defausseB),&(p->pileFisaB));
@@ -402,354 +784,6 @@ void aux_action(carte *c, plateau *p, char id){
     }
 }
 
-void ajout_effet_FISA(carte *c,plateau P,char id){
-     if (id=='A'){
-         if(deck_carteIn(P.sideA,Faye)) pt_DD_change(c,1);
-         if(deck_carteIn(P.sideA,Mouilleron)) pt_Dur_change(c,1);
-         if(deck_carteIn(P.sideA,Watel)) pt_DD_change(c,1);
-         if(deck_carteIn(P.sideA,Y)) pt_Dur_change(c,1);;
-         if(deck_carteIn(P.sideA,Mathias)){
-             pt_DD_change(c,1);
-             pt_Dur_change(c,1);
-         }
-         if(deck_carteIn(P.sideA,Sagna)){
-             pt_DD_change(c,2);
-             pt_Dur_change(c,2);
-         }
-         if(deck_carteIn(P.sideA,Prevel)){
-             pt_DD_change(c,2);
-             pt_Dur_change(c,2);
-         }
-        
-         if(deck_carteIn(P.sideB,Brunel)) pt_DD_change(c,-1);
-         if(deck_carteIn(P.sideB,Bourard)) pt_Dur_change(c,-1);
-         if(deck_carteIn(P.sideB,Goilard)) pt_DD_change(c,-1);
-         if(deck_carteIn(P.sideB,Jeannas)) pt_Dur_change(c,-1);
-         if(deck_carteIn(P.sideB,Mathias)) pt_Dur_change(c,-1);
-     }
-         
-     else {
-         if(deck_carteIn(P.sideB,Faye)) pt_DD_change(c,1);
-          if(deck_carteIn(P.sideB,Mouilleron)) pt_Dur_change(c,1);
-          if(deck_carteIn(P.sideB,Watel)) pt_DD_change(c,1);
-          if(deck_carteIn(P.sideB,Y)) pt_Dur_change(c,1);;
-          if(deck_carteIn(P.sideB,Mathias)){
-              pt_DD_change(c,1);
-              pt_Dur_change(c,1);
-          }
-          if(deck_carteIn(P.sideB,Sagna)){
-              pt_DD_change(c,2);
-              pt_Dur_change(c,2);
-          }
-          if(deck_carteIn(P.sideB,Prevel)){
-              pt_DD_change(c,2);
-              pt_Dur_change(c,2);
-          }
-         
-          if(deck_carteIn(P.sideA,Brunel)) pt_DD_change(c,-1);
-          if(deck_carteIn(P.sideA,Bourard)) pt_Dur_change(c,-1);
-          if(deck_carteIn(P.sideA,Goilard)) pt_DD_change(c,-1);
-          if(deck_carteIn(P.sideA,Jeannas)) pt_Dur_change(c,-1);
-          if(deck_carteIn(P.sideA,Mathias)) pt_Dur_change(c,-1);
-     }
-}
-
-void ajout_effet_FISE(carte *c,plateau P,char id){
-    if (id=='A'){
-        if(deck_carteIn(P.sideA,Lim))pt_DD_change(c,1);
-        if(deck_carteIn(P.sideA,Szafranski))pt_Dur_change(c,1);
-        if(deck_carteIn(P.sideA,Watel))pt_DD_change(c,1);
-        if(deck_carteIn(P.sideA,Y))pt_Dur_change(c,1);
-        if(deck_carteIn(P.sideA,Lejeune)){
-            pt_DD_change(c,1);
-            pt_Dur_change(c,1);
-        }
-        if(deck_carteIn(P.sideA,Salhab)){
-            pt_DD_change(c,2);
-            pt_Dur_change(c,2);
-        }
-        if(deck_carteIn(P.sideA,Prevel)){
-            pt_DD_change(c,2);
-            pt_Dur_change(c,2);
-        }
-    
-        if(deck_carteIn(P.sideB,Dumbrava))pt_DD_change(c,-1);
-        if(deck_carteIn(P.sideB,Forest))pt_Dur_change(c,-1);
-        if(deck_carteIn(P.sideB,Goilard))pt_DD_change(c,-1);
-        if(deck_carteIn(P.sideB,Jeannas))pt_Dur_change(c,-1);
-        if(deck_carteIn(P.sideB,Lejeune))pt_Dur_change(c,-1);
-    }
-    else{
-        if(deck_carteIn(P.sideB,Lim))pt_DD_change(c,1);
-        if(deck_carteIn(P.sideB,Szafranski))pt_Dur_change(c,1);
-        if(deck_carteIn(P.sideB,Watel))pt_DD_change(c,1);
-        if(deck_carteIn(P.sideB,Y))pt_Dur_change(c,1);
-        if(deck_carteIn(P.sideB,Lejeune)){
-            pt_DD_change(c,1);
-            pt_Dur_change(c,1);
-        }
-        if(deck_carteIn(P.sideB,Salhab)){
-            pt_DD_change(c,2);
-            pt_Dur_change(c,2);
-        }
-        if(deck_carteIn(P.sideB,Prevel)){
-            pt_DD_change(c,2);
-            pt_Dur_change(c,2);
-        }
-    
-        if(deck_carteIn(P.sideA,Dumbrava))pt_DD_change(c,-1);
-        if(deck_carteIn(P.sideA,Forest))pt_Dur_change(c,-1);
-        if(deck_carteIn(P.sideA,Goilard))pt_DD_change(c,-1);
-        if(deck_carteIn(P.sideA,Jeannas))pt_Dur_change(c,-1);
-        if(deck_carteIn(P.sideA,Lejeune))pt_Dur_change(c,-1);
-    }
-}
-
-
-    
-    
-/* Les fonctions principales (accessibles depuis le header) */
-
-carte carte_new(Nom carte_nom){
-    carte res;
-    res.nom= carte_nom;
-    if (carte_nom<=1) {res.type=0;}
-    else if (carte_nom<=21) {res.type=1;}
-    else {res.type=2;}
-    res.code=aux_code(carte_nom);
-    return res;
-}
-
-
-void carte_print(carte c){
-    printf("\n");
-    printf("* "); aux_NomPrint(c); printf(" *\n");
-    switch(c.type){
-        case Eleve:
-            printf("- type: eleve\n");
-            printf("- point_déveleppement_durable= %ld \n",pt_DD(c));
-            printf("- point_durabilite= %ld \n",pt_Dur(c));
-            printf("- point_energie= %ld\n",pt_nrj(c));
-            break;
-        case Personnel:
-            printf("- type: personnel\n");
-            printf("- cout: %ld \n",cout(c));
-            break;
-        case Action:
-            printf("- type: action\n");
-            printf("- cout: %ld \n",cout(c));
-            break;
-    }
-    printf("\n");
-}
-
-
-
-int pioche_eleve(plateau p, char id){
-    if (id=='A'){
-        return p.piocheA;
-    }
-    else {
-        return p.piocheB;
-    }
-}
-
-
-void carte_ajouter(Nom nom, plateau *p, char id) {
-
-    carte carte=carte_new(nom);
-
-    if (id=='A'){
-
-        if (nom==Fise){
-            ajout_effet_FISE(&carte,*p,id);
-            deck_add_last(carte,&(p->pileFiseA));
-        }
-        
-        else if (nom==Fisa){
-            ajout_effet_FISA(&carte,*p,id);
-            deck_add_last(carte,&(p->pileFisaA));
-        }
-        
-        else 
-            printf ("Ce n'est pas une carte élève");
-    }
-    else {
-
-        if (nom==Fise){
-            ajout_effet_FISE(&carte,*p,id);
-            deck_add_last(carte,&(p->pileFiseB));
-        }
-        
-        else if (nom==Fisa){
-            ajout_effet_FISA(&carte,*p,id);
-            deck_add_last(carte,&(p->pileFisaB));
-        }
-        
-        else 
-            printf ("Ce n'est pas une carte élève");
-    }
-
-}
-
-
-void carte_personnel(carte c,plateau *p,char id){
-        switch(getNom(c)){
-            case Lim: AE1(p,1,id); break;
-            case Szafranski: AE2(p,1,id); break;
-            case Faye: AA1(p,1,id);break;
-            case Mouilleron:AA2(p,1,id);break;
-            case Dumbrava:RE1(p,1,id);break;
-            case Forest:RE2(p,1,id);break;
-            case Brunel:RA1(p,1,id); break;
-            case Bourard:RA2(p,1,id) ;break;
-            case Watel:
-                AE1(p,1,id);
-                AA1(p,1,id);
-                break;
-            case Y:
-                AE2(p,1,id);
-                AA2(p,1,id);
-                break;
-            case Goilard:
-                RE1(p,1,id);
-                RA1(p,1,id);
-                break;
-            case Jeannas:
-                RE2(p,1,id);
-                RA2(p,1,id);
-                break;
-            case Merabet:
-                DR(p,2,id);
-                break;
-            case Ligozat:
-                ADD(p,2,id);
-                DR(p,1,id);
-                E(p,1,id);
-                break;
-            case Dubois:
-                RDD(p,2,id);
-                DR(p,1,id);
-                E(p,1,id);
-                break;
-            case Lejeune:
-                AE1(p,1,id);
-                AE2(p,1,id);
-                RE2(p,1,id);
-                RDD(p,1,id);
-                break;
-            case Mathias:
-                AA1(p,1,id);
-                AA2(p,1,id);
-                RA2(p,1,id);
-                RDD(p,1,id);
-                break;
-            case Salhab:
-                AE1(p,2,id);
-                AE2(p,2,id);
-                E(p,1,id);
-                break;
-            case Sagna:
-                AA1(p,2,id);
-                AA2(p,2,id);
-                E(p,1,id);
-                break;
-            case Prevel:
-                AE1(p,2,id);
-                AE2(p,2,id);
-                AA1(p,2,id);
-                AA2(p,2,id);
-                ADD(p,1,id);
-                RDD(p,1,id);
-                DR(p,1,id);
-                E(p,2,id);
-                break;
-            default:
-                printf("n'est pas une carte personnel");
-        }
-    }
-
-void retire_carte_personnel(carte c, plateau *p, char id) {
-    switch(getNom(c)){
-        case Lim: AE1(p,-1,id); break;
-        case Szafranski: AE2(p,-1,id); break;
-        case Faye: AA1(p,-1,id);break;
-        case Mouilleron:AA2(p,-1,id);break;
-        case Dumbrava:RE1(p,-1,id);break;
-        case Forest:RE2(p,-1,id);break;
-        case Brunel:RA1(p,-1,id); break;
-        case Bourard:RA2(p,-1,id) ;break;
-        case Watel:
-            AE1(p,-1,id);
-            AA1(p,-1,id);
-            break;
-        case Y:
-            AE2(p,-1,id);
-            AA2(p,-1,id);
-            break;
-        case Goilard:
-            RE1(p,-1,id);
-            RA1(p,-1,id);
-            break;
-        case Jeannas:
-            RE2(p,-1,id);
-            RA2(p,-1,id);
-            break;
-        case Merabet:
-            DR(p,-2,id);
-            break;
-        case Ligozat:
-            ADD(p,-2,id);
-            DR(p,-1,id);
-            E(p,-1,id);
-            break;
-        case Dubois:
-            RDD(p,-2,id);
-            DR(p,-1,id);
-            E(p,-1,id);
-            break;
-        case Lejeune:
-            AE1(p,-1,id);
-            AE2(p,-1,id);
-            RE2(p,-1,id);
-            RDD(p,-1,id);
-            break;
-        case Mathias:
-            AA1(p,-1,id);
-            AA2(p,-1,id);
-            RA2(p,-1,id);
-            RDD(p,-1,id);
-            break;
-        case Salhab:
-            AE1(p,-2,id);
-            AE2(p,-2,id);
-            E(p,-1,id);
-            break;
-        case Sagna:
-            AA1(p,-2,id);
-            AA2(p,-2,id);
-            E(p,-1,id);
-            break;
-        case Prevel:
-            AE1(p,-2,id);
-            AE2(p,-2,id);
-            AA1(p,-2,id);
-            AA2(p,-2,id);
-            ADD(p,-1,id);
-            RDD(p,-1,id);
-            DR(p,-1,id);
-            E(p,-2,id);
-            break;
-        default:
-            printf("n'est pas une carte personnel");
-    };
-    if(id=='A') {
-        deck_add_last(c,&(p->defausseA));
-    }
-    else {
-        deck_add_last(c,&(p->defausseB));
-    };
-}
 
 // la carte est préalablement extraite de la main
 void carte_jouer(carte c, plateau *p, char id){
@@ -811,7 +845,7 @@ void carte_jouer(carte c, plateau *p, char id){
                     deck_add_last(c,&(p->defausseA));
                     p->nrjA-=cout(c);
                     p->nbcarteA --;
-                    aux_action(&c,p,id);
+                    carte_action(&c,p,id);
                 }
                 else {
                     printf("\nVous ne pouvez pas jouer cette carte : pas assez d'énergie !!! \n\n");
@@ -823,7 +857,7 @@ void carte_jouer(carte c, plateau *p, char id){
                     deck_add_last(c,&(p->defausseB));
                     p->nrjB=-cout(c);
                     p->nbcarteB --;
-                    aux_action(&c,p,id);
+                    carte_action(&c,p,id);
                 }
                 else {
                     printf(" \nVous ne pouvez pas jouer cette carte : pas assez d'énergie  !!! \n\n");
