@@ -1,285 +1,229 @@
-//
-//  structure.c
-//  
-//
-//  Created by Loirs Romain on 22/03/2020.
-//
-
-#include "carte.h"
-
-#include <stdlib.h>
+#include "interface.h"
+#include "structure.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include"time.h"
 #include <unistd.h>
 
+void print_new_tour(plateau p){
+	printf("\n---------------------------------------------------------------------------------\n");
+	printf("\t\t\t\tTour %i commencé\n",p.tour);
+	printf("---------------------------------------------------------------------------------\n\n");
+    sleep(2);
 
-
-
-/* construction du deck et destruction*/
-
-deck deck_create(){
-  return NULL;
 }
 
-deck deck_cons(carte x,deck l){
-    deck res;
-    res= (deck) malloc(sizeof(struct node));
-    res->carte=x;
-    res->next=l;
-    return res;
+void print_new_phase(plateau p, char c){
+	if (c=='A') {
+		printf("\n\n C'est au tour de l'ENSIIE A de jouer\n\n");
+		printf("---------------------------------------------------------------------------------\n\n");
+        sleep(2);
+
+	}
+	else {
+		printf("\n\nC'est au tour de l'ENSIIE B de jouer\n\n");
+		printf("---------------------------------------------------------------------------------\n\n");
+        sleep(2);
+
+	}
 }
 
-void deck_free(deck l){
-    deck tmp;
-    while (l != NULL){
-        tmp=l->next;
-        free(l);
-        l=tmp;
-    }
+void print_points_DD(plateau p){
+	printf("Nombre de points DD pour l'ENSIIE A : %i\n",p.ddA);
+	printf("Nombre de points DD pour l'ENSIIE B : %i\n\n",p.ddB);
 }
 
+void print_plateau(plateau p){
 
-/*addition d'element*/
-
-void deck_add(carte x,deck *l){
-    *l = deck_cons(x,*l);
-}
-
-void deck_add_last(carte x,deck *l){
-    deck q;
-    if (*l==NULL){
-        *l=deck_cons(x,NULL);
-    }
-    else{
-        q=*l;
-        while (q->next != NULL){
-            q=q->next;
+	if(p.debutEnsiie == 'A') {
+		printf("Nombre de cartes dans la main de l'ENSIIE A : %i\n",p.nbcarteA);
+		printf("Nombre de points d'énergie pour l'ENSIIE A: %i\n\n",p.nrjA);
+        if((p.tour)%2==1) {
+            printf("Pile FISA de l'ENSIIE A : \n");
+            deck_print(p.pileFisaA);
         }
-        q->next=deck_cons(x,NULL);
-    }
-}
-
-
-/*fonction de contrôle*/
-
-int deck_isEmpty(deck l){
-  return l==NULL;
-}
-
-int deck_carteIn(deck l, Nom nom){
-    while (l != NULL){
-        if (carte_equal(l->carte,nom)) return 1;
-        l=l->next;
-    }
-    return 0;
-}
-
-int deck_length(deck l){
-    int i=0;
-    while (l != NULL){
-        i++;
-        l=l->next;
-    }
-    return i;
-}
-
-void deck_print(deck l){
-    if (deck_isEmpty(l)){
-        printf("the deck is empty\n");
-    }
-    else{
-        deck curl=l;
-        int i=0;
-        while(!deck_isEmpty(curl)){
-            printf("carte n° %i",i);
-            i++;
-            carte_print(curl->carte);
-            curl=curl->next;
+		printf("Pile FISE de l'ENSIIE A : \n");
+		deck_print(p.pileFiseA);
+		printf("\n");
+		printf("Cartes en jeu de l'ENSIIE A : \n");
+		deck_print(p.sideA);
+		printf("Cartes en jeu de l'ENSIIE B : \n");
+		deck_print(p.sideB);
+		printf("\n");
+		printf("Main de l'ENSIIE A : \n");
+		deck_print(p.mainA);
+	}
+	else {
+		printf("Nombre de cartes dans la main de l'ENSIIE B : %i\n",p.nbcarteB);
+		printf("Nombre de points d'énergie pour l'ENSIIE B: %i\n\n",p.nrjB);
+        if((p.tour)%2==1) {
+            printf("Pile FISA de l'ENSIIE B : \n");
+            deck_print(p.pileFisaB);
         }
-    }
+		printf("Pile FISE de l'ENSIIE B : \n");
+		deck_print(p.pileFiseB);
+		printf("\n");
+		printf("Cartes en jeu de l'ENSIIE A : \n");
+		deck_print(p.sideA);
+		printf("Cartes en jeu de l'ENSIIE B : \n");
+		deck_print(p.sideB);
+		printf("\n");
+		printf("Main de l'ENSIIE B : \n");
+		deck_print(p.mainB);
+	}
+
 }
 
-void deck_concatenate(deck *l1,deck *l2){
-    deck tmp = *l2;
-    while(tmp != NULL){
-        carte aux=deck_remove_head(&tmp);
-        deck_add_last(aux,l1);
-        tmp=tmp->next;
-    }
+int ask_carte_ou_fin(plateau p,char c) {
+	if (c=='A'){
+		deck m=p.mainA;
+		deck res=deck_create();
+		while (m!=NULL) {
+			if (cout(m->carte)<=(p.nrjA)){
+				deck_add_last(m->carte,&res);
+			}
+			m=m->next;
+		}
+		if (res==NULL) {
+			print_plateau(p);
+			printf("Vous ne pouvez que finir la phase car vous n'avez que %d PE  !!! . \n\n",p.nrjA);
+            sleep(2);
+			return -1;
+		}
+		else{
+			print_plateau(p);
+			while (1) {
+				char buf[256];
+				int n;
+				printf("Choisissez un numéro de carte parmi le choix possible.\n");
+				printf("Si vous ne voulez pas jouer de carte, saisir -1. Votre choix : ");
+				fgets(buf, 256, stdin);
+				int ask=sscanf(buf,"%d",&n);
+				if (ask==1) {
+					if (n==-1) {
+						return -1;
+					}
+					if ((n>=0) && (n<deck_length(res))){
+						int i=0;
+						while (res!=NULL){
+							if (i==n){
+								return getNom(res->carte);
+							}
+							res=res->next;
+							i=i+1;
+						}
+					}
+					else {
+						printf("Choix incorrect, veuillez recommencer.\n");
+					}
+				}
+				else {
+					printf("Problème de saisie, veuillez recommencer.\n");
+				}
+			}
+		}
+	}
+	else {
+		deck m=p.mainB;
+		deck res=deck_create();
+		while (m!=NULL) {
+			if (cout(m->carte)<=(p.nrjB)){
+				deck_add_last(m->carte,&res);
+			}
+			m=m->next;
+		}
+		if (res==NULL){
+			print_plateau(p);
+			printf("Vous ne pouvez que finir la phase car vous n'avez que %d PE  !!! . \n\n",p.nrjB);
+            sleep(2);
+			return -1;
+		}
+		else {
+			print_plateau(p);
+			while (1){
+				char buf[256];
+				int n;
+				printf("Choisissez un numéro de carte parmi le choix possible.\n");
+				printf("Si vous ne voulez pas jouer de carte, saisir -1. Votre choix : ");
+				fgets(buf, 256, stdin);
+				int ask=sscanf(buf,"%d",&n);
+				if (ask==1){
+					if (n==-1){
+						return -1;
+					}
+					if ((n>=0) && (n<deck_length(res))){
+						int i=0;
+						while (res!=NULL){
+							if (i==n){
+								return getNom(res->carte);
+							}
+							res=res->next;
+							i=i+1;
+						}
+					}
+					else{
+						printf("Choix incorrect, veuillez recommencer.\n");
+					}
+				}
+				else{
+					printf("Problème de saisie, veuillez recommencer.\n");
+				}
+			}
+		}
+	}
 }
 
-
-
-/*retirer des elements*/
-
-carte deck_remove_head(deck *l){
-    carte res= (*l)->carte;
-    deck tmp= (*l)->next;
-    free(*l);
-    *l = tmp;
-    return res;
+void print_win_player(plateau p){
+	if ((p.tour)<30){
+		if ((p.ddA) >= 20){
+			if ((p.ddB) >= 20){
+				if ((p.ddA)>(p.ddB)){
+					printf("L'ENSIIE A a gagné ! \n\n");
+				}
+				else{
+					printf("L'ENSIIE B a gagné !\n\n");
+				}
+			}
+			else{
+				printf("L'ENSIIE A a gagné !\n\n");
+			}
+		}
+		else{
+			if ((p.ddB)>=20){
+				printf("L'ENSIIE B a gagné !\n\n");
+			}
+			else{
+				if ((p.ddB)>(p.ddA)){
+					printf("L'ENSIIE B a gagné !\n\n");
+				}
+				else{
+					printf("L'ENSIIE A a gagné !\n\n");
+				}
+			}
+		}
+	}
+	else{
+		printf("Partie nulle !\n\n");
+	}
 }
 
-carte deck_remove_queue(deck *l)
-    {
-        carte res;
-     
-        /* Si la liste contient un seul élément */
-        if((*l)->next == NULL)
-        {
-            /* On le libère et on retourne NULL (la liste est maintenant vide) */
-            return deck_remove_head(l);
-        }
-     
-        /* Si la liste contient au moins deux éléments */
-        deck tmp = *l;
-        deck ptmp = *l;
-        /* Tant qu'on n'est pas au dernier élément */
-        while(tmp->next != NULL)
-        {
-            /* ptmp stock l'adresse de tmp */
-            ptmp = tmp;
-            /* On déplace tmp (mais ptmp garde l'ancienne valeur de tmp */
-            tmp = tmp->next;
-        }
-        /* A la sortie de la boucle, tmp pointe sur le dernier élément, et ptmp sur
-        l'avant-dernier. On indique que l'avant-dernier devient la fin de la liste
-        et on supprime le dernier élément */
-        ptmp->next = NULL;
-        res=tmp->carte;
-        free(tmp);
-        return res;
-    }
-
-carte deck_remove_carte(deck *l, Nom nom){
-    carte res;
-    
-    if (carte_equal((*l)->carte,nom)){
-        res=deck_remove_head(l);
-        return res;
-    }
-     
-        /* Si la liste contient au moins deux éléments */
-    deck tmp = *l;
-    deck ptmp = *l;
-    deck nxt= *l;
-        /* Tant qu'on n'est pas au dernier élément */
-    while(tmp->next != NULL && !carte_equal((tmp->carte),nom))
-        {
-            /* ptmp stock l'adresse de tmp */
-            ptmp = tmp;
-            /* On déplace tmp (mais ptmp garde l'ancienne valeur de tmp */
-            tmp = tmp->next;
-            nxt= tmp->next;
-        }
-        /* A la sortie de la boucle, tmp pointe sur le dernier élément, et ptmp sur
-        l'avant-dernier. On indique que l'avant-dernier devient la fin de la liste
-        et on supprime le dernier élément */
-    ptmp->next = nxt;
-    res=tmp->carte;
-    free(tmp);
-    return res;
-}
-
-carte deck_remove_indice(deck *l, int indice){
-    carte res;
-    
-    if (indice==0){
-        res=deck_remove_head(l);
-        return res;
-    }
-     
-        /* Si la liste contient au moins deux éléments */
-    deck tmp = *l;
-    deck ptmp = *l;
-    deck nxt= *l;
-    int i=0;
-        /* Tant qu'on n'est pas au dernier élément */
-    while(tmp->next != NULL && i!=indice)
-        {
-            /* ptmp stock l'adresse de tmp */
-            i++;
-            ptmp = tmp;
-            /* On déplace tmp (mais ptmp garde l'ancienne valeur de tmp */
-            tmp = tmp->next;
-            nxt= tmp->next;
-        }
-        /* A la sortie de la boucle, tmp pointe sur le dernier élément, et ptmp sur
-        l'avant-dernier. On indique que l'avant-dernier devient la fin de la liste
-        et on supprime le dernier élément */
-    ptmp->next = nxt;
-    res=tmp->carte;
-    free(tmp);
-    return res;
-}
-
-
-void deck_addPt(deck *l,long pt, int id){
-    deck tmp = *l;
-    switch(id){
-        case 1:
-            while (tmp != NULL){
-                pt_DD_change(&(tmp->carte),pt);
-                tmp=tmp->next;
-            }
-            break;
-        case 2:
-            while (tmp != NULL){
-                pt_Dur_change(&(tmp->carte),pt);
-                tmp=tmp->next;
-            }
-            break;
-        case 3:
-            while (tmp != NULL){
-                pt_nrj_change(&(tmp->carte),pt);
-                tmp=tmp->next;
-            }
-            break;
-        default:
-            printf("id non reconnu\n");
-   }
-}
-
-
-int alea (int a, int b){
-    int res;
-    //sleep(1);
-    srand(time(NULL));
-    res= rand()%(b-a)+a;
-    return res;
-}
-
-void melanger_deck (deck *res) {
-    for (int i=0;i<60;i++){
-        int aux=alea(0,deck_length(*res));
-        carte caux= deck_remove_indice(res,aux);
-        deck_add_last(caux,res);
-    }
-}
-
-int deck_parcours_energie(deck l,int value){
-    int res=0;
-        while (l != NULL){
-            res += value;
-            l=l->next;
-        }
-    return res;
-}
-
-int deck_parcours_durabilite(deck l){
-    int res=0;
-        while (l != NULL){
-            res=res+pt_Dur(l->carte);
-            l=l->next;
-        }
-    return res;
-}
-
-int deck_parcours_devellopement(deck l){
-    int res=0;
-        while (l != NULL){
-            res=res+pt_DD(l->carte);
-            l=l->next;
-        }
-    return res;
+Nom ajout_fise_fisa(){
+	Nom nom;
+	while (1){
+		char buf[256];
+		char string[256];
+		printf("Voulez-vous tirer une carte FISE ou FISA ? Répondre fise ou fisa : ");
+		fgets(buf, 256, stdin);
+		sscanf(buf,"%s",string);
+		if (strcmp(string,"fise")==0){
+			nom=Fise;
+			return nom;
+		}
+		if (strcmp(string,"fisa")==0){
+			nom=Fisa;
+			return nom;
+		}
+		printf("\n");
+	}
 }
