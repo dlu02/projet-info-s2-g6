@@ -774,9 +774,9 @@ void carte_action(carte *c, plateau *p, char id){
                 AA2(p,1,'B');
                 break;
             case Fermeture_annuelle:
-                if((p->tour)%2==0)deck_concatenate(&(p->defausseA),&(p->pileFisaA));
+                if((p->tour)%2==1)deck_concatenate(&(p->defausseA),&(p->pileFisaA));
                 deck_concatenate(&(p->defausseA),&(p->pileFiseA));
-                if((p->tour)%2==0) deck_concatenate(&(p->defausseB),&(p->pileFisaB));
+                if((p->tour)%2==1) deck_concatenate(&(p->defausseB),&(p->pileFisaB));
                 deck_concatenate(&(p->defausseB),&(p->pileFiseB));
                 break;
             default: printf("n'est pas une carte action");break;
