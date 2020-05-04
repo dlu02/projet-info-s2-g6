@@ -69,11 +69,6 @@ long cout(carte);
 int carte_equal(carte,Nom);
     
 
-
-
-
-
-
 //fonctions permettant de modifier une carte//
 
 /**
@@ -153,6 +148,14 @@ void carte_ajouter(Nom, plateau*, char);
  */
 
 void carte_personnel(carte,plateau*,char );
+
+/**
+ \brief: réalise l'action décrite par une carte action
+ \param: une carte action, le plateau de jeu, l'id du joueur
+ \return: nothing
+ */
+
+void carte_action(carte*,plateau*,char );
 
 
 /**
