@@ -270,7 +270,7 @@ int alea (int a, int b){
 
 void melanger_deck (deck *res) {
     printf(" \n *Veuillez patientez, nous mélangeons votre deck* \n ");
-    for (int i=0;i<60;i++){
+    for (int i=0;i<30;i++){
         int aux=alea(0,30);
         carte caux= deck_remove_indice(res,aux);
         deck_add_last(caux,res);
