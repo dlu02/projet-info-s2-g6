@@ -653,7 +653,7 @@ void carte_action(carte *c, plateau *p, char id){
                 carte_ajouter(Fise, p, 'A');
                 break;
             case Rentree_FISA:
-                if((p->tour)%2==0) carte_ajouter(Fisa, p, 'A');
+                if((p->tour)%2==1) carte_ajouter(Fisa, p, 'A');
                 break;
             case Energie_verte:
                 p->nrjA=p->nrjA+6;
@@ -666,7 +666,7 @@ void carte_action(carte *c, plateau *p, char id){
                     carte carteFISE= deck_remove_head(&(p->pileFiseB));
                     deck_add_last(carteFISE,&(p->defausseB));
                 }
-                if((p->tour)%2==0){
+                if((p->tour)%2==1){
                     if (deck_isEmpty(p->pileFisaB)){
                         printf ("vous ne pouvez pas retirer de carte FISA au platau de l'adversaire\n");
                     }
@@ -702,9 +702,9 @@ void carte_action(carte *c, plateau *p, char id){
                 break;
             case Fermeture_annuelle:
                 deck_concatenate(&(p->defausseA),&(p->pileFisaA));
-                if((p->tour)%2==0)deck_concatenate(&(p->defausseA),&(p->pileFiseA));
+                if((p->tour)%2==1)deck_concatenate(&(p->defausseA),&(p->pileFiseA));
                 deck_concatenate(&(p->defausseB),&(p->pileFisaB));
-                if((p->tour)%2==0)deck_concatenate(&(p->defausseB),&(p->pileFiseB));
+                if((p->tour)%2==1)deck_concatenate(&(p->defausseB),&(p->pileFiseB));
                 break;
             case Recrutement:
                 ;carte aux= deck_remove_queue(&(p->deckA));
@@ -726,7 +726,7 @@ void carte_action(carte *c, plateau *p, char id){
                 carte_ajouter(Fise, p, 'B');
                 break;
             case Rentree_FISA:
-                if((p->tour)%2==0)carte_ajouter(Fisa,p,'B');
+                if((p->tour)%2==1)carte_ajouter(Fisa,p,'B');
                 break;
             case Energie_verte:
                 p->nrjB=p->nrjB+6;
@@ -739,7 +739,7 @@ void carte_action(carte *c, plateau *p, char id){
                     carte carteFISE= deck_remove_head(&(p->pileFiseA));
                     deck_add_last(carteFISE,&(p->defausseA));
                 }
-                if((p->tour)%2==0){
+                if((p->tour)%2==1){
                     if (deck_isEmpty(p->pileFisaA)){
                         printf ("vous ne pouvez pas retirer de carte FISA au platau de l'adversaire\n");
                     }
@@ -882,7 +882,7 @@ void carte_fin(plateau *p) {
     int aux_FISA_dur_A=0;
     int aux_FISA_dev_A=0;
     
-    if((p->tour)%2==0){
+    if((p->tour)%2==1){
     int aux_FISA_dur_B=deck_parcours_durabilite(p->pileFisaB);
     int aux_FISA_dev_B=deck_parcours_devellopement(p->pileFisaB);
     int aux_FISA_dur_A=deck_parcours_durabilite(p->pileFisaA);
