@@ -3,11 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include"time.h"
+#include <unistd.h>
 
 void print_new_tour(plateau p){
 	printf("\n---------------------------------------------------------------------------------\n");
 	printf("\t\t\t\tTour %i commencé\n",p.tour);
 	printf("---------------------------------------------------------------------------------\n\n");
+    sleep(2);
 
 }
 
@@ -15,11 +18,13 @@ void print_new_phase(plateau p, char c){
 	if (c=='A') {
 		printf("\n\n C'est au tour de l'ENSIIE A de jouer\n\n");
 		printf("---------------------------------------------------------------------------------\n\n");
+        sleep(2);
 
 	}
 	else {
 		printf("\n\nC'est au tour de l'ENSIIE B de jouer\n\n");
 		printf("---------------------------------------------------------------------------------\n\n");
+        sleep(2);
 
 	}
 }
@@ -83,6 +88,7 @@ int ask_carte_ou_fin(plateau p,char c) {
 		if (res==NULL) {
 			print_plateau(p);
 			printf("Vous ne pouvez que finir la phase car vous n'avez que %d PE  !!! . \n\n",p.nrjA);
+            sleep(2);
 			return -1;
 		}
 		else{
@@ -130,6 +136,7 @@ int ask_carte_ou_fin(plateau p,char c) {
 		if (res==NULL){
 			print_plateau(p);
 			printf("Vous ne pouvez que finir la phase car vous n'avez que %d PE  !!! . \n\n",p.nrjB);
+            sleep(2);
 			return -1;
 		}
 		else {
