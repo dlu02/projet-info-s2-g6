@@ -8,8 +8,6 @@
 #ifndef carte_file_h
 #define carte_file_h
 
-#include <stdio.h>
-
 // Les structures et les types énumérés //
 
 typedef enum Nom Nom;
@@ -66,7 +64,11 @@ typedef struct plateau {
                           la première ENSIIE à débuter */
 } plateau;
 
+
+
 #include "carte.h"
+#include <stdio.h>
+
 
 /* construction du deck et destruction*/
 
@@ -85,9 +87,6 @@ deck deck_create();
 void deck_free(deck);
 
 
-
-
-
 /*addition d'element*/
 
 /**
@@ -97,8 +96,12 @@ void deck_free(deck);
 */
 void deck_add_last(carte,deck*);
 
-
-
+/**
+\brief: permet de prendre toutes les cartes d'un deck et de les rajouter à un autre. 
+\param: deux decks, le premier recevra toutes les cartes du second et le second sera vide
+\return: nothing
+*/
+void deck_concatenate(deck*,deck*);
 
 
 /*fonction de controle*/
@@ -127,12 +130,9 @@ int deck_length(deck);
 /**
 \brief: imprime à l'écran un deck
 \param: un deck.
-\return:  Si le decke st vide affiche "the deck is empty" sinon affiche de leck
+\return:  Si le decke st vide affiche "the deck is empty" sinon affiche de deck
 */
 void deck_print(deck);
-
-void deck_concatenate(deck*,deck*);
-
 
 
 /*retirer les elements*/
@@ -140,14 +140,14 @@ void deck_concatenate(deck*,deck*);
 /**
 \brief: utilisation FIFO: retire le premier élément placé dans le deck
 \param: un deck contenant une carte (vérifié si le deck est non vide avant de l'utiliser)
-\return:  la carte retiré"
+\return:  la carte retirée
 */
 carte deck_remove_head(deck*);
 
 /**
 \brief: utilisation FILO: retire le dernier élément placé dans le deck
 \param: un deck contenant une carte (vérifié si le deck est non vide avant de l'utiliser)
-\return:  la carte retiirée
+\return:  la carte retirée
 */
 carte deck_remove_queue(deck*);
 
@@ -167,22 +167,44 @@ carte deck_remove_indice(deck*, int);
 
 
 
-/*modifier des élements*/
+/*modifier le deck*/
 
 /**
-\brief: ajouter ou retirer des points a une carte Fise ou Fisa
+\brief: ajouter ou retirer des points a toutes les cartes Fise ou Fisa du deck
 \param: la pile a modifier, le nombre de points à ajouter ou retrancher, un numero  pour identifier les points à modifier (1- point DD, 2-point Dur, 3-point energie)
 \return:  nothing
 */
-
 void deck_addPt(deck* ,long , int);
 
+/**
+\brief: mélanger un deck
+\param: un deck
+\return: nothing
+*/
 void melanger_deck (deck*);
 
+
+/*parcours d'un deck*/
+
+/**
+\brief: parcours un deck et trouve le total des points énergies
+\param: un deck contenant uniquement des cartes FISE ou FISA
+\return: la somme des points énergies des cartes d'un deck
+*/
 int deck_parcours_energie(deck,int);
 
+/**
+\brief: parcours un deck et trouve le total des points durabilité
+\param: un deck contenant uniquement des cartes FISE ou FISA
+\return: la somme des points durabilité des cartes d'un deck
+*/
 int deck_parcours_durabilite(deck);
 
+/**
+\brief: parcours un deck et trouve le total des points dévellopement durale
+\param: un deck contenant uniquement des cartes FISE ou FISA
+\return: la somme des points devellepement durable des cartes d'un deck
+*/
 int deck_parcours_devellopement(deck);
 
 
