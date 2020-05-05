@@ -86,7 +86,8 @@ int ask_carte_ou_fin(plateau p,char c) {
 			return -1;
 		}
 		else{
-			print_plateau(p);
+			printf("Vous avez %d PE, votre choix de cartes possible est donc : \n",p.nrjA);
+			deck_print(res);
 			while (1) {
 				char buf[256];
 				int n;
@@ -109,6 +110,7 @@ int ask_carte_ou_fin(plateau p,char c) {
 						}
 					}
 					else {
+
 						printf("Choix incorrect, veuillez recommencer.\n");
 					}
 				}
@@ -133,7 +135,8 @@ int ask_carte_ou_fin(plateau p,char c) {
 			return -1;
 		}
 		else {
-			print_plateau(p);
+			printf("Vous avez %d PE, votre choix de cartes possible est donc : \n",p.nrjB);
+			deck_print(res);
 			while (1){
 				char buf[256];
 				int n;
@@ -216,6 +219,9 @@ Nom ajout_fise_fisa(){
 		if (strcmp(string,"fisa")==0){
 			nom=Fisa;
 			return nom;
+		}
+		else {
+			printf("Saisie incorrecte, veuillez recommencer. \n");
 		}
 		printf("\n");
 	}
