@@ -21,7 +21,6 @@ int main() {
 		
 		new_tour(&p);	// mise à jour du compteur de tours, etc.
 		print_new_tour(p);	// message de nouveau tour
-		// suprresion du plateau des cartes FISA si le tour est pair
 		updateEnergy(&p);	// mis à jour du compteur d'ENSIIE
 
 		for (int i=0;i<2;i++) {		// 2 phases par tour
