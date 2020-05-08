@@ -106,20 +106,6 @@ int nb_cartes(plateau p, char ensiie) {
         if(deck_carteIn(p.sideA,Merabet)){
             res+=1;
         }
-        /*while(p.sideA!=NULL) {
-            if(getNom(p.sideA->carte)==Prevel) {
-                res+=1;
-            };
-            if(getNom(p->sideA->carte)==Dubois) {
-                res+=1;
-            };
-            if(getNom(p->sideA->carte)==Ligozat) {
-                res+=1;
-            };
-            if(getNom(p->sideA->carte)==Merabet) {
-                res+=2;
-            };
-        }*/
     }
     else {
         res=p.piocheB;
@@ -135,20 +121,6 @@ int nb_cartes(plateau p, char ensiie) {
         if(deck_carteIn(p.sideB,Merabet)){
             res+=1;
         }
-        /*while(p->sideB!=NULL) {
-            if(getNom(p->sideB->carte)==Prevel) {
-                res+=1;
-            };
-            if(getNom(p->sideB->carte)==Dubois) {
-                res+=1;
-            };
-            if(getNom(p->sideB->carte)==Ligozat) {
-                res+=1;
-            };
-            if(getNom(p->sideB->carte)==Merabet) {
-                res+=2;
-            }
-        }*/
     }
     return res;
 }
