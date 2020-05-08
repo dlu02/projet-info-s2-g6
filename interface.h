@@ -20,10 +20,10 @@ void print_new_tour(plateau p);
 
 /**
  \brief: afficher un message de début de nouvelle phase en fonction du nom de l'ENSIIE
- \param: un plateau et un char représentant l'ensiie
+ \param:un char représentant l'ensiie
  \return: message de début de nouveau tour
 */
-void print_new_phase(plateau, char);
+void print_new_phase(char);
 
 /**
  \brief: afficher les points de développement durable de chaque ENSIIE à la fin de chaque tour
