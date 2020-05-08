@@ -13,7 +13,7 @@ void print_new_tour(plateau p){
 	sleep(2);
 }
 
-void print_new_phase(plateau p, char c){
+void print_new_phase( char c){
 	if (c=='A') {
 		printf("\n\n C'est au tour de l'ENSIIE A de jouer\n\n");
 		printf("---------------------------------------------------------------------------------\n\n");
