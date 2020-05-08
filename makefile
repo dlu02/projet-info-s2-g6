@@ -1,21 +1,22 @@
 cc=gcc -Wall -Wextra -std=c99
-OBJ1= main.o structure.o carte.o plateau.o interface.o
+H_DIR= headers
 
-all: main
+all: ./bin/main
 
-carte.o= carte.c structure.h
+./obj/carte.o: ./src/carte.c ./headers/structure.h
+	$(cc) -o $@ -c $< -I $(H_DIR)
 
-structure.o= structure.c carte.h
+./obj/structure.o: ./src/structure.c ./headers/carte.h
+	$(cc) -o $@ -c $< -I $(H_DIR)
 
-plateau.o= plateau.c carte.h structure.h
+./obj/plateau.o: ./src/plateau.c ./headers/carte.h ./headers/structure.h
+	$(cc) -o $@ -c $< -I $(H_DIR)
 
-interface.o= interface.c plateau.h
+./obj/interface.o: ./src/interface.c ./headers/plateau.h
+	$(cc) -o $@ -c $< -I $(H_DIR)
 
-main.o= main.c carte.h structure.h plateau.h interface.h
+./obj/main.o: ./src/main.c ./headers/carte.h ./headers/structure.h ./headers/plateau.h ./headers/interface.h
+	$(cc) -o $@ -c $< -I $(H_DIR)
 
-main: $(OBJ1)
+./bin/main: ./obj/carte.o ./obj/main.o ./obj/interface.o ./obj/carte.o ./obj/structure.o ./obj/plateau.o
 	$(cc) $^ -o $@
-
-clean:
-	rm -rf *.o
-
