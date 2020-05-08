@@ -23,7 +23,7 @@ long pt_DD(carte c){
     if (c.code>999999999) return -1;
     else {
         long aux1= c.code%1000000;
-        return c.code%1000;
+        return aux1%1000;
     }
 }
 
@@ -111,6 +111,7 @@ long aux_code(Nom nom){
         case Repas_vegetarien: return 10;break;
         case Fermeture_annuelle: return 10;break;
     }
+    return -1;
 }
 
 carte carte_new(Nom carte_nom){
@@ -883,10 +884,10 @@ void carte_fin(plateau *p) {
     int aux_FISA_dev_A=0;
     
     if((p->tour)%2==1){
-    int aux_FISA_dur_B=deck_parcours_durabilite(p->pileFisaB);
-    int aux_FISA_dev_B=deck_parcours_devellopement(p->pileFisaB);
-    int aux_FISA_dur_A=deck_parcours_durabilite(p->pileFisaA);
-    int aux_FISA_dev_A=deck_parcours_devellopement(p->pileFisaA);
+    aux_FISA_dur_B=deck_parcours_durabilite(p->pileFisaB);
+    aux_FISA_dev_B=deck_parcours_devellopement(p->pileFisaB);
+    aux_FISA_dur_A=deck_parcours_durabilite(p->pileFisaA);
+    aux_FISA_dev_A=deck_parcours_devellopement(p->pileFisaA);
     }
     
     int add_A = aux_FISE_dev_A + aux_FISA_dev_A + p->ADD_effetA;
