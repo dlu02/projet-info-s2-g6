@@ -1,6 +1,6 @@
 //
 //  structure.c
-//  
+//
 //
 //  Created by Loirs Romain on 22/03/2020.
 //
@@ -126,14 +126,14 @@ carte deck_remove_head(deck *l){
 carte deck_remove_queue(deck *l)
     {
         carte res;
-     
+
         /* Si la liste contient un seul élément */
         if((*l)->next == NULL)
         {
             /* On le libère et on retourne NULL (la liste est maintenant vide) */
             return deck_remove_head(l);
         }
-     
+
         /* Si la liste contient au moins deux éléments */
         deck tmp = *l;
         deck ptmp = *l;
@@ -156,12 +156,12 @@ carte deck_remove_queue(deck *l)
 
 carte deck_remove_carte(deck *l, Nom nom){
     carte res;
-    
+
     if (carte_equal((*l)->carte,nom)){
         res=deck_remove_head(l);
         return res;
     }
-     
+
         /* Si la liste contient au moins deux éléments */
     deck tmp = *l;
     deck ptmp = *l;
@@ -186,12 +186,12 @@ carte deck_remove_carte(deck *l, Nom nom){
 
 carte deck_remove_indice(deck *l, int indice){
     carte res;
-    
+
     if (indice==0){
         res=deck_remove_head(l);
         return res;
     }
-     
+
         /* Si la liste contient au moins deux éléments */
     deck tmp = *l;
     deck ptmp = *l;
@@ -269,7 +269,7 @@ int alea (int a, int b){
 }
 
 void melanger_deck (deck *res) {
-    printf(" \n *Veuillez patientez, nous mélangeons votre deck* \n ");
+    printf(" \n *Veuillez patienter, nous mélangeons votre deck* \n ");
     for (int i=0;i<30;i++){
         int aux=alea(0,30);
         carte caux= deck_remove_indice(res,aux);
