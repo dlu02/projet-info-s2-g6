@@ -56,7 +56,7 @@ Toutes les structures sont définis dans le fichier structure.h pour plus de lis
 
 \subsubsection{le type et le nom}
 
- Une carte est définis par deux paramètre: son nom et son type. j'ai choisis d'utiliser un maximum des types \'enum\'er\'es pour les noms des cartes et les types car manipuler des entiers est plus simples pour les tests qu'une chaine de caract\'eres. Dans les régles du jeu, avoir le nom implique de connaitre le type. Il serait donc légitime de supprimer les type de la carte pour gagner de l'espace mémoire. Mais si nous désirons complexifier le jeu en ajoutant des cartes qui ont des noms identiques mais des types différents. Ainsi, conserver le type de la carte nous paraissait important.
+ Une carte est définis par deux paramétres: son nom et son type. j'ai choisis d'utiliser un maximum de types \'enum\'er\'es pour les noms des cartes et les types car manipuler des entiers est plus simples que de tester une chaine de caract\'eres. Dans les régles du jeu, avoir le nom implique de connaitre le type. Il serait donc légitime de supprimer les type de la carte pour gagner de l'espace mémoire. Mais si nous désirons complexifier le jeu en ajoutant des cartes qui ont des noms identiques mais des types différents, il est intéressant de conserver le type de la carte.
  
 \subsubsection{le code}
 
@@ -64,7 +64,7 @@ Toutes les structures sont définis dans le fichier structure.h pour plus de lis
  Ensuite, dans l'optique de créer des listes chainés, il a fallu créer une structure de carte valable pour tout les types de cartes. Cependant, les cartes n'ont pas les mêmes caractéristiques. Nous dénombrons 4 informations importantes 
  \begin{itemize}
  	\item les points énergies, durabilités et développement pour les cartes Eleve
- 	\item le coût pour les cartes actions et et Personnel
+ 	\item le coût pour les cartes actions et Personnel
  \end{itemize}
  La solution la plus simple serait de créer une  variable (de type int) pour une information. Par conséquent, des variables serait inutilisées donc c'est de l'allocation mémoire inutile.
  
@@ -72,7 +72,7 @@ Toutes les structures sont définis dans le fichier structure.h pour plus de lis
  
 
 \paragraph{}
-Le principe est simple, Nous un long \` a la place d'un int.  Le principe de codage est simple. Un int va jursq\'ue 32600 environ alors qu'un long va jusque 2000000000 environ. Ainsi, pour le cout, comme c'est la seul information pour les cartes de type personnel et action, Il suffit de  faire code=cout et c'est simple \` a manipuler. Pour les cartes \'el\`eve c\' est ici que cela devient interessant. un  long vas jusque 2000000000 (et un peu plus). Je n'utilise pas le 2, donc je peux utiliser 9 chiffres. (cela tombe bien j'ai 3 types de points \`a ins\'erer). Donc j'utilise les 3 premiers chiffres pour un point, les trois suivants pour l'autre. Par cons\'equent, on ne pourra pas aller à plus de 999 points pour chaque type de points. Mais étant donnée les régles, il est déjà difficile d'atteindre plus de 100 points pour un type de points.
+Le principe est simple, Nous utilisons un long \` a la place d'un int.   Un int va jursq\'ue 32600 environ alors qu'un long va jusque 2000000000 environ. Ainsi, pour le cout, comme il s'agit de la seul information pour les cartes de type personnel et action, Il suffit de  faire code=cout et la manipulation est simple. Pour les cartes \'el\`eve, c'est ici que cela devient interessant. un  long vas jusque 2000000000 (et un peu plus). Je n'utilise pas le 2, donc je peux utiliser 9 chiffres. (cela tombe bien j'ai 3 types de points \`a ins\'erer). Donc j'utilise les 3 premiers chiffres pour les points énergies, les trois suivants pour les points durabilités et les trois derniers pour les points développement durable.  Par cons\'equent, on ne pourra pas aller à plus de 999 points pour chaque type de points. Mais étant donnée les régles, il est déjà difficile d'atteindre plus de 100 points pour un type de points.
 
 \paragraph{}
 \textbf{exemple:} prenons une carte Eleve dont le code est 123.078.051 ( les points ont un but esthétique). La carte posséde donc  123 points énergie, 78 points durabilité et 51 points développement durable.
@@ -83,15 +83,79 @@ Le principe est simple, Nous un long \` a la place d'un int.  Le principe de cod
 Pour le deck, Nous avons utilis\'e un format de liste chain\'e ou chaque maillon contient une carte. Nous n'avons pas utilisé de tableau car les deck sont de longueur variable tout au long de la partie.
 
 \paragraph{}
-Les fonctions qui manipulent les deck définis dans \texttt{structure.h} ne contiennent pas de structure de contrôle (par exemple, les fonctions ne vérifient pas si avant d'enlever un élément, la liste est non vide). Celle-ci sont défini à part et permet lors de leur utilisation dans d'autre fonctions de permettre au programmeur de définir un message d'erreur plus spécifique qu par exemple "le deck est vide" qui n'est pas très précis.
+Les fonctions qui manipulent les deck définis dans \texttt{structure.h} ne contiennent pas de structure de contrôle (par exemple, les fonctions ne vérifient pas si avant d'enlever un élément, la liste est non vide). Celle-ci sont défini à part et permet lors de leur utilisation dans d'autre fonctions de permettre au programmeur de définir un message d'erreur plus spécifique que par exemple "le deck est vide" qui n'est pas très précis.
 
 \subsection{le plateau}
 
-Le plateau est unique pour une partie et contient l'intégralité des deck des joueurs. Il contient également des indications sur le tour afin de connaitre l'état d'avancement de la partie.
+Le plateau est unique pour une partie et contient l'intégralité des deck des joueurs. C'est à dire:
+\begin{itemize}
+	\item les mains du joueur A et du joueur B
+	\item les défausses du joueur A et B
+	\item les decks du joueur A et du joueur B
+	\item les piles des cartes FISE et FISA des joueurs A et B
+	\item la pile side des joueurs A et B (où sont envoyés les cartes actions et personnels)
+\end{itemize} 
+Il contient également des indications sur le tour et le joueur afin de connaitre l'état d'avancement de la partie.
+\begin{itemize}
+\item le numéro du tour
+\item les points développement des deux joueurs
+\item les points énergies des deux joueurs 	
+\end{itemize}
+
 
 \paragraph{}
 Celui-ci contient également des variables qui permettent de gérer certains effets des cartes personnels et actions.
 
+\section{répartition du travail}
+
+\subsection{Lot A}
+\begin{tabular}{|p{8cm}|p{1.3cm}|p{1.3cm}|p{1.4cm}|p{1.6cm}|}
+\hline
+& Remi  & Florian  &  Damien &  Romain \\
+\hline
+Tâche A.1- Mise en place du projet et main.c & x& & & \\
+\hline
+Tâche A.2 - Rédigez carte.h&  &x  & &x  \\
+\hline
+Tâche A.3 - Rédigez plateau.h & & &  &  \\
+\hline
+Tâche A.4 - Rédigez interface.h
+ &&&  x&\\
+\hline
+\end{tabular}
+
+\subsection{Lot B}
+\begin{tabular}{|p{8cm}|p{1.3cm}|p{1.3cm}|p{1.4cm}|p{1.6cm}|}
+\hline
+& Remi  & Florian  &  Damien &  Romain \\
+\hline
+Tâche B.1 - Lier tous les fichiers & x& & & \\
+\hline
+Tâche B.2 - structures.h&  &  & &x  \\
+\hline
+Tâche B.3 – structures.c& & & &x \\
+\hline
+Tâche B.4 – Getters de carte.h et carte.c & & &  & x \\
+\hline
+Tâche B.5 – Getters de plateau.h et plateau.c & &x &  &  \\
+\hline
+Tâche B.6 – plateau.c & &x &  &  \\
+\hline
+Tâche B.7 – interface.c & & & x &  \\
+\hline
+Tâche B.8-  Tester votre code&x&&  &\\
+\hline
+\end{tabular}
+
+\subsection{Lot C}
+
+\begin{tabular}{|p{8cm}|p{1.3cm}|p{1.3cm}|p{1.4cm}|p{1.6cm}|}
+\hline
+& Remi  & Florian  &  Damien &  Romain \\
+\hline
+rédaction rapport  & & & &x \\
+\hline
+\end{tabular}
 
 
 
