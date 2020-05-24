@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
 \usepackage[utf8]{inputenc} %en UTF-8 c'est mieux comme ca les accents sont gérés
 \usepackage[T1]{fontenc}
@@ -17,14 +17,14 @@
 
 \title{Projet informatique}
 \author{Romain LOIRS, Damien LU, Rémi DECOUTY, Florian LECOMTE}
-\date{17 mai 2020}
+\date{\today}
 
 \pagestyle{fancy} 
 \lhead{Lu - Loirs - Decouty - Lecomte}
 \chead{Projet informatique} 
 \rhead{ENSIIE} 
 \lfoot{} 
-\cfoot{} 
+\cfoot{\thepage} 
 \rfoot{} 
 \renewcommand{\headrulewidth}{0.4pt}
 
@@ -50,63 +50,55 @@ backgroundcolor=\color{yellow!5},columns=fullflexible}
 
 \section{Les structures}
 
-Toutes les structures sont définis dans le fichier structure.h pour plus de lisibilit\'e
+Toutes les structures sont définis dans le fichier structure.h pour plus de lisibilité
 
 \subsection{Les cartes}
 
-\subsubsection{le type et le nom}
+\subsubsection{Le type et le nom}
 
- Une carte est définis par deux paramétres: son nom et son type. j'ai choisis d'utiliser un maximum de types \'enum\'er\'es pour les noms des cartes et les types car manipuler des entiers est plus simples que de tester une chaine de caract\'eres. Dans les régles du jeu, avoir le nom implique de connaitre le type. Il serait donc légitime de supprimer les type de la carte pour gagner de l'espace mémoire. Mais si nous désirons complexifier le jeu en ajoutant des cartes qui ont des noms identiques mais des types différents, il est intéressant de conserver le type de la carte.
+Une carte est définie par deux paramètres: son nom et son type. Nous avons choisi d'utiliser un maximum de types énumérés pour les noms des cartes et les types car manipuler des entiers est plus simple que de tester une chaine de caractères. Dans les règles du jeu, avoir le nom implique de connaitre le type. Il serait donc légitime de supprimer les types de la carte pour gagner de l'espace mémoire. Mais si nous désirons complexifier le jeu en ajoutant des cartes qui ont des noms identiques mais des types différents, il est intéressant de conserver le type de la carte.
  
-\subsubsection{le code}
+\subsubsection{Le code}
 
-\paragraph{}
- Ensuite, dans l'optique de créer des listes chainés, il a fallu créer une structure de carte valable pour tout les types de cartes. Cependant, les cartes n'ont pas les mêmes caractéristiques. Nous dénombrons 4 informations importantes 
+Ensuite, dans l'optique de créer des listes chainées, il a fallu créer une structure de carte valable pour tout les types de cartes. Cependant, les cartes n'ont pas les mêmes caractéristiques. Nous dénombrons 4 informations importantes 
  \begin{itemize}
- 	\item les points énergies, durabilités et développement pour les cartes Eleve
+ 	\item les points énergies, durabilités et développement pour les cartes Élève
  	\item le coût pour les cartes actions et Personnel
  \end{itemize}
- La solution la plus simple serait de créer une  variable (de type int) pour une information. Par conséquent, des variables serait inutilisées donc c'est de l'allocation mémoire inutile.
+La solution la plus simple serait de créer une  variable (de type int) pour une information. Par conséquent, des variables seraient inutilisées donc c'est de l'allocation mémoire inutile.
  
- Par conséquent, nous avons compressé les informations des points d\'eveloppement durable, energie , durabilit\'e et le cout dans un code que j'ai appel\'e (sobrement) code de type long. Nous passons ainsi de (4 x 2 bits) 8 bits  de mémoire pour la création de 4 variables de types int à 1 long de 4 bits.
- 
+Par conséquent, nous avons compressé les informations des points développement durable, énergie , durabilité et le cout dans un code que nous avons appelé (sobrement) code de type long. Nous passons ainsi de (4 x 2 bits) 8 bits de mémoire pour la création de 4 variables de types int à 1 long de 4 bits.
 
-\paragraph{}
-Le principe est simple, Nous utilisons un long \` a la place d'un int.   Un int va jursq\'ue 32600 environ alors qu'un long va jusque 2000000000 environ. Ainsi, pour le cout, comme il s'agit de la seul information pour les cartes de type personnel et action, Il suffit de  faire code=cout et la manipulation est simple. Pour les cartes \'el\`eve, c'est ici que cela devient interessant. un  long vas jusque 2000000000 (et un peu plus). Je n'utilise pas le 2, donc je peux utiliser 9 chiffres. (cela tombe bien j'ai 3 types de points \`a ins\'erer). Donc j'utilise les 3 premiers chiffres pour les points énergies, les trois suivants pour les points durabilités et les trois derniers pour les points développement durable.  Par cons\'equent, on ne pourra pas aller à plus de 999 points pour chaque type de points. Mais étant donnée les régles, il est déjà difficile d'atteindre plus de 100 points pour un type de points.
+Le principe est simple : nous utilisons un long à la place d'un int. Un int va jusqu'à 32600 environ alors qu'un long va jusque 2000000000 environ. Ainsi, pour le coût, comme il s'agit de la seul information pour les cartes de type personnel et action, il suffit de  faire code=cout et la manipulation est simple. Pour les cartes élève, c'est ici que cela devient intéressant. Un long va jusque 2000000000 (et un peu plus). Nous n'utilisons pas le 2, donc nous pouvons utiliser 9 chiffres. (cela tombe bien nous avons 3 types de points à insérer). Donc nous utilisons les 3 premiers chiffres pour les points énergie, les trois suivants pour les points durabilité et les trois derniers pour les points développement durable.  Par conséquent, on ne pourra pas aller à plus de 999 points pour chaque type de points. Mais étant donné les règles, il est déjà difficile d'atteindre plus de 100 points pour un type de point.
 
-\paragraph{}
-\textbf{exemple:} prenons une carte Eleve dont le code est 123.078.051 ( les points ont un but esthétique). La carte posséde donc  123 points énergie, 78 points durabilité et 51 points développement durable.
+\textbf{Exemple :} prenons une carte Élève dont le code est 123.078.051 (les points ont un but esthétique). La carte possède donc 123 points énergie, 78 points durabilité et 51 points développement durable.
 
-\subsection{deck}
+\subsection{Le deck}
 
-\paragraph{}
-Pour le deck, Nous avons utilis\'e un format de liste chain\'e ou chaque maillon contient une carte. Nous n'avons pas utilisé de tableau car les deck sont de longueur variable tout au long de la partie.
+Pour le deck, nous avons utilisé un format de liste chaînée où chaque maillon contient une carte. Nous n'avons pas utilisé de tableau car les decks sont de longueur variable tout au long de la partie.
 
-\paragraph{}
-Les fonctions qui manipulent les deck définis dans \texttt{structure.h} ne contiennent pas de structure de contrôle (par exemple, les fonctions ne vérifient pas si avant d'enlever un élément, la liste est non vide). Celle-ci sont défini à part et permet lors de leur utilisation dans d'autre fonctions de permettre au programmeur de définir un message d'erreur plus spécifique que par exemple "le deck est vide" qui n'est pas très précis.
+Les fonctions qui manipulent les decks définis dans \texttt{structure.h} ne contiennent pas de structure de contrôle (par exemple, les fonctions ne vérifient pas si avant d'enlever un élément, la liste est non vide). Celles-ci sont définies à part et permettent, lors de leur utilisation dans d'autre fonctions, au programmeur de définir un message d'erreur plus spécifique que par exemple "le deck est vide" qui n'est pas très précis.
 
-\subsection{le plateau}
+\subsection{Le plateau}
 
-Le plateau est unique pour une partie et contient l'intégralité des deck des joueurs. C'est à dire:
+Le plateau est unique pour une partie et contient l'intégralité des decks des joueurs, c'est à dire :
 \begin{itemize}
 	\item les mains du joueur A et du joueur B
 	\item les défausses du joueur A et B
 	\item les decks du joueur A et du joueur B
 	\item les piles des cartes FISE et FISA des joueurs A et B
-	\item la pile side des joueurs A et B (où sont envoyés les cartes actions et personnels)
+	\item la pile side des joueurs A et B (où sont envoyées les cartes actions et personnels)
 \end{itemize} 
-Il contient également des indications sur le tour et le joueur afin de connaitre l'état d'avancement de la partie.
+Il contient également des indications sur le tour et le joueur afin de connaître l'état d'avancement de la partie :
 \begin{itemize}
 \item le numéro du tour
 \item les points développement des deux joueurs
-\item les points énergies des deux joueurs 	
+\item les points énergie des deux joueurs 	
 \end{itemize}
 
-
-\paragraph{}
 Celui-ci contient également des variables qui permettent de gérer certains effets des cartes personnels et actions.
 
-\section{répartition du travail}
+\section{Répartition du travail}
 
 \subsection{Lot A}
 \begin{tabular}{|p{8cm}|p{1.3cm}|p{1.3cm}|p{1.4cm}|p{1.6cm}|}
@@ -115,11 +107,11 @@ Celui-ci contient également des variables qui permettent de gérer certains eff
 \hline
 Tâche A.1- Mise en place du projet et main.c & x& & & \\
 \hline
-Tâche A.2 - Rédigez carte.h&  &x  & &x  \\
+Tâche A.2 - Rédiger carte.h&  &  & &x  \\
 \hline
-Tâche A.3 - Rédigez plateau.h & & &  &  \\
+Tâche A.3 - Rédiger plateau.h & &x &  &  \\
 \hline
-Tâche A.4 - Rédigez interface.h
+Tâche A.4 - Rédiger interface.h
  &&&  x&\\
 \hline
 \end{tabular}
@@ -131,7 +123,7 @@ Tâche A.4 - Rédigez interface.h
 \hline
 Tâche B.1 - Lier tous les fichiers & x& & & \\
 \hline
-Tâche B.2 - structures.h&  &  & &x  \\
+Tâche B.2 - structures.h&  &  &x &  \\
 \hline
 Tâche B.3 – structures.c& & & &x \\
 \hline
@@ -143,7 +135,7 @@ Tâche B.6 – plateau.c & &x &  &  \\
 \hline
 Tâche B.7 – interface.c & & & x &  \\
 \hline
-Tâche B.8-  Tester votre code&x&&  &\\
+Tâche B.8-  Test du code&x&&  &\\
 \hline
 \end{tabular}
 
@@ -153,13 +145,8 @@ Tâche B.8-  Tester votre code&x&&  &\\
 \hline
 & Remi  & Florian  &  Damien &  Romain \\
 \hline
-rédaction rapport  & & & &x \\
+Rédaction rapport  & & & &x \\
 \hline
 \end{tabular}
-
-
-
-
-
 
 \end{document}
